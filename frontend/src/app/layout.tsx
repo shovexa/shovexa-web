@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-// @ts-expect-error
+// @ts-ignore - CSS side-effect import without type declarations
 import "./globals.css";
 import FooterComponent from "./components/footers/footer.component";
 import SideWhatsappIconComponent from "./components/SideWhatsappIcon.component";
