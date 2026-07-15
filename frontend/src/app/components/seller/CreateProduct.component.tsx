@@ -5,6 +5,7 @@ import { CreateProductSchema, CreateProductFormData } from '../../utils/formSche
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosError } from 'axios'; import sellerAuth from '../../auths/sellerAuth';
 import { Category } from '@/app/utils/categoryInterface';
+import Image from 'next/image';
 
 
 // Zod schema validation
@@ -216,12 +217,13 @@ const CreateProductComponent = () => {
 
                                                 {categoryImgPreview ? (
                                                     <div className="relative overflow-hidden rounded-2xl border bg-gray-50">
-                                                        <img
+                                                        <Image
                                                             src={categoryImgPreview}
                                                             alt="Category Preview"
+                                                            width={500}
+                                                            height={500}
                                                             className="h-52 w-full object-contain p-4"
                                                         />
-
                                                         <button
                                                             type="button"
                                                             onClick={() => setCategoryImgPreview(null)}
@@ -281,7 +283,7 @@ const CreateProductComponent = () => {
                                                     </label>
                                                 )}
 
-                                             
+
                                             </div>
                                         </div>
                                     </div>
@@ -314,7 +316,7 @@ const CreateProductComponent = () => {
                                         placeholder={`Enter ${field.replace(/([A-Z])/g, ' $1').toLowerCase()}`}
                                     />
                                 )}
-                         
+
                             </div>
                         ))}
 
@@ -349,7 +351,7 @@ const CreateProductComponent = () => {
                                 {/* Image Preview */}
                                 {productImgPreview ? (
                                     <div className="relative mb-4 border border-gray-300 rounded-lg overflow-hidden shadow-sm">
-                                        <img
+                                        <Image
                                             src={productImgPreview}
                                             alt="Preview"
                                             className="max-h-60 w-auto object-contain"

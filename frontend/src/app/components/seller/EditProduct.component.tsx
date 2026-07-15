@@ -238,7 +238,9 @@ useEffect(() => {
 
                 {(product?.category.image) ? (
                   <div className="relative overflow-hidden rounded-2xl border bg-gray-50">
-                    <img
+                    <Image
+                      width={300}
+                      height={300}
                       src={categoryImgPreview || product?.category.image}
                       alt="Category Preview"
                       className="h-52 w-full object-contain p-4"
