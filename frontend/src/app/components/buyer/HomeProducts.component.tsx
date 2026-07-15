@@ -294,10 +294,15 @@ const Products = () => {
 
                     {/* Favorite */}
                     <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        isFavorite ? removeFavHandler(product._id) : addToFavHandler(product._id);
-                      }}
+                  onClick={(e) => {
+  e.stopPropagation();
+
+  if (isFavorite) {
+    removeFavHandler(product._id);
+  } else {
+    addToFavHandler(product._id);
+  }
+}}
                       aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
                       className="absolute top-3 right-3 h-8 w-8 flex items-center justify-center rounded-full bg-white/90 backdrop-blur border border-white/60 text-rose-500 shadow-sm hover:bg-white z-10"
                     >

@@ -34,12 +34,7 @@ const BuyerOrderComponent = () => {
   const [cancelOrders, setCancelOrders] = useState<OrderInterface[]>([])
   const [products, setProducts] = useState<ProductInterface[]>([]);
   const [activeTab, setActiveTab] = useState('pending');
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [indicatorStyle, setIndicatorStyle] = useState({
-    width: '0px',
-    left: '0px',
-    opacity: 0
-  });
+
 
 
   const tabs = [
@@ -52,22 +47,13 @@ const BuyerOrderComponent = () => {
 
   useEffect(() => {
     if (tabFromParams) {
-      setMenuOpen(false)
       setActiveTab(tabFromParams)
     }
   }, [tabFromParams])
   useEffect(() => {
     // Simulate indicator animation on tab change
 
-    const activeTabElement = document.getElementById(`tab-${activeTab}`);
-    if (activeTabElement) {
-      const { offsetLeft, offsetWidth } = activeTabElement;
-      setIndicatorStyle({
-        width: `${offsetWidth}px`,
-        left: `${offsetLeft}px`,
-        opacity: 1
-      });
-    }
+    
   }, [activeTab]);
   const fetchOrders = async () => {
     try {

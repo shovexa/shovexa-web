@@ -20,3 +20,4 @@ connectDb().then(() => {
     console.log("DB connection failed: ", error);
     return new ApiError(500, "DB connection failed")
 });
+export default app;
