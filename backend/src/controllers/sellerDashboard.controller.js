@@ -1,0 +1,754 @@
+import mongoose from "mongoose";
+import cloudinary from "cloudinary"
+import { Order } from "../models/Order.model.js";
+import { Product } from "../models/Product.model.js";
+import { ApiError } from "../utils/apiError.js";
+import { ApiResponse } from "../utils/apiResponse.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+import { Category } from "../models/Category.model.js";
+import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import { User } from "../models/User.model.js";
+import { Cart } from "../models/Cart.model.js"
+import { sellerRole } from "../config/roles.config.js"
+import { Address } from "../models/address.model.js";
+import { sendEmailRefundConfirmation } from "../utils/emailSenders/sendRefundConfirmation.utils.js";
+import { UserPayment } from "../models/UserPayment.model.js";
+import { sendEmailOrderConfirmed } from "../utils/emailSenders/orderConfirmEmailSender.utils.js";
+import { orderDeliveredEmailSender } from "../utils/emailSenders/orderDeliveredEmailSender.utils.js";
+
+
+dotenv.config({
+    path: ".env"
+})
+
+const transporter = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+    },
+    logger: true,
+    debug: true,
+});
+
+const sendEmail = async (email, image, title, price, subject) => {
+
+
+    const mailOptions = {
+        from: `"shovexa.com" <${process.env.EMAIL_USER}>`,
+        to: email,
+        subject: subject,
+        html: `<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #2c3e50;
+        }
+        .content {
+            padding: 20px 0;
+        }
+        .content p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #555;
+        }
+        .order-details {
+            background-color: #f9fafc;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .order-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .order-details li {
+            margin: 10px 0;
+            font-size: 15px;
+        }
+        .product-image {
+            margin-top: 10px;
+            text-align: center;
+        }
+        .product-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 15px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Order Confirmation</h1>
+        </div>
+        <div class="content">
+            <p>Thank you for your order!</p>
+            <p>Your order has been <strong>${subject}</strong>.</p>
+
+            <div class="order-details">
+                <ul>
+                    <li><strong>Product:</strong> ${title}</li>
+                    <li><strong>Price:</strong> ${price}</li>
+                </ul>
+                <div class="product-image">
+                    <img src="${image}" alt="${title}" />
+                </div>
+            </div>
+
+            <p>We appreciate your business and hope to serve you again soon!</p>
+            <p>Best regards,</p>
+            <p><strong>shovexa.com Team</strong></p>
+        </div>
+        <div class="footer">
+            &copy; 2025 shovexa.com. All rights reserved.
+        </div>
+    </div>
+</body>
+</html>
+
+
+        `,
+    };
+    return new Promise((resolve, reject) => {
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error("Failed to send email:", error);
+                return reject(new ApiError(500, "Failed to send email"));
+            }
+            resolve(info);
+        });
+    });
+};
+
+
+const sellerProducts = asyncHandler(async (req, res) => {
+    const user = req.user
+    if (!user) {
+        throw new ApiError(401, false, "user not loged in!", false)
+    }
+
+
+
+    if (sellerRole !== user.role) {
+        throw new ApiError(401, false, "you can't access secure route", false)
+
+    }
+    const product = await Product.find({ user: user.id }).populate('category', 'categoryName image')
+    if (!product) {
+        throw new ApiError(404, false, "no product founded", false)
+
+    }
+    res.status(200).json(new ApiResponse(200, product, "product founded", true))
+})
+let createProductsWithCategory = asyncHandler(async (req, res) => {
+    let { categoryName, title, discount, price, description, countInStock, brand } = req.body
+    let userId = req.user
+
+
+    try {
+        if (!userId) {
+            throw new ApiError(400, "user not login")
+        }
+        let user = await User.findById(userId)
+
+
+
+
+        if (sellerRole !== user.role) {
+            throw new ApiError(400, "only admin can create products")
+        }
+
+        if (!categoryName ||
+            !title || !price || !description || !countInStock
+            || !brand) {
+            throw new ApiError(400, "All fields are required")
+        }
+
+        let category = await Category.findOne({ categoryName: categoryName })
+
+       
+        const productImgBuffer = req.files.productImg[0].buffer;
+        const categoryImgBuffer = req.files.categoryImg[0].buffer;
+        const productImgSize = req.files.productImg[0].size;
+        const categoryImgSize = req.files.categoryImg[0].size;
+
+        if (!productImgBuffer || !categoryImgBuffer) {
+            throw new ApiError(402, "image path not found!")
+        }
+
+
+        if (productImgSize > 10485760) {
+            throw new ApiError(402, "product image file too long only 10MB is allowed!")
+        }
+        if (categoryImgSize > 10485760) {
+            throw new ApiError(402, "category image file too long only 10MB is allowed!")
+        }
+const productImg = await uploadOnCloudinary(
+  productImgBuffer,
+  "shovexa/products-img"
+);
+
+
+        const categoryImg = await uploadOnCloudinary(
+            categoryImgBuffer,
+            "shovexa/category-img"
+        );
+
+        if (!categoryImg.url) {
+            throw new ApiError(402, "category image uploading failed!")
+        }
+
+        if (!productImg.url) {
+            throw new ApiError(402, "product image uploading failed!")
+        }
+
+        if (!category) {
+            category = await Category.create({
+                image: categoryImg.url,
+                categoryName,
+                user: userId
+            })
+        }
+
+
+        let product = await Product.create(
+            {
+                title,
+                price,
+                description,
+                image: productImg.url,
+                countInStock,
+                brand,
+                user: userId,
+                category: category.id,
+                discount: discount > 0 && discount
+
+            }
+        )
+        res.status(201).json(new ApiResponse(201, product, "Product created successfully"))
+
+    } catch (error) {
+        console.log('Product Not created error', error)
+    }
+})
+const updateProductWithCategory = asyncHandler(async (req, res) => {
+    const {
+        categoryName,
+        title,
+        price,
+        discount,
+        description,
+        countInStock,
+        brand,
+    } = req.body;
+
+    const user = req.user;
+
+    if (!user) {
+        throw new ApiError(401, "User not logged in");
+    }
+
+    if (user.role !== sellerRole) {
+        throw new ApiError(403, "Only sellers can update products");
+    }
+
+    if (
+        !categoryName ||
+        !title ||
+        !price ||
+        !description ||
+        !countInStock ||
+        !brand
+    ) {
+        throw new ApiError(400, "All fields are required");
+    }
+
+    const product = await Product.findById(req.params.productid).populate("category");
+
+    if (!product) {
+        throw new ApiError(404, "Product not found");
+    }
+
+    if (product.user.toString() !== user.id.toString()) {
+        throw new ApiError(403, "You are not authorized");
+    }
+
+    // Files
+    const productFile = req.files?.productImg?.[0];
+    const categoryFile = req.files?.categoryImg?.[0];
+
+    // Find category
+    let category = await Category.findOne({ categoryName });
+
+    // Create category if it doesn't exist
+    if (!category) {
+        category = await Category.create({
+            categoryName,
+            image: "",
+            user: user.id,
+        });
+    }
+
+    /*
+    ==========================
+    UPDATE CATEGORY IMAGE
+    ==========================
+    */
+
+    if (categoryFile) {
+        if (categoryFile.size > 10485760) {
+            throw new ApiError(400, "Category image must be less than 10MB");
+        }
+
+        const uploadedCategory = await uploadOnCloudinary(
+            categoryFile.buffer,
+            "shovexa/category-img"
+        );
+
+        if (!uploadedCategory) {
+            throw new ApiError(500, "Failed to upload category image");
+        }
+
+        if (category.image) {
+            const publicId = category.image
+                .split("/")
+                .pop()
+                .split(".")[0];
+
+            await cloudinary.uploader.destroy(
+                `shovexa/category-img/${publicId}`
+            );
+        }
+
+        category.image = uploadedCategory.url;
+        await category.save();
+    }
+
+    /*
+    ==========================
+    UPDATE PRODUCT IMAGE
+    ==========================
+    */
+
+    if (productFile) {
+        if (productFile.size > 10485760) {
+            throw new ApiError(400, "Product image must be less than 10MB");
+        }
+
+        const uploadedProduct = await uploadOnCloudinary(
+            productFile.buffer,
+            "shovexa/products-img"
+        );
+
+        if (!uploadedProduct) {
+            throw new ApiError(500, "Failed to upload product image");
+        }
+
+        if (product.image) {
+            const publicId = product.image
+                .split("/")
+                .pop()
+                .split(".")[0];
+
+            await cloudinary.uploader.destroy(
+                `shovexa/products-img/${publicId}`
+            );
+        }
+
+        product.image = uploadedProduct.url;
+    }
+
+    /*
+    ==========================
+    UPDATE PRODUCT
+    ==========================
+    */
+
+    product.category = category._id;
+    product.title = title;
+    product.price = price;
+    product.discount = discount || 0;
+    product.description = description;
+    product.countInStock = countInStock;
+    product.brand = brand;
+
+    await product.save();
+
+    return res.status(200).json(
+        new ApiResponse(200, product, "Product updated successfully")
+    );
+});
+let deleteProductWithCategory = asyncHandler(async (req, res) => {
+    let user = req.user
+    if (!user) {
+        throw new ApiError(400, "user not login")
+    }
+    if (sellerRole !== user.role) {
+        throw new ApiError(400, "only admin can delete products")
+    }
+    let productId = req.params.productid
+    let product = await Product.findById(productId)
+    const objId = new mongoose.Types.ObjectId(productId)
+
+    let checkUserRole = product.user.toString() === user.id.toString() || user.role === "superadmin"
+    if (!checkUserRole) {
+        throw new ApiError(400, "You are not authorized to delete this product")
+    }
+
+    if (!product) {
+        throw new ApiError(404, "Product not found")
+    }
+
+    const existOrder = await Order.findOne({ "products.productId": objId });
+
+
+    if (existOrder) {
+
+
+        if (!existOrder.isDelivered && !existOrder.cancelled) {
+            throw new ApiError(400, "Cannot delete product as it is part of an existing order");
+
+        }
+    }
+    await Cart.updateMany(
+        {
+            "cartItems.product": new mongoose.Types.ObjectId(product.id)
+        },
+        {
+            $set: { deleted: true }
+        }
+    );
+    let existimgUrl = product.image
+    let publicIdWithExtension = existimgUrl.split("/").pop()
+    let publicId = publicIdWithExtension.split(".")[0]
+    let cloudImgPath = `ecommerce/products-img/${publicId}`
+
+    await cloudinary.uploader.destroy(cloudImgPath)
+
+    let findProductCategory = await Product.find({ category: product.category })
+
+    let category = await Category.findById(product.category)
+
+
+
+    if (findProductCategory.length === 1) {
+        await category.deleteOne()
+    }
+
+    await product.deleteOne()
+
+    res.status(200).json(new ApiResponse(200, product, "Product deleted successfully"))
+})
+const getOrdersBySellerProducts = asyncHandler(async (req, res) => {
+    try {
+        const user = req.user?._id;
+        if (!user) {
+            throw new ApiError(401, "User not logged in");
+        }
+
+
+        const sellerProducts = await Product.find({ user: user })
+
+        // if (sellerProducts.length === 0) {
+        //     return res
+        //         .status(404)
+        //         .json(new ApiResponse(404, [], "Seller has no products"));
+        // }
+        const getAllOrdered = await Order.find()
+            .populate("userId", "username email phone")
+            .populate("products.productId", "title price image")
+
+        const addresses = await Address.find()
+        const getAllUserPayment = await UserPayment.find()
+
+        const ordersWithDetails = getAllOrdered.map(order => {
+            const orderAddress = addresses.find(address => address.user.toString() === order.userId?._id.toString());
+            const payment = getAllUserPayment.find(payment => payment.userId.toString() === order.userId?._id.toString());
+            return {
+                ...order.toObject(),
+                address: orderAddress || null,
+                paymentData: payment
+            };
+        });
+        // Extract product IDs of admin's products
+        const sellerProductIds = sellerProducts.length !== 0 ? sellerProducts.map(p => p._id.toString()) : []
+        let filterSellerProducts
+        if (sellerProducts.length === 0) {
+            filterSellerProducts = ordersWithDetails
+        } else {
+
+            filterSellerProducts = ordersWithDetails
+                .map(order => {
+                    // keep only the products that belong to this seller
+                    const sellerItems = order.products.filter(p =>
+                        sellerProductIds.includes(p.productId?._id.toString())
+                    );
+
+                    return {
+                        ...order,
+                        products: sellerItems
+                    };
+                })
+                .filter(Boolean);
+
+        }
+
+
+        res.status(200).json(new ApiResponse(200, filterSellerProducts));
+    } catch (error) {
+        console.error("getOrderedProducts Error:", error);
+        res.status(500).json(new ApiResponse(500, null, "Internal Server Error"));
+    }
+});
+
+const orderConfirmed = asyncHandler(async (req, res) => {
+    const user = req.user
+    const { orderId } = req.params
+    if (!user) {
+        throw ApiError(401, false, "user not loged in!", false)
+    }
+    if (!orderId) {
+        throw new ApiError(401, false, "order id not provided", false)
+    }
+
+    if (sellerRole !== user.role) {
+        throw new ApiError(401, false, "you can't access secure route", false)
+
+    }
+    const order = await Order.findById(orderId)
+        .populate("userId", "username email phone")
+        .populate("productId", "image")
+
+    if (!order) {
+        throw new ApiError(404, false, "no order founded", false)
+
+    }
+    const orderconfirm = order.confirmed
+    order.confirmed = !orderconfirm
+    await order.save()
+
+    sendEmailOrderConfirmed(order)
+
+    res.status(200).json(new ApiResponse(200, null, "order confirmed", true))
+})
+const paymentConfirmed = asyncHandler(async (req, res) => {
+    const user = req.user
+    const { orderId } = req.params
+    if (!user) {
+        throw ApiError(401, false, "user not loged in!", false)
+    }
+    if (!orderId) {
+        throw new ApiError(401, false, "order id not provided", false)
+    }
+
+    if (sellerRole !== user.role) {
+        throw new ApiError(401, false, "you can't access secure route", false)
+
+    }
+    const order = await Order.findById(orderId)
+    if (!order) {
+        throw new ApiError(404, false, "no order founded", false)
+
+    }
+    const pymentconfirmation = order.isPaid
+    order.isPaid = !pymentconfirmation
+    await order.save()
+    res.status(200).json(new ApiResponse(200, order, "Payment received", true))
+})
+const orderShipping = asyncHandler(async (req, res) => {
+    const user = req.user
+    const { orderId } = req.params
+    if (!user) {
+        throw ApiError(401, false, "user not loged in!", false)
+    }
+    if (!orderId) {
+        throw new ApiError(401, false, "order id not provided", false)
+    }
+
+    if (sellerRole !== user.role) {
+        throw new ApiError(401, false, "you can't access secure route", false)
+
+    }
+    const order = await Order.findById(orderId)
+    if (!order) {
+        throw new ApiError(404, false, "no order founded", false)
+
+    }
+    const orderShipped = order.orderShipped
+    order.orderShipped = !orderShipped
+
+    await order.save()
+    res.status(200).json(new ApiResponse(200, null, "Your order Shipped", true))
+})
+const orderReadyForPickUp = asyncHandler(async (req, res) => {
+    const user = req.user
+    const { orderId } = req.params
+    if (!user) {
+        throw ApiError(401, false, "user not loged in!", false)
+    }
+    if (!orderId) {
+        throw new ApiError(401, false, "order id not provided", false)
+    }
+
+    if (sellerRole !== user.role) {
+        throw new ApiError(401, false, "you can't access secure route", false)
+
+    }
+    const order = await Order.findById(orderId)
+    if (!order) {
+        throw new ApiError(404, false, "no order founded", false)
+
+    }
+    const orderReadyForPickup = order.readyForPickup
+    order.readyForPickup = !orderReadyForPickup
+
+    await order.save()
+    res.status(200).json(new ApiResponse(200, null, "Order ready for pickup", true))
+})
+const orderDelivered = asyncHandler(async (req, res) => {
+    const user = req.user
+    const { orderId } = req.params
+    if (!user) {
+        throw ApiError(401, false, "user not loged in!", false)
+    }
+    if (!orderId) {
+        throw new ApiError(401, false, "order id not provided", false)
+    }
+
+    if (sellerRole !== user.role) {
+        throw new ApiError(401, false, "you can't access secure route", false)
+
+    }
+    const order = await Order.findById(orderId).populate("products.productId", "title price image").populate("userId", "username phone email")
+    if (!order) {
+        throw new ApiError(404, false, "no order founded", false)
+
+    }
+
+
+    const orderDelivered = order.isDelivered
+    order.isDelivered = !orderDelivered
+
+    await order.save()
+    const email = order.userId.email
+    await orderDeliveredEmailSender(email, order)
+    res.status(200).json(new ApiResponse(200, null, "order delivered successfully", true))
+})
+const orderPickedByCounter = asyncHandler(async (req, res) => {
+    const user = req.user
+    const { orderId } = req.params
+    if (!user) {
+        throw ApiError(401, false, "user not loged in!", false)
+    }
+    if (!orderId) {
+        throw new ApiError(401, false, "order id not provided", false)
+    }
+
+    if (sellerRole !== user.role) {
+        throw new ApiError(401, false, "you can't access secure route", false)
+
+    }
+    const order = await Order.findById(orderId)
+    if (!order) {
+        throw new ApiError(404, false, "no order founded", false)
+
+    }
+    const orderDelivered = order.pickedByCounter
+    order.pickedByCounter = !orderDelivered
+
+
+    await order.save()
+    res.status(200).json(new ApiResponse(200, null, "order Picked By counter", true))
+})
+
+const refund = asyncHandler(async (req, res) => {
+    const user = req.user
+    const { orderId } = req.params
+    if (!user) {
+        throw ApiError(401, false, "user not loged in!", false)
+    }
+    if (!orderId) {
+        throw new ApiError(401, false, "order id not provided", false)
+    }
+    if (sellerRole !== user.role) {
+        throw new ApiError(401, false, "you can't access secure route", false)
+
+    }
+    const order = await Order.findById(orderId)
+        .populate("userId", "username email")
+        .populate("products.productId", "title image price");
+    if (!order) {
+        throw new ApiError(404, false, "no order founded", false)
+
+    }
+    const refund = order.refund
+    order.refund = !refund
+    await order.save()
+    const refundedProducts = order.products.map(p => p.productId);
+    const email = order.userId.email;
+    const userName = order.userId.username || "Customer";
+
+    await sendEmailRefundConfirmation(order, refundedProducts, email, userName)
+
+
+    res.status(200).json(new ApiResponse(200, null, "payment refunded", true))
+
+})
+
+
+export {
+
+    sellerProducts,
+    createProductsWithCategory,
+    updateProductWithCategory,
+    deleteProductWithCategory,
+    getOrdersBySellerProducts,
+    orderConfirmed,
+    paymentConfirmed,
+    orderShipping,
+    orderReadyForPickUp,
+    orderDelivered,
+    orderPickedByCounter,
+    refund
+
+}
