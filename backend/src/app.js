@@ -106,23 +106,23 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(
-    session({
-        secret: process.env.SESSION_SECRET, 
-        resave: false,
-        saveUninitialized: true,
-        store: MongoStore.create({
-            mongoUrl: process.env.DB_URL,
-            collectionName: "sessions",
-    }),
-        cookie: { 
-            secure: process.env.NODE_ENV==='production',
-            httpOnly: true,
-             sameSite: "lax",
+// app.use(
+//     session({
+//         secret: process.env.SESSION_SECRET, 
+//         resave: false,
+//         saveUninitialized: true,
+//         store: MongoStore.create({
+//             mongoUrl: process.env.DB_URL,
+//             collectionName: "sessions",
+//     }),
+//         cookie: { 
+//             secure: process.env.NODE_ENV==='production',
+//             httpOnly: true,
+//              sameSite: "lax",
              
-            }, 
-    })
-);
+//             }, 
+//     })
+// );
 app.use(cookieParser());
 app.use(passport.initialize())
 app.use(passport.session())
