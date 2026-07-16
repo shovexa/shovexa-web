@@ -72,67 +72,70 @@ const ProductReviewFormComponent = ({
 
     return (
         <div
-            className={`${!productId && "hidden"}  rounded-lg`}
+  className={`${!productId && "hidden"} bg-white rounded-xl border border-orange-100 shadow-sm p-6`}
+>
+  <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+    <span className="w-1.5 h-5 bg-orange-500 rounded-full" />
+    Write a Review
+  </h2>
+
+  {success && (
+    <p className="text-green-600 bg-green-50 border border-green-100 rounded-lg px-3 py-2 text-sm mb-4">
+      Review submitted successfully!
+    </p>
+  )}
+
+  {productId ? (
+    <div>
+      <label className="block text-sm font-medium text-gray-700">Rating</label>
+      <div className="flex space-x-1 mt-2">
+        {ratingOptions.map((num) => (
+          <span
+            key={num}
+            className={`cursor-pointer text-2xl transition-transform hover:scale-110 ${
+              num <= rating ? "text-amber-500" : "text-gray-300"
+            }`}
+            onClick={() => setRating(num)}
+          >
+            ★
+          </span>
+        ))}
+      </div>
+
+      <label className="block text-sm font-medium text-gray-700 mt-4">
+        Review
+      </label>
+      <textarea
+        className="w-full p-3 border border-gray-300 text-gray-700 rounded-lg mt-1.5 overflow-y-auto resize-none focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm"
+        rows={3}
+        value={reviewMessage}
+        onChange={(e) => setReviewMessage(e.target.value)}
+        placeholder="Write your review here..."
+      />
+
+      <div className="flex flex-col items-center">
+        {error && (
+          <p className="text-red-500 text-sm mt-3 w-full text-center">{error}</p>
+        )}
+
+        <button
+          onClick={handleSubmit}
+          className="w-full bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-500 hover:to-amber-400 text-white font-semibold py-2.5 px-4 rounded-lg mt-4 shadow-sm hover:shadow-md transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+          disabled={loading}
         >
-            <h2 className="text-lg font-semibold text-gray-400 mb-2">
-                Write a Review
-            </h2>
-
-            {success && (
-                <p className="text-green-500">Review submitted successfully!</p>
-            )}
-
-            {productId ? (
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                        Rating
-                    </label>
-                    <div className="flex space-x-1 mt-1">
-                        {ratingOptions.map((num) => (
-                            <span
-                                key={num}
-                                className={`cursor-pointer text-xl ${num <= rating ? "text-yellow-500" : "text-gray-300"
-                                    }`}
-                                onClick={() => setRating(num)}
-                            >
-                                ★
-                            </span>
-                        ))}
-                    </div>
-
-                    <label className="block text-sm font-medium text-gray-700 mt-3">
-                        Review
-                    </label>
-                    <textarea
-                        className="w-full  p-2 border text-gray-600 rounded mt-1 overflow-y-auto resize-none"
-                        rows={3}
-                        value={reviewMessage}
-                        onChange={(e) => setReviewMessage(e.target.value)}
-                        placeholder="Write your review here..."
-
-                    />
-
-                    <div className="flex flex-col items-center">
-                        {error && <p className="text-red-500">{error}</p>}
-
-                        <button
-                            onClick={handleSubmit}
-                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded mt-3"
-                            disabled={loading}
-                        >
-                            {loading ? "Submitting..." : "Submit Review"}
-                        </button>
-                    </div>
-                </div>
-            ) : (
-                <Link
-                    className="w-full hover:text-gray-500 text-gray-600 font-semibold underline py-2 px-4 rounded mt-3"
-                    href="/"
-                >
-                    Return to Home Page↗
-                </Link>
-            )}
-        </div>
+          {loading ? "Submitting..." : "Submit Review"}
+        </button>
+      </div>
+    </div>
+  ) : (
+    <Link
+      className="w-full inline-block text-center hover:text-orange-600 text-gray-600 font-semibold underline decoration-orange-300 underline-offset-4 py-2 px-4 rounded mt-3 transition-colors"
+      href="/"
+    >
+      Return to Home Page ↗
+    </Link>
+  )}
+</div>
     );
 };
 

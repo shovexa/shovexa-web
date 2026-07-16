@@ -6,7 +6,7 @@ export const orderDelivered = (order) => {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Confirmation - Saadi Collection</title>
+    <title>Order Confirmation - shovexa</title>
     <style>
         /* Base Styles */
         body {
@@ -210,7 +210,7 @@ export const orderDelivered = (order) => {
             
             <p>Dear <strong>${order.userId.username}</strong>,</p>
             
-            <p>Thank you for shopping with Saadi Collection. We're pleased to confirm that your order has been received and is being processed.</p>
+            <p>Thank you for shopping with shovexa. We're pleased to confirm that your order has been received and is being processed.</p>
             
             <!-- Order Summary -->
             <div class="order-summary">
@@ -290,13 +290,13 @@ export const orderDelivered = (order) => {
             
             <p>If you have any questions about your order, please don't hesitate to contact our customer service team.</p>
             
-            <p>Best regards,<br><strong>The Saadi Collection Team</strong></p>
+            <p>Best regards,<br><strong>The shovexa Team</strong></p>
         </div>
         
         <!-- Footer -->
         <div class="footer">
-            <p>© ${new Date().getFullYear()} Saadi Collection. All rights reserved.</p>
-            <p>This email was sent to ${order.userId.email} as part of your Saadi Collection account.</p>
+            <p>© ${new Date().getFullYear()} shovexa. All rights reserved.</p>
+            <p>This email was sent to ${order.userId.email} as part of your shovexa account.</p>
         </div>
     </div>
 </body>

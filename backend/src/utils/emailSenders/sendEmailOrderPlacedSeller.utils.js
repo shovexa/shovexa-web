@@ -11,7 +11,7 @@ export const sendEmailOrderPlacedSeller = async (order, orderedProduct, email) =
         throw new ApiError('owner email not found ')
     }
     const mailOptions = {
-        from: `"Saadi Collection Alerts" ${EMAIL_USER}`,
+        from: `"shovexa Alerts" ${EMAIL_USER}`,
         to: email,
         subject: "You have a new order",
         html: orderPlacedSellerTemplate(order, orderedProduct)

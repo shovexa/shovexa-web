@@ -17,6 +17,8 @@ import { sendEmailRefundConfirmation } from "../utils/emailSenders/sendRefundCon
 import { UserPayment } from "../models/UserPayment.model.js";
 import { sendEmailOrderConfirmed } from "../utils/emailSenders/orderConfirmEmailSender.utils.js";
 import { orderDeliveredEmailSender } from "../utils/emailSenders/orderDeliveredEmailSender.utils.js";
+import { sendEmailpickedbycourier } from "../utils/emailSenders/pickedbycourier.utils.js";
+import { OrderreadyforpickupSender } from "../utils/emailSenders/Orderreadyforpickup.utils.js";
 
 
 dotenv.config({
@@ -556,8 +558,8 @@ const orderConfirmed = asyncHandler(async (req, res) => {
 
     }
     const order = await Order.findById(orderId)
-        .populate("userId", "username email phone")
-        .populate("productId", "image")
+  .populate("userId", "username email phone")
+  .populate("products.productId", "image");
 
     if (!order) {
         throw new ApiError(404, false, "no order founded", false)
@@ -616,7 +618,6 @@ const orderShipping = asyncHandler(async (req, res) => {
     }
     const orderShipped = order.orderShipped
     order.orderShipped = !orderShipped
-
     await order.save()
     res.status(200).json(new ApiResponse(200, null, "Your order Shipped", true))
 })
@@ -634,7 +635,7 @@ const orderReadyForPickUp = asyncHandler(async (req, res) => {
         throw new ApiError(401, false, "you can't access secure route", false)
 
     }
-    const order = await Order.findById(orderId)
+    const order = await Order.findById(orderId).populate("products.productId", "title price image").populate("userId", "username phone email")
     if (!order) {
         throw new ApiError(404, false, "no order founded", false)
 
@@ -642,6 +643,7 @@ const orderReadyForPickUp = asyncHandler(async (req, res) => {
     const orderReadyForPickup = order.readyForPickup
     order.readyForPickup = !orderReadyForPickup
 
+await OrderreadyforpickupSender(order)
     await order.save()
     res.status(200).json(new ApiResponse(200, null, "Order ready for pickup", true))
 })
@@ -688,7 +690,7 @@ const orderPickedByCounter = asyncHandler(async (req, res) => {
         throw new ApiError(401, false, "you can't access secure route", false)
 
     }
-    const order = await Order.findById(orderId)
+    const order = await Order.findById(orderId).populate("products.productId", "title price image").populate("userId", "username phone email")  
     if (!order) {
         throw new ApiError(404, false, "no order founded", false)
 
@@ -696,6 +698,7 @@ const orderPickedByCounter = asyncHandler(async (req, res) => {
     const orderDelivered = order.pickedByCounter
     order.pickedByCounter = !orderDelivered
 
+await sendEmailpickedbycourier(order)
 
     await order.save()
     res.status(200).json(new ApiResponse(200, null, "order Picked By counter", true))

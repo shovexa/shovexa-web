@@ -257,7 +257,7 @@ const PublicNavbar = () => {
                                         </button>
                                         {categorisOpen && (
                                             <div className="absolute right-12  w-48 rounded-lg shadow-lg bg-gray-800 border border-gray-700 z-50">
-                                                <CategoryComponent />
+                                                <CategoryComponent setIsMenuOpen={setIsMenuOpen} />
                                             </div>
                                         )}
 
@@ -447,7 +447,7 @@ const PublicNavbar = () => {
                                             </button>
                                             {categorisOpen && (
                                                 <div className="absolute left-0 mt-2 w-full rounded-lg shadow-lg bg-gray-800 border border-gray-700 z-50">
-                                                    <CategoryComponent />
+                                                    <CategoryComponent setIsMenuOpen={setIsMenuOpen} />
                                                 </div>
                                             )}
                                         </div>

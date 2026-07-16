@@ -1,19 +1,18 @@
-export const orderConfirmationTemp = (order) => {
+export const orderReadyForPickupTemp = (order) => {
   const websiteUrl = process.env.WEBSITE_URL;
 
-  
   return `
   <!DOCTYPE html>
   <html lang="en">
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Order Confirmed - shovexa</title>
+      <title>Order Ready for Pickup - Shovexa</title>
       <style>
           /* Base Styles */
           body {
               font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-              background-color: #f8f9fa;
+              background-color: #FBF3EC;
               margin: 0;
               padding: 0;
               color: #333;
@@ -26,11 +25,12 @@ export const orderConfirmationTemp = (order) => {
               border-radius: 8px;
               overflow: hidden;
               box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+              border: 1px solid #fce8d8;
           }
           
           /* Header */
           .header {
-              background: linear-gradient(135deg, #28a745, #20c997);
+              background: linear-gradient(135deg, #ea580c, #f59e0b);
               color: white;
               padding: 25px 30px;
               text-align: center;
@@ -53,7 +53,7 @@ export const orderConfirmationTemp = (order) => {
           /* Status Badge */
           .status-badge {
               display: inline-block;
-              background-color: #28a745;
+              background-color: #ea580c;
               color: white;
               padding: 6px 15px;
               border-radius: 20px;
@@ -61,10 +61,34 @@ export const orderConfirmationTemp = (order) => {
               font-weight: 600;
               margin-bottom: 20px;
           }
+
+          /* Tracking banner */
+          .tracking-banner {
+              background: linear-gradient(135deg, #fff7ed, #ffedd5);
+              border: 1px solid #fed7aa;
+              border-radius: 6px;
+              padding: 16px 20px;
+              margin: 20px 0;
+              display: flex;
+              align-items: center;
+              gap: 14px;
+          }
+          .tracking-icon {
+              width: 40px;
+              height: 40px;
+              flex-shrink: 0;
+              background-color: #ea580c;
+              border-radius: 50%;
+              display: inline-block;
+              text-align: center;
+              line-height: 40px;
+              color: white;
+              font-size: 18px;
+          }
           
           /* Order Summary */
           .order-summary {
-              background-color: #f8f9fa;
+              background-color: #fff7ed;
               border-radius: 6px;
               padding: 20px;
               margin: 20px 0;
@@ -72,8 +96,8 @@ export const orderConfirmationTemp = (order) => {
           .order-summary h2 {
               margin-top: 0;
               font-size: 18px;
-              color: #2c3e50;
-              border-bottom: 1px solid #eaeaea;
+              color: #7c2d12;
+              border-bottom: 1px solid #f3e4d7;
               padding-bottom: 10px;
           }
           
@@ -84,16 +108,16 @@ export const orderConfirmationTemp = (order) => {
               margin: 20px 0;
           }
           .product-table th {
-              background-color: #f1f5f9;
+              background-color: #fff2e2;
               text-align: left;
               padding: 12px 15px;
               font-weight: 600;
-              color: #2c3e50;
-              border-bottom: 1px solid #e1e5e9;
+              color: #7c2d12;
+              border-bottom: 1px solid #f3e4d7;
           }
           .product-table td {
               padding: 12px 15px;
-              border-bottom: 1px solid #eaeaea;
+              border-bottom: 1px solid #f3e4d7;
           }
           .product-table tr:last-child td {
               border-bottom: none;
@@ -106,7 +130,7 @@ export const orderConfirmationTemp = (order) => {
             }
           /* Price Breakdown */
           .price-breakdown {
-              background-color: #f8f9fa;
+              background-color: #fff7ed;
               border-radius: 6px;
               padding: 20px;
               margin: 20px 0;
@@ -118,9 +142,10 @@ export const orderConfirmationTemp = (order) => {
               padding: 8px 0;
           }
           .price-breakdown .total-row {
-              border-top: 1px solid #ddd;
+              border-top: 1px solid #f3e4d7;
               font-weight: 700;
               font-size: 18px;
+              color: #7c2d12;
           }
           .price-breakdown .value {
               text-align: right;
@@ -136,14 +161,14 @@ export const orderConfirmationTemp = (order) => {
           .info-box {
               flex: 1;
               min-width: 200px;
-              background-color: #f8f9fa;
+              background-color: #fff7ed;
               border-radius: 6px;
               padding: 15px;
           }
           .info-box h3 {
               margin-top: 0;
               font-size: 16px;
-              color: #2c3e50;
+              color: #7c2d12;
           }
           
           /* Buttons */
@@ -153,7 +178,7 @@ export const orderConfirmationTemp = (order) => {
           }
           .btn {
               display: inline-block;
-              background: linear-gradient(135deg, #28a745, #20c997);
+              background: linear-gradient(135deg, #ea580c, #f59e0b);
               color: white;
               padding: 12px 25px;
               text-decoration: none;
@@ -169,16 +194,16 @@ export const orderConfirmationTemp = (order) => {
           }
           .btn-outline {
               background: transparent;
-              border: 1px solid #28a745;
-              color: #28a745;
+              border: 1px solid #ea580c;
+              color: #ea580c;
           }
           
           /* Footer */
           .footer {
-              background-color: #f1f5f9;
+              background-color: #fff2e2;
               padding: 20px 30px;
               text-align: center;
-              color: #6c757d;
+              color: #a8887a;
               font-size: 14px;
           }
           .footer p {
@@ -204,17 +229,25 @@ export const orderConfirmationTemp = (order) => {
       <div class="container">
           <!-- Header -->
           <div class="header">
-              <h1>Order Confirmed Successfully!</h1>
-              <p>Thank you for shopping with shovexa</p>
+              <h1>Your Order Is Ready for Pickup!</h1>
+              <p>Packed and waiting for you</p>
           </div>
           
           <!-- Content -->
           <div class="content">
-              <div class="status-badge">Order Confirmed</div>
+              <div class="status-badge">Ready for Pickup</div>
               
               <p>Dear <strong>${order.userId.username || "Customer"}</strong>,</p>
               
-              <p>Your order has been confirmed by the seller and is now being processed. We'll notify you once your order ships.</p>
+              <p>Good news! Your order has been packed and is ready to be picked up at your convenience. Please bring your order ID when you arrive.</p>
+
+              <div class="tracking-banner">
+                  <span class="tracking-icon">📦</span>
+                  <div>
+                      <strong style="color:#7c2d12;">Ready when you are</strong><br/>
+                      <span style="color:#7c5b4a;font-size:14px;">Your order is packed and waiting for collection.</span>
+                  </div>
+              </div>
               
               <!-- Order Summary -->
               <div class="order-summary">
@@ -225,7 +258,7 @@ export const orderConfirmationTemp = (order) => {
               </div>
               
               <!-- Products -->
-              <h2>Order Items</h2>
+              <h2 style="color:#7c2d12;">Order Items</h2>
               <table class="product-table">
            <thead>
 <tr>
@@ -265,7 +298,7 @@ export const orderConfirmationTemp = (order) => {
               
               <!-- Price Breakdown -->
               <div class="price-breakdown">
-                  <h2>Price Breakdown</h2>
+                  <h2 style="color:#7c2d12;">Price Breakdown</h2>
                   <table>
                       <tr>
                           <td>Subtotal:</td>
@@ -289,18 +322,18 @@ export const orderConfirmationTemp = (order) => {
               <!-- Customer Information -->
               <table class="customer-info" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;">
   <tr>
-    <td valign="top" width="50%" style="padding:10px; border:1px solid #eee;">
-      <h3 style="margin:0 0 10px 0;">Customer Information</h3>
+    <td valign="top" width="50%" style="padding:10px; border:1px solid #f3e4d7;">
+      <h3 style="margin:0 0 10px 0;color:#7c2d12;">Customer Information</h3>
       <p><strong>Name:</strong> ${order.userId.username || "Customer"}</p>
       <p><strong>Email:</strong> ${order.userId.email || "Not provided"}</p>
       <p><strong>Phone:</strong> ${order.userId.phone || "Not provided"}</p>
     </td>
 
-    <td valign="top" width="50%" style="padding:10px; border:1px solid #eee;">
-      <h3 style="margin:0 0 10px 0;">Order Status</h3>
+    <td valign="top" width="50%" style="padding:10px; border:1px solid #f3e4d7;">
+      <h3 style="margin:0 0 10px 0;color:#7c2d12;">Order Status</h3>
       <p><strong>Payment:</strong> ${order.isPaid ? 'Paid' : 'Pending'}</p>
       <p><strong>Confirmed:</strong> ${order.confirmed ? 'Yes' : 'No'}</p>
-      <p><strong>Delivery:</strong> ${order.isDelivered ? 'Delivered' : 'Processing'}</p>
+      <p><strong>Delivery:</strong> Ready for pickup</p>
     </td>
   </tr>
 </table>
@@ -312,9 +345,9 @@ export const orderConfirmationTemp = (order) => {
                   <a href="${websiteUrl}" class="btn btn-outline">Continue Shopping</a>
               </div>
               
-              <p>If you have any questions about your order, please don't hesitate to contact our customer service team.</p>
+              <p>If you have any questions about your pickup, please don't hesitate to contact our customer service team.</p>
               
-              <p>Best regards,<br><strong>The shovexa Team</strong></p>
+              <p>Best regards,<br><strong>The Shovexa Team</strong></p>
           </div>
           
           <!-- Footer -->

@@ -9,7 +9,7 @@ import { transporter } from "../../config/emailTransporter.confilg.js";
 export const sellerApprovalEmailSender= async (name,email,randomPassword) => {
 
     const mailOptions = {
-  from: `"SAADiC Admin" <${process.env.EMAIL_USER}>`,
+  from: `"shovexa Admin" <${process.env.EMAIL_USER}>`,
   to: email,
   subject: "Your Seller Account Has Been Approved",
   html:sellerApprovalTemp(name,email,randomPassword)

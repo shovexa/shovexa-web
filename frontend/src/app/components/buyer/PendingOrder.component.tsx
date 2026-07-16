@@ -23,7 +23,40 @@ const PendingOrderComponent = ({
   const [loadingMap, setLoadingMap] = useState<Record<string, boolean>>({});
   // const [detailToggleBtn, SetDetailToggleBtn] = useState<boolean>(false)
 
+const formatOrderDate = (createdAt: string | Date) => {
+  const orderDate = new Date(createdAt);
+  const now = new Date();
+  const diffMs = now.getTime() - orderDate.getTime();
+  const diffMins = Math.floor(diffMs / 1000 / 60);
+  const diffHours = Math.floor(diffMins / 60);
 
+  const isToday = orderDate.toDateString() === now.toDateString();
+
+  const yesterday = new Date(now);
+  yesterday.setDate(now.getDate() - 1);
+  const isYesterday = orderDate.toDateString() === yesterday.toDateString();
+
+  const timeStr = orderDate.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+  });
+
+  if (isToday) {
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins} minute${diffMins === 1 ? '' : 's'} ago`;
+    return `${diffHours} hour${diffHours === 1 ? '' : 's'} ago`;
+  }
+
+  if (isYesterday) {
+    return `Yesterday at ${timeStr}`;
+  }
+
+  return orderDate.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+};
 
   const handleCancelOrder = async (orderId: string) => {
 
@@ -53,7 +86,9 @@ const PendingOrderComponent = ({
         </div>
       }
       <div className="space-y-6">
-        {pendingOders.map((order) => {
+        {pendingOders.
+        sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).
+        map((order) => {
           const orderDate = new Date(order.createdAt);
           const delivered = order.isDelivered;
           const now = new Date();
@@ -75,13 +110,9 @@ const PendingOrderComponent = ({
                   Order #{order._id.slice(-6).toUpperCase()}
                 </h2>
 
-                <p className="text-gray-600 text-sm">order{' '}on{' '}
-                  {new Date(order.createdAt).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                  })}
-                </p>
+            <p className="text-gray-600 text-sm">
+  order on {formatOrderDate(order.createdAt)}
+</p>
                 <div className="flex items-center mt-1">
                   <span className={`inline-block w-3 h-3 rounded-full ${order.confirmed ? 'bg-green-500' : 'bg-red-500'}  mr-2`}></span>
                   <span className={`text-sm ${order.confirmed ? 'text-green-700' : 'text-red-500'} `}>

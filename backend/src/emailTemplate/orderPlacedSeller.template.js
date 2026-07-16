@@ -10,8 +10,8 @@ export const orderPlacedSellerTemplate = (order, orderedProducts) => {
 
             return `
         <tr>
-          <td style="padding:12px;border-bottom:1px solid #e0e0e0;text-align:center;font-family:Arial,sans-serif;color:#555;">${index + 1}</td>
-          <td style="padding:12px;border-bottom:1px solid #e0e0e0;">
+          <td style="padding:12px;border-bottom:1px solid #f3e4d7;text-align:center;font-family:Arial,sans-serif;color:#555;">${index + 1}</td>
+          <td style="padding:12px;border-bottom:1px solid #f3e4d7;">
             <div style="display:flex;align-items:center;gap:14px;">
               <img src="${item.image}" 
                    alt="${item.title || "Product Image"}"
@@ -19,11 +19,11 @@ export const orderPlacedSellerTemplate = (order, orderedProducts) => {
             </div>
           </td>
           <td
-           style="padding:12px;border-bottom:1px solid #e0e0e0;text-align:center;font-family:Arial,sans-serif;color:#555;">
+           style="padding:12px;border-bottom:1px solid #f3e4d7;text-align:center;font-family:Arial,sans-serif;color:#555;">
            PKR ${(item.price)}
            </td>
           <td 
-          style="padding:12px;border-bottom:1px solid #e0e0e0;text-align:center;font-family:Arial,sans-serif;color:#555;font-weight:600;">
+          style="padding:12px;border-bottom:1px solid #f3e4d7;text-align:center;font-family:Arial,sans-serif;color:#555;font-weight:600;">
           ${quantity}
           </td>
         </tr>`;
@@ -39,7 +39,7 @@ export const orderPlacedSellerTemplate = (order, orderedProducts) => {
       <style>
           body {
               font-family: 'Segoe UI', Arial, sans-serif;
-              background-color: #f8f9fa;
+              background-color: #FBF3EC;
               margin: 0;
               padding: 0;
               line-height: 1.6;
@@ -51,19 +51,32 @@ export const orderPlacedSellerTemplate = (order, orderedProducts) => {
               padding: 30px;
               border-radius: 12px;
               box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+              border: 1px solid #fce8d8;
           }
           .header {
               text-align: center;
               padding-bottom: 20px;
-              border-bottom: 1px solid #eaeaea;
+              border-bottom: 1px solid #f3e4d7;
               margin-bottom: 25px;
           }
           .logo {
               height: 50px;
               margin-bottom: 15px;
           }
+          .badge {
+              display: inline-block;
+              background: linear-gradient(135deg, #ea580c, #f59e0b);
+              color: #ffffff;
+              font-size: 11px;
+              font-weight: 700;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+              padding: 5px 14px;
+              border-radius: 999px;
+              margin-bottom: 14px;
+          }
           .order-header {
-              color: #2c3e50;
+              color: #7c2d12;
               font-size: 24px;
               font-weight: 600;
               margin: 15px 0 10px 0;
@@ -74,18 +87,18 @@ export const orderPlacedSellerTemplate = (order, orderedProducts) => {
               margin-bottom: 20px;
           }
           .order-info {
-              background: #f8f9fa;
+              background: #fff7ed;
               padding: 20px;
               border-radius: 8px;
               margin: 20px 0;
-              border-left: 4px solid #3498db;
+              border-left: 4px solid #ea580c;
           }
           .info-label {
               font-weight: 600;
-              color: #2c3e50;
-             display: flex;
+              color: #7c2d12;
+              display: flex;
               flex-wrap: wrap;
-             gap: 12px;
+              gap: 12px;
               width: 120px;
           }
           .info-value {
@@ -101,7 +114,7 @@ export const orderPlacedSellerTemplate = (order, orderedProducts) => {
               box-shadow: 0 2px 8px rgba(0,0,0,0.05);
           }
           th {
-              background-color: #2c3e50;
+              background-color: #ea580c;
               color: white;
               padding: 14px 12px;
               text-align: center;
@@ -109,7 +122,7 @@ export const orderPlacedSellerTemplate = (order, orderedProducts) => {
               font-size: 14px;
           }
           .total-section {
-              background: #f8f9fa;
+              background: #fff7ed;
               padding: 20px;
               border-radius: 8px;
               margin: 25px 0;
@@ -118,11 +131,11 @@ export const orderPlacedSellerTemplate = (order, orderedProducts) => {
           .total-amount {
               font-size: 20px;
               font-weight: 700;
-              color: #27ae60;
+              color: #ea580c;
           }
           .btn {
               display: inline-block;
-              background: linear-gradient(135deg, #3498db, #2980b9);
+              background: linear-gradient(135deg, #ea580c, #f59e0b);
               color: #ffffff;
               padding: 14px 32px;
               text-decoration: none;
@@ -131,23 +144,23 @@ export const orderPlacedSellerTemplate = (order, orderedProducts) => {
               font-size: 15px;
               margin: 20px 0;
               transition: all 0.3s ease;
-              box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+              box-shadow: 0 2px 8px rgba(234, 88, 12, 0.3);
           }
           .btn:hover {
-              background: linear-gradient(135deg, #2980b9, #3498db);
-              box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+              background: linear-gradient(135deg, #f59e0b, #ea580c);
+              box-shadow: 0 4px 12px rgba(234, 88, 12, 0.4);
               transform: translateY(-1px);
           }
           .footer {
               margin-top: 30px;
               padding-top: 20px;
-              border-top: 1px solid #eaeaea;
+              border-top: 1px solid #f3e4d7;
               text-align: center;
               font-size: 13px;
-              color: #7f8c8d;
+              color: #a8887a;
           }
           .highlight {
-              color: #2c3e50;
+              color: #7c2d12;
               font-weight: 600;
           }
       </style>
@@ -155,7 +168,8 @@ export const orderPlacedSellerTemplate = (order, orderedProducts) => {
   <body>
       <div class="container">
           <div class="header">
-              <img src="${websiteUrl}/logo.jpg" alt="Saadi Collection Logo" class="logo"/>
+              <img src="${websiteUrl}/logo.jpg" alt="Shovexa Logo" class="logo"/>
+              <div class="badge">New Order</div>
               <h1 class="order-header">New Order Received</h1>
               <p class="subheader">A customer has placed an order for your products</p>
           </div>
@@ -172,7 +186,7 @@ export const orderPlacedSellerTemplate = (order, orderedProducts) => {
               <div><span class="info-label">Payment Method:</span> <span class="info-value">${order.paymentMethod || "Not specified"}</span></div>
           </div>
 
-          <h3 style="color:#2c3e50;margin-bottom:15px;font-size:18px;">Order Items</h3>
+          <h3 style="color:#7c2d12;margin-bottom:15px;font-size:18px;">Order Items</h3>
           <table>
               <thead>
                   <tr>
@@ -200,8 +214,8 @@ export const orderPlacedSellerTemplate = (order, orderedProducts) => {
                   <span style="color:#555;">Shipping:</span> 
                   <span style="float:right;font-weight:600;">PKR ${order.shippingPrice?.toFixed(2) || "0.00"}</span>
               </div>
-              <div style="border-top:2px solid #e0e0e0;padding-top:10px;margin-top:10px;">
-                  <span style="color:#2c3e50;font-weight:600;font-size:16px;">Total Amount:</span> 
+              <div style="border-top:2px solid #f3e4d7;padding-top:10px;margin-top:10px;">
+                  <span style="color:#7c2d12;font-weight:600;font-size:16px;">Total Amount:</span> 
                   <span class="total-amount" style="float:right;">PKR ${order.totalPrice?.toFixed(2) || "0.00"}</span>
               </div>
           </div>
@@ -212,7 +226,7 @@ export const orderPlacedSellerTemplate = (order, orderedProducts) => {
 
           <div class="footer">
               <p>© ${new Date().getFullYear()} shovexa.com. All rights reserved.</p>
-              <p style="margin-top:5px;color:#95a5a6;">This is an automated notification. Please do not reply to this email.</p>
+              <p style="margin-top:5px;color:#c4a595;">This is an automated notification. Please do not reply to this email.</p>
           </div>
       </div>
   </body>

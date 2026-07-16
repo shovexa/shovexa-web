@@ -54,55 +54,67 @@ const handleEditSubmit = async () => {
   }
 };
   return (
- <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                  <div className="bg-white rounded-lg p-6 w-full max-w-md">
-                    <h2 className="text-xl font-semibold text-black mb-4">Edit Your Review</h2>
-                    <div >
-                      <div className="mb-4">
-                        <label className="block text-gray-700 mb-2">Rating</label>
-                      
-                        {ratingOptions.map((num) => (
-                            <span
-                                key={num}
-                                className={`cursor-pointer text-xl ${num <= rating ? "text-yellow-500" : "text-gray-300"
-                                    }`}
-                                onClick={() => setRating(num)}
-                            >
-                                ★
-                            </span>
-                        ))}
-                      </div>
-              {editData &&        <div className="mb-4">
-                        <label className="block text-gray-700 mb-2">Review Message</label>
-                        <textarea
-                          value={editData.reviewMessage}
-                          required
-                          onChange={(e) =>
-                            setEditData({ ...editData, reviewMessage: e.target.value })
-                          }
-                          className="w-full border text-black border-gray-300 rounded px-3 py-2"
-                          rows={4}
-                          placeholder='Write your review here...' 
-                        ></textarea>
-                      </div>}
-                      <div className="flex justify-end space-x-3">
-                        <button
-                          type="button"
-                          onClick={() => setEditToggle(false)}
-                          className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition"
-                        >
-                          Cancel
-                        </button>
-                        <button
-                         onClick={handleEditSubmit}
-                          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-                        >
-                          Save Changes
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+ <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
+  <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-xl border border-orange-100">
+    <h2 className="text-xl font-semibold text-gray-900 mb-5 flex items-center gap-2">
+      <span className="w-1.5 h-5 bg-orange-500 rounded-full" />
+      Edit Your Review
+    </h2>
+
+    <div>
+      <div className="mb-4">
+        <label className="block text-gray-700 mb-2 text-sm font-medium">Rating</label>
+        <div className="flex space-x-1">
+          {ratingOptions.map((num) => (
+            <span
+              key={num}
+              className={`cursor-pointer text-2xl transition-transform hover:scale-110 ${
+                num <= rating ? "text-amber-500" : "text-gray-300"
+              }`}
+              onClick={() => setRating(num)}
+            >
+              ★
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {editData && (
+        <div className="mb-5">
+          <label className="block text-gray-700 mb-2 text-sm font-medium">
+            Review Message
+          </label>
+          <textarea
+            value={editData.reviewMessage}
+            required
+            onChange={(e) =>
+              setEditData({ ...editData, reviewMessage: e.target.value })
+            }
+            className="w-full border text-gray-800 border-gray-300 rounded-lg px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm"
+            rows={4}
+            placeholder="Write your review here..."
+          ></textarea>
+        </div>
+      )}
+
+      <div className="flex justify-end space-x-3">
+        <button
+          type="button"
+          onClick={() => setEditToggle(false)}
+          className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={handleEditSubmit}
+          className="px-4 py-2 bg-gradient-to-r from-orange-600 to-amber-500 text-white rounded-lg hover:from-orange-500 hover:to-amber-400 transition-all font-medium shadow-sm hover:shadow-md"
+        >
+          Save Changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
   )
 }
 

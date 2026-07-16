@@ -1,17 +1,20 @@
 import { transporter } from "../../config/emailTransporter.confilg.js";
-import sellerRequestTemplate from "../../emailTemplate/sellerRequest.template.js";
+import { orderPickedByCourierTemp } from "../../emailTemplate/pickedbycourier.temp.js";
+import { ApiError } from "../apiError.js";
 
 
 
 
-export const sendSellerRequestEmail = async (StoreName,OwnerName,ContactEmail,SubmissionDate,ReferenceID,phone) => {
-  
+
+
+export const sendEmailpickedbycourier = async (order) => {
     const mailOptions = {
-        from: `"shovexa" ${process.env.EMAIL_USER}`, 
-        to: ContactEmail,
-        subject: "seller store request",
-        html: sellerRequestTemplate(StoreName,OwnerName,ContactEmail,SubmissionDate,ReferenceID,phone)
-    };
+  from: `"shovexa.com" ${process.env.EMAIL_USER}`,
+  to:order.userId.email,
+  subject: "Your Order Has Been Picked by Courier",
+  html:orderPickedByCourierTemp(order)
+};
+
     return new Promise((resolve, reject) => {
         transporter.sendMail(mailOptions, (error, info) => {
             

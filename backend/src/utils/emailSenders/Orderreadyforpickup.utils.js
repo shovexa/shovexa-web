@@ -1,17 +1,22 @@
 import { transporter } from "../../config/emailTransporter.confilg.js";
-import sellerRequestTemplate from "../../emailTemplate/sellerRequest.template.js";
+import { orderConfirmationTemp } from "../../emailTemplate/orderConfirnedTemp.js";
+import { orderReadyForPickupTemp} from "../../emailTemplate/Orderreadyforpickup.template.js";
+import { ApiError } from "../apiError.js";
 
 
 
 
-export const sendSellerRequestEmail = async (StoreName,OwnerName,ContactEmail,SubmissionDate,ReferenceID,phone) => {
-  
+
+
+export const OrderreadyforpickupSender= async (order) => {
+
     const mailOptions = {
-        from: `"shovexa" ${process.env.EMAIL_USER}`, 
-        to: ContactEmail,
-        subject: "seller store request",
-        html: sellerRequestTemplate(StoreName,OwnerName,ContactEmail,SubmissionDate,ReferenceID,phone)
-    };
+  from: `"shovexa.com" ${process.env.EMAIL_USER}`,
+  to:order.userId.email,
+  subject: "Your Order Is Ready for Pickup",
+  html:orderReadyForPickupTemp(order)
+};
+
     return new Promise((resolve, reject) => {
         transporter.sendMail(mailOptions, (error, info) => {
             

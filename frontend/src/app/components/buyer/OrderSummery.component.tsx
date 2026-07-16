@@ -119,75 +119,103 @@ const ShippingComponent = () => {
 
 
 
-        <div className="flex flex-wrap justify-center  rounded-lg shadow-md">
+        <div className="max-w-5xl mx-auto px-4 py-10">
+  <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6 lg:gap-8">
+    {/* Left column: Address + Selected Item */}
+    <div className="space-y-6 order-2 lg:order-1">
+      <div className="bg-white rounded-2xl border border-orange-100 shadow-sm p-5 sm:p-6">
+        <AddressComponent />
+      </div>
 
-
-
-          <div className="w-auto max-w-md text-gray-800 bg-transparent   mt-10">
-            <h1 className="text-xl font-semibold text-gray-900 border-b pb-2 mb-4">
-              Order Summary
-            </h1>
-            <p className="text-sm text-gray-600 mb-4">
-              order cancelling is not allowed after 15 minutes of placing order
-            </p>
-            {
-              decoded ?
-                <div className="space-y-3">
-                  <h2 className="flex justify-between items-center text-sm font-medium">
-                    <span>Items Total ({orderSummary.products[0].quantity}):</span>
-                    <span>
-                      PKR{' '}{orderSummary.products[0].price - orderSummary.products[0].discount}
-                      </span>
-                    <span
-                      className="block text-sm text-gray-500 line-through">
-                      {orderSummary.products[0].price}
-                    </span>
-                    <span
-                      className="bg-green-100 text-green-700 text-sm font-semibold px-2 py-1 rounded-full">
-                      Save  {Math.round((Number(orderSummary.products[0].discount) / Number(orderSummary.products[0].price)) * 100)}%
-                    </span>
-                  </h2>
-                  <h2 className="flex justify-between text-sm font-medium">
-                    <span>Delivery Fee:</span>
-                    <span>PKR{' '}{orderSummary.shippingPrice}</span>
-                  </h2>
-                  <h2 className="flex justify-between text-sm font-medium">
-                    <span>Tax Price:</span>
-                    <span>PKR{' '}{orderSummary.taxPrice.toFixed(2)}</span>
-                  </h2>
-                  <h2 className="flex justify-between text-lg font-semibold text-gray-900">
-                    <span>Total:</span>
-                    <span>PKR{' '}{orderSummary.totalPrice.toFixed(2)}</span>
-                  </h2>
-                </div>
-                : <p className="text-red-600 font-light flex justify-center items-center mt-4">Invalid order details provided.</p>
-            }
-            <button onClick={handleProceedPay} className="mt-6 w-full bg-blue-600 text-white font-medium py-2 rounded-md hover:bg-blue-700 transition-all">
-              {loading ? 'loading...' : 'Proceed to Pay'}
-            </button>
-          </div>
-          <div className="">
-
-            <AddressComponent />
-          </div>
-          {
-            decoded ?
-              <div className=" text-gray-800 bg-transparent border  mt-10">
-                <h1
-                  className="text-xl font-semibold text-gray-900 border-b pb-2 mb-4"
-                >
-                  Selected Item for Checkout
-                </h1>
-                <SingleProductComponent productIds={[decoded.productId]} />
-
-              </div>
-              : <p className="text-red-600 font-light flex justify-center items-center mt-4">Invalid order details provided.</p>
-          }
-
-
-
-
+      {decoded ? (
+        <div className="bg-white rounded-2xl border border-orange-100 shadow-sm p-5 sm:p-6">
+          <h1 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            <span className="w-1.5 h-5 bg-orange-500 rounded-full" />
+            Selected Item for Checkout
+          </h1>
+          <SingleProductComponent productIds={[decoded.productId]} />
         </div>
+      ) : (
+        <p className="text-red-600 font-light flex justify-center items-center py-6 bg-white rounded-2xl border border-red-100">
+          Invalid order details provided.
+        </p>
+      )}
+    </div>
+
+    {/* Right column: Order Summary (sticky receipt card) */}
+    <div className="order-1 lg:order-2">
+      <div className="lg:sticky lg:top-6 bg-white rounded-2xl border border-orange-100 shadow-md overflow-hidden">
+        {/* Orange header strip */}
+        <div className="bg-gradient-to-r from-orange-600 to-orange-500 px-5 py-4 sm:px-6">
+          <h1 className="text-lg font-semibold text-white">Order Summary</h1>
+          <p className="text-xs text-orange-50/90 mt-1">
+            Order cancelling is not allowed after 15 minutes of placing order
+          </p>
+        </div>
+
+        <div className="p-5 sm:p-6">
+          {decoded ? (
+            <>
+              <div className="space-y-4 divide-y divide-dashed divide-orange-100">
+                <div className="pb-4">
+                  <div className="flex justify-between items-start text-sm font-medium text-gray-800">
+                    <span>Items Total ({orderSummary.products[0].quantity})</span>
+                    <span className="font-semibold text-gray-900">
+                      PKR {orderSummary.products[0].price - orderSummary.products[0].discount}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 mt-1.5">
+                    <span className="text-xs text-gray-400 line-through">
+                      PKR {orderSummary.products[0].price}
+                    </span>
+                    <span className="bg-orange-100 text-orange-700 text-xs font-semibold px-2 py-0.5 rounded-full">
+                      Save{" "}
+                      {Math.round(
+                        (Number(orderSummary.products[0].discount) /
+                          Number(orderSummary.products[0].price)) *
+                          100
+                      )}
+                      %
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex justify-between text-sm font-medium text-gray-700 py-3">
+                  <span>Delivery Fee</span>
+                  <span>PKR {orderSummary.shippingPrice}</span>
+                </div>
+
+                <div className="flex justify-between text-sm font-medium text-gray-700 py-3">
+                  <span>Tax Price</span>
+                  <span>PKR {orderSummary.taxPrice.toFixed(2)}</span>
+                </div>
+
+                <div className="flex justify-between items-center pt-4">
+                  <span className="text-base font-semibold text-gray-900">Total</span>
+                  <span className="text-xl font-bold text-orange-600">
+                    PKR {orderSummary.totalPrice.toFixed(2)}
+                  </span>
+                </div>
+              </div>
+
+              <button
+                onClick={handleProceedPay}
+                disabled={loading}
+                className="mt-6 w-full bg-orange-600 text-white font-semibold py-3 rounded-xl hover:bg-orange-700 active:bg-orange-800 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {loading ? "Processing…" : "Proceed to Pay"}
+              </button>
+            </>
+          ) : (
+            <p className="text-red-600 font-light flex justify-center items-center py-6">
+              Invalid order details provided.
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
       </div>
 
     </>

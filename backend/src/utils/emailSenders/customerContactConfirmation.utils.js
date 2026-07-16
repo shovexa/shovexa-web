@@ -8,7 +8,7 @@ import { ApiError } from "../apiError.js";
 export const sendcustomerConfirmations = async (name,email) => {
 
     const mailOptions = {
-  from: `"saadiCollection Support" ${process.env.EMAIL_USER}`,
+  from: `"shovexa Support" ${process.env.EMAIL_USER}`,
   to: email,
   subject: "We’ve received your message",
   html:customerContactConfirmationTemp(name)

@@ -47,7 +47,7 @@ const sellerRequestTemp = (
       <td align="center" style="padding: 30px 0 20px;">
         <div style="font-size: 24px; font-weight: bold; color: #2563eb;">
           <span style="color: #2563eb; background: #dbeafe; border-radius: 6px; padding: 8px 12px; display: inline-block;">
-            📦 saadiCollection
+            📦 shovexa
           </span>
         </div>
       </td>
