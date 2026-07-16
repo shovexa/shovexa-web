@@ -2,16 +2,16 @@ import type { Metadata } from "next";
 
 
 export const metadata:Metadata = {
-  title: "My Orders | SAADiCcollection.shop",
+  title: "My Orders | shovexa.com",
   description:
-    "View and manage your pending and delivered orders. Access your favorites and cart products on SAADiCcollection.shop.",
+    "View and manage your pending and delivered orders. Access your favorites and cart products on shovexa.com.",
   keywords: [
     "buyer orders",
     "pending orders",
     "delivered orders",
     "favorites",
     "cart",
-    "SAADiCcollection.shop"
+    "shovexa.com"
   ],
   
 };

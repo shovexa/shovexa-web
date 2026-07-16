@@ -4,9 +4,9 @@ import {
   // FaFacebookF,
   // FaInstagram,
   // FaTelegramPlane,
+  // FaTwitter,
   FaYoutube,
   FaTiktok,
-  FaTwitter,
   FaWhatsapp,
   FaEnvelope,
   FaCcVisa,
@@ -52,10 +52,10 @@ const Footer = () => {
     href: "https://tiktok.com/@adamkibeti86",
     icon: <FaTiktok />,
   },
-  {
-    href: "https://x.com/sadicollection1",
-    icon: <FaTwitter />,
-  },
+  // {
+  //   href: "https://x.com/sadicollection1",
+  //   icon: <FaTwitter />,
+  // },
   {
     href: "mailto:shovexa@gmail.com",
     icon: <FaEnvelope />,

@@ -275,7 +275,7 @@ export const signupWithGoogleUnknownError=(err)=>{
             <div class="contact-info">
                 <div class="contact-item">
                     <span>📧</span>
-                    <span>saadicollection18@gmail.com</span>
+                    <span>shovexa@gmail.com</span>
                 </div>
                 <div class="contact-item">
                     <span>📞</span>

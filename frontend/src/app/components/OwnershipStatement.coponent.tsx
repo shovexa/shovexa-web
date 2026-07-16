@@ -30,7 +30,7 @@ const OwnershipStatement = () => {
         <p>
           Contact Information:
           <br />
-          Email: <span className="font-medium">saadicollection18@gmail.com</span>
+          Email: <span className="font-medium">shovexa@gmail.com</span>
           <br />
           Phone: <span className="font-medium">03334186523 </span>
         </p>

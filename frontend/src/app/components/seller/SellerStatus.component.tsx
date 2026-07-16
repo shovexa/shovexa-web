@@ -172,7 +172,7 @@ await logOut()
               </h3>
               <p className="text-sm text-gray-600 ">
                 Our support team is available 24/7 at
-                <span className="text-blue-600 flex flex-wrap justify-center">saadicollection18@gmail.com </span>
+                <span className="text-blue-600 flex flex-wrap justify-center">shovexa@gmail.com </span>
               </p>
             </div>
           </div>

@@ -3,15 +3,15 @@ import Head from "next/head";
 
 
 export const metadata:Metadata = {
-  title: "Contact Us | SAADiCcollection.shop",
+  title: "Contact Us | shovexa.com",
   description:
-    "Get in touch with SAADiCcollection.shop support team for help with orders, products, or account-related questions.",
+    "Get in touch with shovexa.com support team for help with orders, products, or account-related questions.",
   keywords: [
     "contact",
     "support",
     "customer service",
     "help center",
-    "SAADiCcollection.shop"
+    "shovexa.com"
   ],
   
 };

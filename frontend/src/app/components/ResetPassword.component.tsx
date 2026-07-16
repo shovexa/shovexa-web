@@ -6,263 +6,241 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 
 const ResetPasswordComponent = () => {
-    const router = useRouter();
-    const searchParams = useSearchParams();
-    const email = searchParams.get("email") as string;
-    const [error, setError] = useState<string | undefined>(undefined);
-    const [passwordVisible, setPasswordVisible] = useState(false);
-    const API_URL = process.env.NEXT_PUBLIC_API_URL;
-    const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email") as string;
+  const [error, setError] = useState<string | undefined>(undefined);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const [loading, setLoading] = useState<boolean>(false);
 
-    const handleEmailSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const form = e.target as HTMLFormElement;
-        setError(undefined)
+  const handleEmailSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    setError(undefined);
 
-        try {
-            setLoading(true);
-            await axios.post(`${API_URL}/forgotPassword`, { email: form.email.value })
+    try {
+      setLoading(true);
+      await axios.post(`${API_URL}/forgotPassword`, { email: form.email.value });
+      router.push(`?email=${form.email.value}`);
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        setLoading(false);
+        setError(error?.response?.data.error);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
-            router.push(`?email=${form.email.value}`);
+  const handleResetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const code = form.code.value;
+    const newPassword = form.newPassword.value;
 
-        } catch (error: unknown) {
-            if (error instanceof AxiosError) {
+    if (code.length < 6) {
+      setError("Code must be 6 digits");
+      return;
+    }
+    if (newPassword.length < 6) {
+      setError("Password must be at least 6 characters");
+      return;
+    }
+    setLoading(true);
+    const data = { email: email, passwordResetCode: code, newPassword: newPassword };
 
-                setLoading(false)
-                setError(error?.response?.data.error)
-            }
+    try {
+      await axios.post(`${API_URL}/resetPassword`, data);
+      alert("Password reset successful");
+      router.push("/login");
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        setLoading(false);
+        setError(error?.response?.data.error);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
-        } finally {
-            setLoading(false)
-        }
-    };
-
-    const handleResetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const form = e.target as HTMLFormElement;
-        const code = form.code.value;
-        const newPassword = form.newPassword.value;
-
-        if (code.length < 6) {
-            setError("Code must be 6 digits")
-            return
-        }
-        if (newPassword.length < 6) {
-            setError("Password must be at least 6 characters")
-            return
-
-        }
-        setLoading(true);
-        const data = { email: email, passwordResetCode: code, newPassword: newPassword }
-
-        try {
-            await axios.post(`${API_URL}/resetPassword`, data)
-            alert('Password reset successful')
-            router.push('/login')
-
-        } catch (error: unknown) {
-            if (error instanceof AxiosError) {
-                setLoading(false)
-                setError(error?.response?.data.error)
-
-
-            }
-        } finally {
-            setLoading(false)
-        }
-
-
-    };
-
-    return (
-      <>
-  <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex flex-col items-center justify-center p-4">
-    {/* Header with Logo */}
-    <div className="text-center mb-8">
-      <div className="flex justify-center items-center mb-4">
-        <div className="relative">
-          <Image 
-            src="/logo.jpg" 
-            width={80} 
-            height={80} 
-            alt="SAADiCcollection Logo"
-            className="rounded-lg shadow-md transition-transform duration-300 hover:scale-105"
-          />
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-orange-900 via-orange-800 to-amber-700 p-4">
+      {/* Main Card */}
+      <div className="w-full max-w-5xl bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+        
+        {/* Left Panel – Branding */}
+        <div className="hidden md:flex md:w-1/2 bg-orange-600/30 backdrop-blur-sm p-10 flex-col justify-center items-center text-white">
+          <div className="mb-6">
+            <Image src="/logo.jpg" alt="Shovexa Logo" width={120} height={120} className="rounded-full shadow-lg" />
+          </div>
+          <h1 className="text-5xl font-extrabold tracking-tight text-orange-100">Shovexa</h1>
+          <p className="text-lg text-orange-200/80 mt-3 text-center max-w-xs">
+            Reset your password securely.
+          </p>
+          <div className="mt-8 w-16 h-1 bg-orange-400 rounded-full" />
+          <p className="mt-6 text-sm text-orange-200/60 text-center">
+            We’ll help you get back into your account.
+          </p>
         </div>
-      </div>
-      <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
-        Reset SAADiCcollection Password
-      </h1>
-      <p className="text-gray-600 text-sm">
-        Secure access to your fashion collection
-      </p>
-    </div>
 
-    {!email ? (
-      /* Email Input Form */
-      <div className="w-full max-w-md">
-        <div className="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 hover:shadow-2xl">
-          <form onSubmit={handleEmailSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                Enter your email to reset password
-              </label>
-              <input
-                name="email"
-                id="email"
-                type="email"
-                placeholder="Enter your email address"
-                required
-                className="w-full px-4 py-3 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white"
-              />
-            </div>
-
-            {error && (
-              <div className="p-3 bg-red-50 border border-red-200 rounded-lg animate-pulse">
-                <p className="text-red-600 text-sm font-medium flex items-center">
-                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                  </svg>
-                  {error}
-                </p>
-              </div>
-            )}
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 px-4 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:transform-none"
-            >
-              {loading ? (
-                <span className="flex items-center justify-center">
-                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  Sending code...
-                </span>
-              ) : (
-                'Send Verification Code'
-              )}
-            </button>
-
-            <div className="text-center pt-4 border-t border-gray-100">
-              <Link 
-                href="/" 
-                className="inline-flex items-center text-sm text-gray-600 hover:text-gray-800 transition-colors duration-200 font-medium"
-              >
-                ← Back to Home Page
-              </Link>
-            </div>
-          </form>
-        </div>
-      </div>
-    ) : (
-      /* Password Reset Form */
-      <div className="w-full max-w-md">
-        <div className="bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 hover:shadow-2xl">
-          <div className="mb-6 text-center">
-            <p className="text-gray-600 text-sm">
-              Code sent to: <span className="font-semibold text-gray-800">{email}</span>
+        {/* Right Panel – Forms */}
+        <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+          <div className="text-center md:text-left mb-8">
+            <h2 className="text-3xl font-bold text-white">
+              {!email ? "Reset Password" : "Set New Password"}
+            </h2>
+            <p className="text-orange-200/70 mt-1">
+              {!email
+                ? "Enter your email to receive a verification code"
+                : `Code sent to ${email}`}
             </p>
           </div>
 
-          <form onSubmit={handleResetPassword} className="space-y-6">
-            {/* Verification Code */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Enter verification code
-              </label>
-              <input
-                name="code"
-                id="code"
-                placeholder="Enter 6-digit code"
-                required
-                className="w-full px-4 py-3 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white text-center text-lg font-mono tracking-widest"
-                maxLength={6}
-              />
+          {/* Error Toast – fixed at bottom, consistent with previous redesigns */}
+          {error && (
+            <div className="fixed bottom-5 left-1/2 -translate-x-1/2 max-w-sm w-[90%] bg-red-500/90 backdrop-blur text-white text-sm px-4 py-2 rounded-full shadow-lg z-50 text-center break-words">
+              {error}
             </div>
+          )}
 
-            {/* New Password */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                New Password
-              </label>
+          {!email ? (
+            /* ---------- Step 1: Email Input ---------- */
+            <form onSubmit={handleEmailSubmit} className="space-y-5">
               <div className="relative">
                 <input
-                  name="newPassword"
-                  id="newPassword"
-                  placeholder="Enter new password"
+                  type="email"
+                  id="reset-email"
+                  name="email"
+                  placeholder=" "
                   required
-                  type={passwordVisible ? 'text' : 'password'}
-                  className="w-full px-4 py-3 pr-12 text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-white"
+                  className="w-full p-3 pt-5 pb-2 bg-white/5 border rounded-xl text-white placeholder-transparent focus:outline-none focus:ring-2 border-orange-300/50 focus:ring-orange-400 transition"
                 />
-                <button
-                  type="button"
-                  onClick={() => setPasswordVisible(prev => !prev)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                <label
+                  htmlFor="reset-email"
+                  className="absolute left-3 transition-all duration-200 pointer-events-none text-orange-200/70"
                 >
-                  <Image 
-                    src={passwordVisible ? "/eye-solid.svg" : "/eye-slash-solid.svg"}
-                    width={20} 
-                    height={20} 
-                    alt={passwordVisible ? "Hide password" : "Show password"}
-                    className="filter brightness-75"
-                  />
-                </button>
+                  Email Address
+                </label>
               </div>
-              <p className="text-xs text-gray-500 mt-2">
-                Must be at least 8 characters with uppercase, lowercase, and numbers
-              </p>
-            </div>
 
-            {/* Submit Button */}
-            <div className="pt-2">
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-3 px-4 rounded-lg font-semibold hover:from-green-700 hover:to-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all duration-200 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:transform-none"
+                className={`w-full py-3 rounded-full font-semibold transition-all duration-300 shadow-lg ${
+                  loading
+                    ? "bg-gray-500 cursor-not-allowed"
+                    : "bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white hover:shadow-orange-500/30"
+                }`}
               >
                 {loading ? (
-                  <span className="flex items-center justify-center">
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Resetting password...
+                  <span className="flex items-center justify-center gap-2">
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    Sending code...
                   </span>
                 ) : (
-                  'Reset Password'
+                  "Send Verification Code"
                 )}
               </button>
-            </div>
 
-            {error && (
-              <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
-                <p className="text-red-600 text-sm font-medium flex items-center">
-                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                  </svg>
-                  {error}
-                </p>
+              <div className="text-center pt-4 border-t border-orange-200/30">
+                <Link
+                  href="/"
+                  className="inline-flex items-center text-sm text-orange-200/70 hover:text-orange-100 transition"
+                >
+                  ← Back to Home
+                </Link>
               </div>
-            )}
+            </form>
+          ) : (
+            /* ---------- Step 2: Code + New Password ---------- */
+            <form onSubmit={handleResetPassword} className="space-y-5">
+              {/* Verification Code */}
+              <div className="relative">
+                <input
+                  type="text"
+                  id="reset-code"
+                  name="code"
+                  placeholder=" "
+                  required
+                  maxLength={6}
+                  className="w-full p-3 pt-5 pb-2 bg-white/5 border rounded-xl text-white placeholder-transparent focus:outline-none focus:ring-2 border-orange-300/50 focus:ring-orange-400 transition text-center font-mono tracking-widest"
+                />
+                <label
+                  htmlFor="reset-code"
+                  className="absolute left-3 transition-all duration-200 pointer-events-none text-orange-200/70"
+                >
+                  Verification Code
+                </label>
+              </div>
 
-            <div className="text-center pt-4 border-t border-gray-100">
-              <Link 
-                href="/" 
-                className="inline-flex items-center text-sm text-gray-600 hover:text-gray-800 transition-colors duration-200 font-medium"
+              {/* New Password */}
+              <div className="relative">
+                <input
+                  type={passwordVisible ? "text" : "password"}
+                  id="reset-password"
+                  name="newPassword"
+                  placeholder=" "
+                  required
+                  className="w-full p-3 pt-5 pb-2 bg-white/5 border rounded-xl text-white placeholder-transparent focus:outline-none focus:ring-2 border-orange-300/50 focus:ring-orange-400 transition pr-12"
+                />
+                <label
+                  htmlFor="reset-password"
+                  className="absolute left-3 transition-all duration-200 pointer-events-none text-orange-200/70"
+                >
+                  New Password
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setPasswordVisible((prev) => !prev)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-orange-200/70 hover:text-white transition"
+                >
+                  <Image
+                    src={passwordVisible ? "/eye-solid.svg" : "/eye-slash-solid.svg"}
+                    width={20}
+                    height={20}
+                    alt="Toggle visibility"
+                  />
+                </button>
+              </div>
+
+              <p className="text-xs text-orange-200/60 -mt-2">
+                Must be at least 8 characters with uppercase, lowercase, and numbers.
+              </p>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className={`w-full py-3 rounded-full font-semibold transition-all duration-300 shadow-lg ${
+                  loading
+                    ? "bg-gray-500 cursor-not-allowed"
+                    : "bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white hover:shadow-orange-500/30"
+                }`}
               >
-                ← Back to Home Page
-              </Link>
-            </div>
-          </form>
+                {loading ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    Resetting...
+                  </span>
+                ) : (
+                  "Reset Password"
+                )}
+              </button>
+
+              <div className="text-center pt-4 border-t border-orange-200/30">
+                <Link
+                  href="/"
+                  className="inline-flex items-center text-sm text-orange-200/70 hover:text-orange-100 transition"
+                >
+                  ← Back to Home
+                </Link>
+              </div>
+            </form>
+          )}
         </div>
       </div>
-    )}
-  </div>
-</>
-    );
+    </div>
+  );
 };
 
 export default ResetPasswordComponent;

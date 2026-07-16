@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 
 
 
-const CategoryComponent = () => {
+const CategoryComponent = ({ setIsMenuOpen }: { setIsMenuOpen: (isOpen: boolean) => void }) => {
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
     const [category, setCategory] = useState<Category[]>([]);
     const [loading, setLoading] = useState(true);
@@ -65,9 +65,9 @@ const CategoryComponent = () => {
                                 key={cat._id}
                                 className="px-4 py-3  hover:bg-gray-800/60 cursor-pointer transition-all duration-200 group"
                                 onClick={() => {
-
-                                    console.log(cat)
+                                    
                                     router.push(`/?category=${encodeURIComponent(cat.categoryName)}`)
+                                    setIsMenuOpen(false);
                                 }
                                 }
                             >

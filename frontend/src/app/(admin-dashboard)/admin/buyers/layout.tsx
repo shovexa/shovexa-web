@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Manage Buyers | SAADiCcollection.shop",
+  title: "Manage Buyers | shovexa.com",
   description:
-    "View and manage all registered buyers on SAADiCcollection.shop. Monitor activity, handle account issues, and maintain a secure shopping environment.",
+    "View and manage all registered buyers on shovexa.com. Monitor activity, handle account issues, and maintain a secure shopping environment.",
   keywords: [
     "manage buyers",
     "buyer accounts",
     "admin dashboard",
     "user management",
-    "SAADiCcollection.shop"
+    "shovexa.com"
   ],
 };
 

@@ -4,9 +4,9 @@ import SellerNavbarComponent from "@/app/components/navbars/SellerNavbar.compone
 import Loading from "@/app/components/Loading.component";
 
 export const metadata: Metadata = {
-  title: "Seller Dashboard | SAADiCcollection.shop",
-  description: "Manage your products, track orders, and monitor performance. Seller dashboard for SAADiCcollection.shop merchants.",
-  keywords: ["seller dashboard", "product management", "order tracking", "SAADiCcollection.shop"],
+  title: "Seller Dashboard | shovexa.com",
+  description: "Manage your products, track orders, and monitor performance. Seller dashboard for shovexa.com merchants.",
+  keywords: ["seller dashboard", "product management", "order tracking", "shovexa.com"],
 };
 
 export default function SellerLayout({

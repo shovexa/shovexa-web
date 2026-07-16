@@ -3,13 +3,13 @@ import { Suspense } from "react";
 import Loading from "@/app/components/Loading.component";
 
 export const metadata: Metadata = {
-  title: "User Profile | SAADiCcollection.shop",
-  description: "View and manage your account details, update personal information, and track your activity on SAADiCcollection.shop.",
+  title: "User Profile | shovexa.com",
+  description: "View and manage your account details, update personal information, and track your activity on shovexa.com.",
   keywords: [
     "user profile",
     "account settings",
     "profile management",
-    "SAADiCcollection.shop"
+    "shovexa.com"
   ],
 };
 

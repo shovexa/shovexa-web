@@ -3,9 +3,9 @@ import { Suspense } from "react";
 import Loading from "@/app/components/Loading.component";
 
 export const metadata: Metadata = {
-  title: "Seller Orders | SAADiCcollection.shop",
-  description: "View and manage all customer orders. Track order status, process deliveries, and handle returns on SAADiCcollection.shop.",
-  keywords: ["seller orders", "order management", "track orders", "seller dashboard", "SAADiCcollection.shop"],
+  title: "Seller Orders | shovexa.com",
+  description: "View and manage all customer orders. Track order status, process deliveries, and handle returns on shovexa.com.",
+  keywords: ["seller orders", "order management", "track orders", "seller dashboard", "shovexa.com"],
 };
 
 

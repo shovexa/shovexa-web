@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 
 
 export const metadata: Metadata = {
-  title: "Approve Stores | SAADiCcollection.shop",
+  title: "Approve Stores | shovexa.com",
   description:
-    "Review and approve new store requests from sellers. Manage store verification and activation on SAADiCcollection.shop.",
+    "Review and approve new store requests from sellers. Manage store verification and activation on shovexa.com.",
   keywords: [
     "approve stores",
     "store approval",
     "seller stores",
     "admin panel",
-    "SAADiCcollection.shop"
+    "shovexa.com"
   ],
 };
 

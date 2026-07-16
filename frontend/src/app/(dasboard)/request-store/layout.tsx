@@ -3,15 +3,15 @@ import Head from "next/head";
 
 
 export const metadata: Metadata = {
-  title: "Request a Store | SAADiCcollection.shop",
+  title: "Request a Store | shovexa.com",
   description:
-    "Submit a request to open your own store on SAADiCcollection.shop and start selling your products online.",
+    "Submit a request to open your own store on shovexa.com and start selling your products online.",
   keywords: [
     "request store",
     "open store",
     "seller registration",
     "become a seller",
-    "SAADiCcollection.shop"
+    "shovexa.com"
   ],
 };
 

@@ -3,15 +3,15 @@ import Head from "next/head";
 
 
 export const metadata: Metadata = {
-  title: "Reset Password | SAADiCcollection.shop",
+  title: "Reset Password | shovexa.com",
   description:
-    "Securely reset your SAADiCcollection.shop account password to regain access to your profile and orders.",
+    "Securely reset your shovexa.com account password to regain access to your profile and orders.",
   keywords: [
     "reset password",
     "account recovery",
     "password change",
     "forgot password",
-    "SAADiCcollection.shop"
+    "shovexa.com"
   ],
 };
 

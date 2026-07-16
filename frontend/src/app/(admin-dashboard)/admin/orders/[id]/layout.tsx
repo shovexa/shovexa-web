@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 
 
 export const metadata: Metadata = {
-  title: "Admin Order Details | SAADiCcollection.shop",
+  title: "Admin Order Details | shovexa.com",
   description:
-    "View detailed information about a specific order as an admin, including products, quantities, payment, and shipping status on SAADiCcollection.shop.",
+    "View detailed information about a specific order as an admin, including products, quantities, payment, and shipping status on shovexa.com.",
   keywords: [
     "admin order details",
     "order management",
     "order tracking",
     "admin dashboard",
-    "SAADiCcollection.shop"
+    "shovexa.com"
   ],
 };
 

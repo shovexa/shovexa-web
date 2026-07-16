@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 
 
 export const metadata: Metadata = {
-  title: "Verify Email | SAADiCcollection.shop",
+  title: "Verify Email | shovexa.com",
   description:
-    "Verify your email address to activate your SAADiCcollection.shop account and start shopping or selling securely.",
+    "Verify your email address to activate your shovexa.com account and start shopping or selling securely.",
   keywords: [
     "verify email",
     "email verification",
     "account activation",
     "secure login",
-    "SAADiCcollection.shop"
+    "shovexa.com"
   ],
 };
 

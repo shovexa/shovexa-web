@@ -115,7 +115,7 @@ export const sellerApprovalTemp = (name, email, randomPassword) => {
               </p>
           </div>
           <div class="footer">
-              <p>© ${new Date().getFullYear()} SAADiCcollection.shop. All rights reserved.</p>
+              <p>© ${new Date().getFullYear()} shovexa.com. All rights reserved.</p>
           </div>
       </div>
   </body>

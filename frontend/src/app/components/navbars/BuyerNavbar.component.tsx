@@ -282,7 +282,7 @@ const BuyerNavbarComponent = () => {
                                     </button>
                                     {categorisOpen && (
                                         <div className="absolute right-0 mt-2 w-56 rounded-xl shadow-xl bg-white border border-black/5 z-50  text-slate-700">
-                                            <CategoryComponent />
+                                            <CategoryComponent setIsMenuOpen={setIsMenuOpen} />
                                         </div>
                                     )}
                                 </div>
@@ -354,16 +354,18 @@ const BuyerNavbarComponent = () => {
                                     </button>
                                     {userActionOpen && (
                                         <div className="absolute right-0 mt-2 w-52 rounded-xl shadow-xl bg-white border border-black/5 z-50 py-1.5 overflow-hidden">
-                                            {!user && (
-                                                <>
+                                                
+                                            {user && (
+                                                <button onClick={() => handleSitting('profile')} className="w-full text-left px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+                                                    Profile
+                                                </button>
+                                            )}
+                                            <button onClick={() => handleSitting('contact')} className="w-full text-left px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+                                                Contact us
+                                            </button>
                                                     <button onClick={() => handleSitting('login')} className="w-full text-left px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">Login</button>
                                                     <button onClick={() => handleSitting('sign-up')} className="w-full text-left px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">Sign up</button>
-                                                </>
-                                            )}
-                                            {user && (
-                                                <button onClick={() => handleSitting('profile')} className="w-full text-left px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">Profile</button>
-                                            )}
-                                            <button onClick={() => handleSitting('contact')} className="w-full text-left px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">Contact us</button>
+                                                
                                             {user && (
                                                 <>
                                                     <div className="my-1 border-t border-slate-100" />
@@ -550,9 +552,9 @@ const BuyerNavbarComponent = () => {
                                     <span className="text-slate-400">{chevron(categorisOpen)}</span>
                                 </button>
                                 {categorisOpen && (
-                                <div className=" mt-2 w-56 rounded-xl shadow-xl bg-white border border-black/5 z-50  text-slate-700">
-                                            <CategoryComponent />
-                                        </div>
+                                    <div ref={categoryRef} className=" mt-2 w-56 rounded-xl shadow-xl bg-white border border-black/5 z-50  text-slate-700">
+                                        <CategoryComponent setIsMenuOpen={setIsMenuOpen} />
+                                    </div>
                                 )}
                                 <div className="border-t border-slate-100 px-3.5 py-3">
                                     <span className="text-sm font-medium text-slate-700">Sort by</span>
@@ -578,12 +580,8 @@ const BuyerNavbarComponent = () => {
                             {/* Account actions */}
                             <p className="mt-5 mb-2 px-0.5 text-xs font-semibold uppercase tracking-wide text-slate-400">Account</p>
                             <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-                                {!user && (
-                                    <>
                                         <button onClick={() => handleSitting('login')} className="w-full text-left px-3.5 py-3 text-sm text-slate-700 hover:bg-slate-50 border-b border-slate-100">Login</button>
                                         <button onClick={() => handleSitting('sign-up')} className="w-full text-left px-3.5 py-3 text-sm text-slate-700 hover:bg-slate-50">Sign up</button>
-                                    </>
-                                )}
                                 {user && (
                                     <button onClick={() => handleSitting('log-out')} className="w-full text-left px-3.5 py-3 text-sm text-rose-600 hover:bg-rose-50">Log out</button>
                                 )}

@@ -3,15 +3,15 @@ import Head from "next/head";
 
 
 export const metadata: Metadata = {
-  title: "Shipping Policy | SAADiCcollection.shop",
+  title: "Shipping Policy | shovexa.com",
   description:
-    "Read the SAADiCcollection.shop shipping policy to learn about delivery times, shipping methods, and order tracking details.",
+    "Read the shovexa.com shipping policy to learn about delivery times, shipping methods, and order tracking details.",
   keywords: [
     "shipping policy",
     "delivery information",
     "order tracking",
     "shipping rates",
-    "SAADiCcollection.shop"
+    "shovexa.com"
   ],
 };
 

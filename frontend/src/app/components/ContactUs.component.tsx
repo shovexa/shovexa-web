@@ -106,7 +106,7 @@ setTimeout(() => {
           <h3 className="text-2xl font-semibold text-gray-800 mb-4">Contact Information</h3>
           <p className="text-gray-600 mb-2">📍 Address:Sialkot,Pakistan</p>
           <p className="text-gray-600 mb-2">📞 Phone: 03334186523 </p>
-          <p className="text-gray-600 mb-2">📧 Email: saadicollection18@gmail.com</p>
+          <p className="text-gray-600 mb-2">📧 Email: shovexa@gmail.com</p>
 
   
         </div>

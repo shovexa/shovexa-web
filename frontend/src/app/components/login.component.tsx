@@ -76,88 +76,148 @@ const LoginComponent = () => {
     <>
       {networkError && <NoInternetComponent />}
 
-      <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 p-4">
-        <div className="w-full max-w-4xl bg-transparent p-8 rounded-lg shadow-lg">
-          <div className="text-center mb-10">
-            <Image src="/logo.jpg" alt="App Logo" width={100} height={100} className="mx-auto rounded-full mb-4" />
-            <h1 className="text-4xl font-extrabold text-orange-200">Welcome Back</h1>
-            <h1 className="text-4xl font-extrabold text-orange-50">Login to Saadi Collection</h1>
-          <p className="text-gray-300 mt-2">Log in to manage your account and explore new features</p>
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-orange-900 via-orange-800 to-amber-700 p-4">
+      {/* Main Card */}
+      <div className="w-full max-w-5xl bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+        
+        {/* Left Panel – Branding (hidden on mobile) */}
+        <div className="hidden md:flex md:w-1/2 bg-orange-600/30 backdrop-blur-sm p-10 flex-col justify-center items-center text-white">
+          <div className="mb-6">
+            <Image src="/logo.jpg" alt="Shovexa Logo" width={120} height={120} className="rounded-full shadow-lg" />
+          </div>
+          <h1 className="text-5xl font-extrabold tracking-tight text-orange-100">Shovexa</h1>
+          <p className="text-lg text-orange-200/80 mt-3 text-center max-w-xs">
+            Manage your world, securely.
+          </p>
+          <div className="mt-8 w-16 h-1 bg-orange-400 rounded-full" />
+          <p className="mt-6 text-sm text-orange-200/60 text-center">
+            Your trusted platform for seamless account management.
+          </p>
+        </div>
+
+        {/* Right Panel – Login Form */}
+        <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+          <div className="text-center md:text-left mb-8">
+            <h2 className="text-3xl font-bold text-white">Welcome back</h2>
+            <p className="text-orange-200/70 mt-1">Log in to your Shovexa account</p>
           </div>
 
+          {/* Error toast */}
           {error && (
-            <div className="fixed bottom-5 left-1/2 -translate-x-1/2 max-w-sm w-[90%] bg-red-500 text-white text-sm px-4 py-2 rounded shadow-md z-50 text-center break-words">
-              {error.split(' at ')[0]}
+            <div className="fixed bottom-5 left-1/2 -translate-x-1/2 max-w-sm w-[90%] bg-red-500/90 backdrop-blur text-white text-sm px-4 py-2 rounded-full shadow-lg z-50 text-center break-words">
+              {error.split(" at ")[0]}
             </div>
           )}
 
-          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
-
-            <div>
-              <label className="block text-sm font-medium text-orange-200 mb-1">Email</label>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            {/* Email Field – Floating Label */}
+            <div className="relative">
               <input
-                {...register('email')}
+                {...register("email", { required: "Email is required" })}
                 type="email"
-                placeholder="Enter your email"
-                className={`w-full p-3 placeholder:text-orange-200 text-white bg-transparent border rounded-lg focus:outline-none ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+                id="email"
+                placeholder=" "
+                className={`w-full p-3 pt-5 pb-2 bg-white/5 border rounded-xl text-white placeholder-transparent focus:outline-none focus:ring-2 ${
+                  errors.email
+                    ? "border-red-400 focus:ring-red-400"
+                    : "border-orange-300/50 focus:ring-orange-400"
+                } transition`}
               />
-              {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+              <label
+                htmlFor="email"
+                className={`absolute left-3 transition-all duration-200 pointer-events-none ${
+                  errors.email ? "text-red-400" : "text-orange-200/70"
+                } 
+                `}
+              >
+                Email
+              </label>
+              {errors.email && (
+                <p className="text-red-400 text-xs mt-1">{errors.email.message}</p>
+              )}
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-orange-200 mb-1">Password</label>
-              <div className="relative">
-                <input
-                  {...register('password')}
-                  type={passwordVisible ? 'text' : 'password'}
-                  placeholder="Enter your password"
-                  className={`w-full p-3 placeholder:text-orange-200 border text-white bg-transparent rounded-lg focus:outline-none ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
+            {/* Password Field – Floating Label with Toggle */}
+            <div className="relative">
+              <input
+                {...register("password", { required: "Password is required", minLength: { value: 6, message: "Min 6 chars" } })}
+                type={passwordVisible ? "text" : "password"}
+                id="password"
+                placeholder=" "
+                className={`w-full p-3 pt-5 pb-2 bg-white/5 border rounded-xl text-white placeholder-transparent focus:outline-none focus:ring-2 pr-12 ${
+                  errors.password
+                    ? "border-red-400 focus:ring-red-400"
+                    : "border-orange-300/50 focus:ring-orange-400"
+                } transition`}
+              />
+              <label
+                htmlFor="password"
+                className={`absolute left-3 transition-all duration-200 pointer-events-none ${
+                  errors.password ? "text-red-400" : "text-orange-200/70"
+                }`}
+              >
+                Password
+              </label>
+              <button
+                type="button"
+                onClick={() => setPasswordVisible((prev) => !prev)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-orange-200/70 hover:text-white transition"
+              >
+                <Image
+                  src={passwordVisible ? "/eye-solid.svg" : "/eye-slash-solid.svg"}
+                  width={20}
+                  height={20}
+                  alt="Toggle visibility"
                 />
-                <div className="absolute right-3 top-3">
-                  <Image
-                    onClick={() => setPasswordVisible(prev => !prev)}
-                    src={passwordVisible ? "/eye-solid.svg" : "/eye-slash-solid.svg"}
-                    width={20} height={20} alt="Toggle password visibility"
-                    className="cursor-pointer"
-                  />
-                </div>
-              </div>
-              {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
+              </button>
+              {errors.password && (
+                <p className="text-red-400 text-xs mt-1">{errors.password.message}</p>
+              )}
             </div>
 
+            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
-              className={`w-full py-3 rounded-lg transition duration-200 ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
+              className={`w-full py-3 rounded-full font-semibold transition-all duration-300 shadow-lg ${
+                loading
+                  ? "bg-gray-500 cursor-not-allowed"
+                  : "bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white hover:shadow-orange-500/30"
+              }`}
             >
-              {loading ? 'Submitting...' : 'Login'}
+              {loading ? "Logging in..." : "Log in"}
             </button>
           </form>
 
-          <div className="flex flex-col items-center justify-center mt-6 space-y-6">
-            <div className="relative w-full max-w-xs">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-200"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">or</span>
-              </div>
-            </div>
-
-            <SignInWithGoogleComponent />
-
-            <div className="flex flex-col items-center mt-6 space-y-4 w-full max-w-xs">
-              <Link href="/sign-up" className="w-full text-center py-2 px-4 rounded-lg bg-gray-800 text-white font-medium hover:bg-gray-900 transition-colors duration-200">Sign Up</Link>
-
-              <div className="flex justify-between w-full text-sm text-blue-400">
-                <Link href="/reset-password" className="hover:text-blue-500 transition-colors duration-200">Forgot Password?</Link>
-                <Link href="/" className="hover:text-white transition-colors duration-200">Home Page ↗</Link>
-              </div>
-            </div>
+          {/* Divider + Social Login */}
+          <div className="flex items-center my-6">
+            <div className="flex-1 border-t border-orange-200/30" />
+            <span className="px-3 text-sm text-orange-200/60">or continue with</span>
+            <div className="flex-1 border-t border-orange-200/30" />
           </div>
 
+          <SignInWithGoogleComponent />
+
+          {/* Footer Links */}
+          <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-sm">
+            <Link
+              href="/sign-up"
+              className="w-full sm:w-auto text-center px-6 py-2 rounded-full border border-orange-400/60 text-orange-200 hover:bg-orange-500/20 transition"
+            >
+              Create account
+            </Link>
+            <div className="flex gap-4">
+              <Link href="/reset-password" className="text-orange-200/70 hover:text-orange-100 transition">
+                Forgot password?
+              </Link>
+              <Link href="/" className="text-orange-200/70 hover:text-orange-100 transition">
+                Home
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
     </>
   );
 };

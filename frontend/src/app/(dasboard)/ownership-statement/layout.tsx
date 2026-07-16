@@ -3,14 +3,14 @@ import Head from "next/head";
 
 
 export const metadata: Metadata = {
-  title: "Ownership Statement | SAADiCcollection.shop",
+  title: "Ownership Statement | shovexa.com",
   description:
-    "Learn about the ownership and rights of SAADiCcollection.shop, including trademarks, content usage, and intellectual property information.",
+    "Learn about the ownership and rights of shovexa.com, including trademarks, content usage, and intellectual property information.",
   keywords: [
     "ownership statement",
     "intellectual property",
     "content rights",
-    "SAADiCcollection.shop",
+    "shovexa.com",
     "legal information"
   ],
 };

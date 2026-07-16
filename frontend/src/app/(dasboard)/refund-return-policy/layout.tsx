@@ -3,15 +3,15 @@ import Head from "next/head";
 
 
 export const metadata: Metadata = {
-  title: "Refund and Return Policy | SAADiCcollection.shop",
+  title: "Refund and Return Policy | shovexa.com",
   description:
-    "Review the SAADiCcollection.shop refund and return policy to understand how refunds, exchanges, and returns are handled for your orders.",
+    "Review the shovexa.com refund and return policy to understand how refunds, exchanges, and returns are handled for your orders.",
   keywords: [
     "refund policy",
     "return policy",
     "exchange policy",
     "order refund",
-    "SAADiCcollection.shop"
+    "shovexa.com"
   ],
 };
 
