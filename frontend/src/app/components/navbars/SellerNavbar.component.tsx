@@ -46,7 +46,7 @@ const SellerNavbarComponent = () => {
                  <div className="overflow-hidden whitespace-nowrap">
             <div className="inline-block animate-marquee  text-[15px] font-semibold tracking-wide">
               shovexa
-              <span className="text-[10px] ml-0.5 text-cyan-500">.shop</span>
+              <span className="text-[10px] ml-0.5 text-cyan-500">.com</span>
 
             </div>
           </div>
