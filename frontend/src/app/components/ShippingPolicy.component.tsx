@@ -129,7 +129,7 @@ const ShippingPolicyCards = () => {
             Shipping Policy
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-base text-white/90 sm:text-lg">
-            We aim to ensure a smooth and reliable delivery experience for all customers — here's
+            We aim to ensure a smooth and reliable delivery experience for all customers — here&apos;s
             how we process and deliver your orders.
           </p>
           <p className="mt-6 text-sm text-white/70">Last updated {currentDate}</p>

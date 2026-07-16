@@ -125,7 +125,7 @@ const RefundReturnPolicyCards = () => {
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-base text-white/90 sm:text-lg">
             We aim to provide you with high-quality products and a smooth shopping experience. If
-            you're not satisfied with your purchase, here's how returns and refunds work.
+            you&apos;re not satisfied with your purchase, here&apos;s how returns and refunds work.
           </p>
           <p className="mt-6 text-sm text-white/70">Last updated {currentDate}</p>
         </div>

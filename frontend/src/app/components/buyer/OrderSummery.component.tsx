@@ -106,7 +106,7 @@ const ShippingComponent = () => {
   }
   return (
     <>
-      <div className=" bg-transparent h-full  grid grid-row-2  w-full  ">
+      <div className=" bg-transparent h-full  grid-row-2  w-full  ">
 
 
         {
@@ -119,11 +119,11 @@ const ShippingComponent = () => {
 
 
 
-        <div className="flex flex-wrap justify-center md:p-2 rounded-lg shadow-md">
+        <div className="flex flex-wrap justify-center  rounded-lg shadow-md">
 
 
 
-          <div className="w-auto max-w-md text-gray-800 bg-transparent  p-6 mt-10">
+          <div className="w-auto max-w-md text-gray-800 bg-transparent   mt-10">
             <h1 className="text-xl font-semibold text-gray-900 border-b pb-2 mb-4">
               Order Summary
             </h1>

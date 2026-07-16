@@ -39,7 +39,7 @@ const ViewSingleOrderComponent = () => {
   if (!order) return <p className="p-6 text-center text-gray-500">Order not found</p>;
 
   return (
-    <div className=" overflow-x-auto p-4 min-h-screen bg-gradient-to-b from-blue-400 to-blue-700 sm:p-6 ">
+    <div className=" overflow-x-auto min-h-screen bg-gradient-to-b from-blue-400 to-blue-700 sm:p-6 ">
 
       <button
         onClick={() => router.back()}
@@ -48,7 +48,7 @@ const ViewSingleOrderComponent = () => {
         Back
       </button>
 
-      <div className=" shadow rounded-lg md:p-6">
+      <div className=" shadow rounded-lg ">
         <h1 className="text-2xl  font-semibold mb-4">Order Details</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">

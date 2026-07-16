@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { useForm} from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation";
 import GetProductsByIdsComponent from "./GetProductsByIds.component";
-import PolicyLinksCoponent from "../PolicyLinks.coponent";
 
 
 interface FormData {
@@ -86,7 +85,7 @@ return;
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white py-6">
       <div className="mx-auto max-w-7xl md:px-4">
 
-        <div className="grid gap-6 lg:grid-cols-[380px_1fr]">
+        <div className="gap-6 lg:grid-cols-[380px_1fr]">
 
           {/* Checkout Card */}
           <div className="rounded-2xl border border-orange-200 bg-orange-50 p-5">

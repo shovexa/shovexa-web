@@ -146,7 +146,7 @@ const PrivacyPolicyCards = () => {
             Privacy Policy
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-base text-white/90 sm:text-lg">
-            Protecting your privacy is our priority — here's exactly how we collect, use, and
+            Protecting your privacy is our priority — here&apos;s exactly how we collect, use, and
             safeguard your information.
           </p>
           <p className="mt-6 text-sm text-white/70">Last updated {currentDate}</p>
