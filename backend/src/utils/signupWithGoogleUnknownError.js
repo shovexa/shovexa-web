@@ -279,7 +279,7 @@ export const signupWithGoogleUnknownError=(err)=>{
                 </div>
                 <div class="contact-item">
                     <span>📞</span>
-                    <span>+92 340 9751709</span>
+                    <span>03334186523 </span>
                 </div>
             </div>
         </div>

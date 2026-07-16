@@ -84,61 +84,78 @@ return;
     </div>
   ) : (
     <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white py-6">
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-7xl md:px-4">
 
         <div className="grid gap-6 lg:grid-cols-[380px_1fr]">
 
           {/* Checkout Card */}
-          <div className="rounded-2xl border border-orange-200 bg-white p-5 shadow-lg">
+          <div className="rounded-2xl border border-orange-200 bg-orange-50 p-5">
 
-            <div className="mb-6">
-              <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-600">
-                Quick Checkout
-              </span>
+  <label className="mb-4 block text-lg font-semibold text-gray-900">
+    Quantity
+  </label>
 
-              <h2 className="mt-3 text-2xl font-bold text-gray-900">
-                Select Quantity
-              </h2>
+  <div className="flex items-center justify-between rounded-2xl border border-orange-200 bg-white p-2 shadow-sm">
 
-              <p className="mt-1 text-sm text-gray-500">
-                Choose how many items you want to order.
-              </p>
-            </div>
+    <button
+      type="button"
+      onClick={() =>
+        selectedQuantity !== null && selectedQuantity > 1 &&
+        handleQuantityChange(selectedQuantity - 1)
+      }
+      disabled={selectedQuantity === null || selectedQuantity === 1}
+      className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-100 text-3xl font-medium text-orange-600 transition hover:bg-orange-500 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+    >
+      −
+    </button>
 
-            <div className="grid grid-cols-3 gap-3">
-              {[1, 2, 3].map((qty) => (
-                <button
-                  key={qty}
-                  type="button"
-                  onClick={() => handleQuantityChange(qty)}
-                  className={`rounded-xl py-3 text-lg font-bold transition-all duration-200 ${
-                    selectedQuantity === qty
-                      ? "bg-orange-500 text-white shadow-lg scale-105"
-                      : "border border-orange-200 bg-orange-50 text-orange-600 hover:bg-orange-100"
-                  }`}
-                >
-                  {qty}
-                </button>
-              ))}
-            </div>
+    <div className="flex flex-col items-center">
+      <span className="text-3xl font-bold text-gray-900">
+        {selectedQuantity}
+      </span>
+      <span className="text-sm text-gray-500">
+        {selectedQuantity === 1 ? "Item" : "Items"}
+      </span>
+    </div>
 
-            {errors.quantity && (
-              <p className="mt-3 text-center text-sm text-red-500">
-                {errors.quantity.message}
-              </p>
-            )}
+    <button
+      type="button"
+      onClick={() =>
+        selectedQuantity !== null && selectedQuantity < 3 &&
+        handleQuantityChange(selectedQuantity + 1)
+      }
+      disabled={selectedQuantity === 3 || selectedQuantity === null}
+      className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-500 text-3xl font-medium text-white transition hover:bg-orange-600 disabled:cursor-not-allowed disabled:opacity-40"
+    >
+      +
+    </button>
 
-            <button
-              onClick={onSubmit}
-              className="mt-6 w-full rounded-xl bg-orange-500 py-3 font-semibold text-white shadow-md transition hover:bg-orange-600 active:scale-95"
-            >
-              Place Order
-            </button>
+  </div>
 
-            <div className="mt-5 border-t border-orange-100 pt-4">
-              <PolicyLinksCoponent />
-            </div>
-          </div>
+  <div className="mt-3 flex items-center justify-between text-sm">
+    <span className="text-gray-500">
+      Maximum quantity
+    </span>
+
+    <span className="rounded-full bg-orange-100 px-3 py-1 font-semibold text-orange-600">
+      3 Items
+    </span>
+  </div>
+
+  {errors.quantity && (
+    <p className="mt-3 text-sm text-red-500">
+      {errors.quantity.message}
+    </p>
+  )}
+
+  <button
+    onClick={onSubmit}
+    className="mt-6 w-full rounded-2xl bg-orange-500 py-4 text-lg font-semibold text-white transition hover:bg-orange-600 active:scale-95"
+  >
+    Place Order
+  </button>
+
+</div>
 
           {/* Product Card */}
           <div className="rounded-2xl border border-orange-200 bg-white p-5 shadow-lg">

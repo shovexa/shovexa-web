@@ -74,6 +74,14 @@ const BuyerNavbarComponent = () => {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
+    // Lock body scroll while the mobile drawer is open
+    useEffect(() => {
+        document.body.style.overflow = isMenuOpen ? "hidden" : "";
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [isMenuOpen]);
+
     const search = async (value: string) => {
 
         try {
@@ -306,13 +314,13 @@ const BuyerNavbarComponent = () => {
                                             {SORT_OPTIONS.map((opt) => (
                                                 <button
                                                     key={opt.value}
-                                                    onClick={() =>{
+                                                    onClick={() => {
 
                                                         handleSort(opt.value)
-                                            setIsMenuOpen(false)
+                                                        setIsMenuOpen(false)
 
                                                     }
-                                                        }
+                                                    }
                                                     className={`w-full text-left px-4 py-2 text-sm transition-colors ${sortOption === opt.value ? "text-orange-600 bg-orange-50 font-medium" : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}`}
                                                 >
                                                     {opt.label}
@@ -375,118 +383,214 @@ const BuyerNavbarComponent = () => {
                             <button
                                 className="md:hidden text-white focus:outline-none p-2 rounded-lg hover:bg-black/10 transition-colors"
                                 onClick={handleMenuToggle}
-                                aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                                aria-label="Open menu"
                             >
-                                {isMenuOpen ? (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                ) : (
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                                    </svg>
-                                )}
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
                             </button>
-                        </div>
-
-                        {/* Mobile Navigation */}
-                        <div
-                            className={`md:hidden grid transition-[grid-template-rows,opacity] duration-300 ease-out ${isMenuOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
-                        >
-                            <div className="overflow-hidden">
-                                <div className="flex flex-col gap-4 pb-4 pt-1">
-
-                                    {/* Search */}
-                                    <div className="relative">
-                                        <div className="flex items-center gap-2 rounded-full border border-white/25 bg-white/15 focus-within:border-white transition-colors px-3.5 py-2.5">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white/70 shrink-0" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" />
-                                            </svg>
-                                            <input
-                                                type="text"
-                                                onChange={handleSearch}
-                                                value={searchInput}
-                                                placeholder="Search products..."
-                                                className="w-full bg-transparent text-sm text-white placeholder-white/60 focus:outline-none"
-                                            />
-                                        </div>
-                                        <SearchComponent
-                                            product={searchResult}
-                                            isProductSearched={isProductSearched}
-                                            setIsProductSearched={setIsProductSearched}
-                                            setIsMenuOpen={setIsMenuOpen}
-                                        />
-                                    </div>
-
-                                    <div className="flex items-center justify-between px-1">
-                                        <OrdersIconComponent />
-                                        {!sellerRoleAuth && user?.role === userRoles?.[2] &&
-                                            <Link href="/seller" className="text-sm font-medium text-white hover:text-white/80">Dashboard</Link>
-                                        }
-                                        {!adminRoleAuth && user?.role === userRoles?.[0] &&
-                                            <Link href="/admin" className="text-sm font-medium text-white hover:text-white/80">Dashboard</Link>
-                                        }
-                                    </div>
-
-                                    {/* Categories accordion */}
-                                    <div>
-                                        <button
-                                            onClick={() => setCategorisOpen(!categorisOpen)}
-                                            className="w-full flex justify-between items-center py-2.5 px-3.5 rounded-lg bg-white/15 border border-white/25 text-sm text-white"
-                                        >
-                                            <span>Categories</span>
-                                            {chevron(categorisOpen)}
-                                        </button>
-                                        {categorisOpen && (
-                                            <div className="mt-2 rounded-lg border border-black/5 bg-white overflow-hidden text-slate-700">
-                                                <CategoryComponent />
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    {/* Sort chips */}
-                                    <div>
-                                        <p className="text-xs uppercase tracking-wide text-white/70 mb-2 px-1">Sort by</p>
-                                        <div className="flex flex-wrap gap-2">
-                                            {SORT_OPTIONS.map((opt) => (
-                                                <button
-                                                    key={opt.value}
-                                                    onClick={() => handleSort(opt.value)}
-                                                    className={`text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${sortOption === opt.value ? "border-white bg-white text-orange-600" : "border-white/30 text-white/85 bg-white/10"}`}
-                                                >
-                                                    {opt.label}
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    {/* Account */}
-                                    <div className="rounded-lg border border-black/5 bg-white shadow-sm overflow-hidden">
-                                        <div className="flex items-center gap-2.5 px-3.5 py-3 border-b border-slate-100">
-                                            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-500 text-xs font-bold text-white">
-                                                {user ? accountInitial : "?"}
-                                            </span>
-                                            <span className="text-sm font-medium text-slate-800 truncate">{accountLabel}</span>
-                                        </div>
-                                        {!user && (
-                                            <>
-                                                <button onClick={() => handleSitting('login')} className="w-full text-left px-3.5 py-2.5 text-sm text-slate-600 hover:bg-slate-50">Login</button>
-                                                <button onClick={() => handleSitting('sign-up')} className="w-full text-left px-3.5 py-2.5 text-sm text-slate-600 hover:bg-slate-50">Sign up</button>
-                                            </>
-                                        )}
-                                        {user && (
-                                            <button onClick={() => handleSitting('profile')} className="w-full text-left px-3.5 py-2.5 text-sm text-slate-600 hover:bg-slate-50">Profile</button>
-                                        )}
-                                        <button onClick={() => handleSitting('contact')} className="w-full text-left px-3.5 py-2.5 text-sm text-slate-600 hover:bg-slate-50">Contact us</button>
-                                        {user && (
-                                            <button onClick={() => handleSitting('log-out')} className="w-full text-left px-3.5 py-2.5 text-sm text-rose-600 hover:bg-rose-50 border-t border-slate-100">Log out</button>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </nav>
+            )}
+
+            {/* Mobile Navigation Drawer */}
+            {(publicRoutes || (!isAuthRoute && roleAuth)) && (
+                <div className="md:hidden">
+                    {/* Backdrop */}
+                    <div
+                        onClick={handleMenuToggle}
+                        aria-hidden="true"
+                        className={`fixed inset-0 z-[60] bg-slate-900/50 backdrop-blur-[1px] transition-opacity duration-300 ${isMenuOpen ? "opacity-100" : "pointer-events-none opacity-0"
+                            }`}
+                    />
+
+                    {/* Drawer panel */}
+                    <div
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Site menu"
+                        className={`fixed inset-y-0 right-0 z-[70] flex h-full w-[85%] max-w-sm flex-col bg-slate-50 shadow-2xl transition-transform duration-300 ease-out ${isMenuOpen ? "translate-x-0" : "translate-x-full"
+                            }`}
+                    >
+                        {/* Header: account snapshot */}
+                        <div className="shrink-0 bg-orange-500 px-4 pb-5 pt-4 text-white">
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-2.5">
+                                    <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full bg-orange-400 ring-2 ring-white/40">
+                                        <Image src="/logo.jpg" alt="shovexa logo" width={36} height={36} className="h-full w-full object-cover" />
+                                    </span>
+                                    <span className="text-[15px] font-bold tracking-tight">
+                                        shovexa<span className="text-[10px] font-medium text-white/70 align-super">.shop</span>
+                                    </span>
+                                </div>
+                                <button
+                                    onClick={handleMenuToggle}
+                                    aria-label="Close menu"
+                                    className="rounded-full p-1.5 text-white/90 hover:bg-white/15 hover:text-white transition-colors"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <button
+                                onClick={() => {
+                                    setIsMenuOpen(false)
+                                    handleSitting(user ? 'profile' : 'login')
+                                }
+                                }
+                                className="mt-4 flex w-full items-center gap-3 rounded-xl bg-white/15 px-3 py-2.5 text-left hover:bg-white/20 transition-colors"
+                            >
+                                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-sm font-bold text-orange-600 shrink-0">
+                                    {user ? accountInitial : (
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-orange-600" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fillRule="evenodd" d="M10 9a3.75 3.75 0 100-7.5A3.75 3.75 0 0010 9zm-7 8a7 7 0 1114 0H3z" clipRule="evenodd" />
+                                        </svg>
+                                    )}
+                                </span>
+                                <span className="min-w-0 flex-1">
+                                    <span className="block truncate text-sm font-semibold">{accountLabel}</span>
+                                    <span className="block text-xs text-white/75">{user ? "View profile" : "Sign in or create an account"}</span>
+                                </span>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white/70 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        {/* Scrollable body */}
+                        <div className="flex-1 overflow-y-auto px-4 py-4">
+
+                            {/* Search */}
+                            <div className="relative">
+                                <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-2.5 shadow-sm focus-within:border-orange-400 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-400 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" />
+                                    </svg>
+                                    <input
+                                        type="text"
+                                        onChange={handleSearch}
+                                        value={searchInput}
+                                        placeholder="Search products..."
+                                        className="w-full bg-transparent text-sm text-slate-800 placeholder-slate-400 focus:outline-none"
+                                    />
+                                    {searchInput !== "" && (
+                                        <button type="button" onClick={clearSearch} aria-label="Clear search" className="text-slate-400 hover:text-slate-600 transition-colors">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                                            </svg>
+                                        </button>
+                                    )}
+                                </div>
+                                <SearchComponent
+                                    product={searchResult}
+                                    isProductSearched={isProductSearched}
+                                    setIsProductSearched={setIsProductSearched}
+                                    setIsMenuOpen={setIsMenuOpen}
+                                />
+                            </div>
+
+                            {/* Quick actions */}
+                            <div className="mt-4 grid grid-cols-3 gap-2">
+                                <div className="flex flex-col items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white py-3 shadow-sm">
+                                    <OrdersIconComponent />
+                                    <span className="text-[11px] font-medium text-slate-600">Orders</span>
+                                </div>
+                                {!sellerRoleAuth && user?.role === userRoles?.[2] && (
+                                    <Link
+                                        href="/seller"
+                                        onClick={handleMenuToggle}
+                                        className="flex flex-col items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white py-3 shadow-sm hover:border-orange-300"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-orange-500" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1H3a1 1 0 01-1-1v-6zM8 7a1 1 0 011-1h2a1 1 0 011 1v10a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 3a1 1 0 011-1h2a1 1 0 011 1v14a1 1 0 01-1 1h-2a1 1 0 01-1-1V3z" />
+                                        </svg>
+                                        <span className="text-[11px] font-medium text-slate-600">Dashboard</span>
+                                    </Link>
+                                )}
+                                {!adminRoleAuth && user?.role === userRoles?.[0] && (
+                                    <Link
+                                        href="/admin"
+                                        onClick={handleMenuToggle}
+                                        className="flex flex-col items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white py-3 shadow-sm hover:border-orange-300"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-orange-500" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fillRule="evenodd" d="M10 1a5 5 0 00-5 5v2a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2H7V6a3 3 0 016 0v1a1 1 0 102 0V6a5 5 0 00-5-5z" clipRule="evenodd" />
+                                        </svg>
+                                        <span className="text-[11px] font-medium text-slate-600">Admin</span>
+                                    </Link>
+                                )}
+                                <button
+                                    onClick={() => handleSitting('contact')}
+                                    className="flex flex-col items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white py-3 shadow-sm hover:border-orange-300"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-orange-500" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                                    </svg>
+                                    <span className="text-[11px] font-medium text-slate-600">Contact</span>
+                                </button>
+                            </div>
+
+                            {/* Browse */}
+                            <p className="mt-5 mb-2 px-0.5 text-xs font-semibold uppercase tracking-wide text-slate-400">Browse</p>
+                            <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                                <button
+                                    onClick={() => {
+                                        console.log('clicked')
+                                        setCategorisOpen((prev) => !prev)
+                                    }
+
+                                    }
+                                    className="flex w-full items-center justify-between px-3.5 py-3 text-sm font-medium text-slate-700"
+                                >
+                                    <span>Categories</span>
+                                    <span className="text-slate-400">{chevron(categorisOpen)}</span>
+                                </button>
+                                {categorisOpen && (
+                                <div className=" mt-2 w-56 rounded-xl shadow-xl bg-white border border-black/5 z-50  text-slate-700">
+                                            <CategoryComponent />
+                                        </div>
+                                )}
+                                <div className="border-t border-slate-100 px-3.5 py-3">
+                                    <span className="text-sm font-medium text-slate-700">Sort by</span>
+                                    <div className="mt-2 flex flex-wrap gap-2">
+                                        {SORT_OPTIONS.map((opt) => (
+                                            <button
+                                                key={opt.value}
+                                                onClick={() => {
+                                                    setIsMenuOpen(false)
+
+                                                    handleSort(opt.value)
+                                                }
+                                                }
+                                                className={`text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${sortOption === opt.value ? "border-orange-500 bg-orange-50 text-orange-600" : "border-slate-200 text-slate-600 hover:border-slate-300"}`}
+                                            >
+                                                {opt.label}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Account actions */}
+                            <p className="mt-5 mb-2 px-0.5 text-xs font-semibold uppercase tracking-wide text-slate-400">Account</p>
+                            <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                                {!user && (
+                                    <>
+                                        <button onClick={() => handleSitting('login')} className="w-full text-left px-3.5 py-3 text-sm text-slate-700 hover:bg-slate-50 border-b border-slate-100">Login</button>
+                                        <button onClick={() => handleSitting('sign-up')} className="w-full text-left px-3.5 py-3 text-sm text-slate-700 hover:bg-slate-50">Sign up</button>
+                                    </>
+                                )}
+                                {user && (
+                                    <button onClick={() => handleSitting('log-out')} className="w-full text-left px-3.5 py-3 text-sm text-rose-600 hover:bg-rose-50">Log out</button>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             )}
 
         </>

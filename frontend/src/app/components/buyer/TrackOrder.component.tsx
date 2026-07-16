@@ -61,7 +61,7 @@ const TrackOrderComponent = ({ product, order, setOpenTrackOrder }: { product: O
                                         Customer Support
                                         <br />
                                         <a href="tel:+923409751709" className="text-blue-600 hover:underline ml-1 flex items-center gap-1">
-                                            <FaPhone className="inline" /> +92 340 9751709
+                                            <FaPhone className="inline" /> 03334186523 
                                         </a>
                                     </div>
                                 </div>

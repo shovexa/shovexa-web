@@ -32,7 +32,9 @@ const CategoryComponent = () => {
     }, [API_URL]);
 
     return (
-        <div className="absolute w-full  right-0 rounded-lg shadow-xl overflow-hidden bg-gradient-to-br p-2 from-orange-500 to-orange-600 border border-gray-700">
+        <div 
+
+        className="absolute w-full  right-0 rounded-lg shadow-xl overflow-hidden bg-gradient-to-br p-2 from-orange-500 to-orange-600 border border-gray-700">
           <div className="max-h-60 overflow-y-auto  custom-scrollbar">
                 {loading ? (
                     <div className="flex flex-col items-center justify-center py-8">
@@ -62,11 +64,20 @@ const CategoryComponent = () => {
                             <div
                                 key={cat._id}
                                 className="px-4 py-3  hover:bg-gray-800/60 cursor-pointer transition-all duration-200 group"
-                                onClick={() => router.push(`/?category=${encodeURIComponent(cat.categoryName)}`)}
+                                onClick={() => {
+
+                                    console.log(cat)
+                                    router.push(`/?category=${encodeURIComponent(cat.categoryName)}`)
+                                }
+                                }
                             >
-                                <div className="flex items-center ">
+                                <div 
+                                
+                                className="flex items-center ">
                                     <div>
                                         <Image
+                                        width={800}
+                                        height={800}
                                             src={cat.image}
                                             alt={cat.categoryName}
                                             className="h-8 w-8 rounded-full object-cover transition-transform duration-200 group-hover:scale-105"
