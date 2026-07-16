@@ -208,7 +208,7 @@ const BuyerNavbarComponent = () => {
                                 <span className="hidden sm:flex flex-col items-start leading-none">
                                     <span className="text-[17px] font-bold tracking-tight text-white">
                                         shovexa
-                                        <span className="ml-0.5 text-[10px] font-medium text-white/70 align-super">.shop</span>
+                                        <span className="ml-0.5 text-[10px] font-medium text-white/70 align-super">.com</span>
                                     </span>
                                     <span className="flex items-center gap-1 text-[10px] text-white/70 mt-0.5">
                                         <span className="h-1.5 w-1.5 rounded-full bg-emerald-300 motion-safe:animate-pulse" />
