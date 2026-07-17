@@ -3,66 +3,110 @@ export const customerContactTemp = (name, email, message) => {
   <!DOCTYPE html>
   <html>
   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <style>
           body {
-              font-family: Arial, sans-serif;
-              background-color: #f4f4f4;
+              font-family: 'Segoe UI', Arial, sans-serif;
+              background-color: #FBF3EC;
               margin: 0;
               padding: 0;
+              line-height: 1.6;
           }
           .container {
               max-width: 600px;
-              margin: 20px auto;
+              margin: 30px auto;
               background: #ffffff;
-              padding: 20px;
-              border-radius: 8px;
-              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+              border-radius: 12px;
+              overflow: hidden;
+              box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+              border: 1px solid #fce8d8;
           }
           .header {
-              background-color: #007bff;
-              color: #fff;
+              background: linear-gradient(135deg, #ea580c, #f59e0b);
+              color: #ffffff;
               text-align: center;
-              padding: 15px;
-              border-radius: 8px 8px 0 0;
+              padding: 22px 20px;
+          }
+          .header h2 {
+              margin: 0;
+              font-size: 20px;
+              font-weight: 600;
+          }
+          .badge {
+              display: inline-block;
+              background: rgba(255,255,255,0.2);
+              color: #ffffff;
+              font-size: 11px;
+              font-weight: 700;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+              padding: 4px 12px;
+              border-radius: 999px;
+              margin-bottom: 10px;
           }
           .content {
-              margin-top: 15px;
+              padding: 25px 30px 10px;
               color: #333;
               font-size: 15px;
           }
-          .content p {
-              margin: 8px 0;
+          .field {
+              background-color: #fff7ed;
+              border-left: 4px solid #ea580c;
+              border-radius: 6px;
+              padding: 12px 16px;
+              margin: 0 0 14px;
           }
           .label {
-              font-weight: bold;
-              color: #555;
+              font-weight: 600;
+              color: #7c2d12;
+              font-size: 12px;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+              margin: 0 0 4px;
+          }
+          .value {
+              margin: 0;
+              color: #333;
+          }
+          .message-field {
+              white-space: pre-line;
           }
           .footer {
               text-align: center;
               font-size: 12px;
-              color: #777;
-              margin-top: 20px;
+              color: #a8887a;
+              padding: 18px 30px 22px;
+              border-top: 1px solid #f3e4d7;
+              margin-top: 10px;
           }
       </style>
   </head>
   <body>
       <div class="container">
           <div class="header">
-              <h2>New Contact Message</h2>
+              <div class="badge">New Message</div>
+              <h2>${name} sent you a message</h2>
           </div>
           <div class="content">
-              <p class="label">Name:</p>
-              <p>${name}</p>
+              <div class="field">
+                  <p class="label">Name</p>
+                  <p class="value">${name}</p>
+              </div>
 
-              <p class="label">Email:</p>
-              <p>${email}</p>
+              <div class="field">
+                  <p class="label">Email</p>
+                  <p class="value">${email}</p>
+              </div>
 
-              <p class="label">Message:</p>
-              <p style="white-space: pre-line;">${message}</p>
+              <div class="field">
+                  <p class="label">Message</p>
+                  <p class="value message-field">${message}</p>
+              </div>
           </div>
 
           <div class="footer">
-              <p>This message was sent from the contact form on <strong>shovexa.com</strong>.</p>
+              <p>This message was sent from the contact form on <strong style="color:#7c2d12;">shovexa.com</strong>.</p>
           </div>
       </div>
   </body>

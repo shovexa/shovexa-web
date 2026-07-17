@@ -45,7 +45,7 @@ export default function AdminNavbar() {
           <div className="overflow-hidden whitespace-nowrap">
             <div className="inline-block animate-marquee   text-[15px] font-semibold tracking-wide">
               shovexa
-             <span className="text-cyan-500 text-[11px] font-medium ml-0.5">.shop</span>
+             <span className="text-cyan-500 text-[11px] font-medium ml-0.5">.com</span>
 
             </div>
           </div>

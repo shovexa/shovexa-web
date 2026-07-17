@@ -6,12 +6,11 @@ import { ApiError } from "../apiError.js";
 
 
 export const sendcustomerConfirmations = async (name,email) => {
-
-    const mailOptions = {
-  from: `"shovexa Support" ${process.env.EMAIL_USER}`,
+const mailOptions = {
+  from: `"Shovexa Support" <${process.env.EMAIL_USER}>`,
   to: email,
-  subject: "We’ve received your message",
-  html:customerContactConfirmationTemp(name)
+  subject: `We got your message, ${name}`,
+  html: customerContactConfirmationTemp(name)
 };
 
     return new Promise((resolve, reject) => {
