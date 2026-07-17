@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Head from "next/head";
-
 
 export const metadata: Metadata = {
   title: "Reset Password | shovexa.com",
@@ -13,6 +11,9 @@ export const metadata: Metadata = {
     "forgot password",
     "shovexa.com"
   ],
+  alternates: {
+    canonical: "/reset-password",
+  },
 };
 
 
@@ -24,11 +25,8 @@ export default function SellerLayout({
   children: React.ReactNode;
 }) {
   return (
-          <>
-      <Head>
-        <link rel="canonical" href="https://www.shovexa.com/reset-password" />
-      </Head>
+
    <main className="">{children}</main>
-   </>
+
   );
 }

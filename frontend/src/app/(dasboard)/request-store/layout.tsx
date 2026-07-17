@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Head from "next/head";
+
 
 
 export const metadata: Metadata = {
@@ -13,6 +13,9 @@ export const metadata: Metadata = {
     "become a seller",
     "shovexa.com"
   ],
+  alternates: {
+    canonical: "/request-store",
+  },
 };
 
 
@@ -25,11 +28,8 @@ export default function SellerLayout({
   children: React.ReactNode;
 }) {
   return (
-       <>
-      <Head>
-        <link rel="canonical" href="https://www.shovexa.com/request-store" />
-      </Head>
+  
    <main className="">{children}</main>
-   </>
+   
   );
 }

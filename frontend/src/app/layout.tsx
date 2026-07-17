@@ -20,42 +20,52 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "shovexa",
-  description: "Buy electronics, fashion, home items, and daily essentials.",
+  metadataBase: new URL("https://www.shovexa.com"),
+
+  title: {
+    default: "Shovexa",
+    template: "%s | Shovexa",
+  },
+
+  description:
+    "Shovexa is an online shopping marketplace in Pakistan where customers can buy electronics, fashion, home essentials, and more from trusted sellers.",
+
   keywords: [
-    "online store",
+    "Shovexa",
+    "Shovexa Pakistan",
+    "online shopping Pakistan",
+    "Pakistan ecommerce",
     "electronics",
     "fashion",
-    "home products",
-    "best prices",
-    "shovexa"
+    "home essentials",
+    "online marketplace",
   ],
-  openGraph: {
-    title: "shovexa",
-    description: "Shop electronics, fashion, and home items.",
-    images: [
-      {
-        url: "/og-image1.jpg",
-        width: 1200,
-        height: 630,
-        alt: "shovexa Store"
-      },
-      {
-        url: "/og-image2.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Sapizo Store"
-      }
-    ]
+
+  alternates: {
+    canonical: "/",
   },
+
+  openGraph: {
+    type: "website",
+    url: "https://www.shovexa.com",
+    siteName: "Shovexa",
+    title: "Shovexa",
+    description:
+      "Shop electronics, fashion, home essentials, and more from trusted sellers.",
+  },
+
   twitter: {
     card: "summary_large_image",
-    title: "shovexa",
-    description: "Shop electronics, fashion, and home items.",
-    images: ["/og-image1.jpg"]
-  }
-};
+    title: "Shovexa",
+    description:
+      "Shop electronics, fashion, home essentials, and more from trusted sellers.",
+  },
 
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

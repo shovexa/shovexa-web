@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Head from "next/head";
 
 export const metadata: Metadata = {
   title: "Refund and Return Policy | Shovexa",
@@ -32,6 +31,9 @@ export const metadata: Metadata = {
     "Pakistan ecommerce",
     "customer refund policy"
   ],
+  alternates: {
+    canonical: "/refund-return-policy",
+  },
 };
 
 export default function SellerLayout({
@@ -40,15 +42,10 @@ export default function SellerLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <Head>
-        <link
-          rel="canonical"
-          href="https://www.shovexa.com/refund-return-policy"
-        />
-      </Head>
+   
+    
 
       <main>{children}</main>
-    </>
+    
   );
 }

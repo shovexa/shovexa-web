@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Head from "next/head";
+
 
 export const metadata: Metadata = {
   title: "Terms and Conditions | Shovexa",
@@ -32,6 +32,9 @@ export const metadata: Metadata = {
     "seller agreement",
     "usage policy"
   ],
+  alternates: {
+    canonical: "/terms-and-conditions",
+  },
 };
 
 export default function TermsAndConditionsLayout({
@@ -40,15 +43,9 @@ export default function TermsAndConditionsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <Head>
-        <link
-          rel="canonical"
-          href="https://www.shovexa.com/terms-and-conditions"
-        />
-      </Head>
+ 
 
       <main>{children}</main>
-    </>
+   
   );
 }

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import Head from "next/head";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Shovexa",
+  title: "Contact Us",
+
   description:
     "Contact Shovexa for help with orders, shipping, returns, payments, products, seller inquiries, or your account. Our support team is here to assist you.",
+
   keywords: [
     "contact",
     "support",
@@ -29,22 +30,18 @@ export const metadata: Metadata = {
     "Shovexa ecommerce",
     "online shopping Pakistan",
     "Pakistan ecommerce",
-    "customer support Pakistan"
+    "customer support Pakistan",
   ],
+
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
-export default function SellerLayout({
+export default function ContactLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <>
-      <Head>
-        <link rel="canonical" href="https://www.shovexa.com/contact" />
-      </Head>
-
-      <main>{children}</main>
-    </>
-  );
+  return <main>{children}</main>;
 }

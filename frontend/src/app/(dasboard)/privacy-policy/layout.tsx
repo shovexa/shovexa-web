@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Head from "next/head";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Shovexa",
@@ -32,6 +31,9 @@ export const metadata: Metadata = {
     "GDPR privacy",
     "data privacy"
   ],
+  alternates: {
+    canonical: "/privacy-policy",
+  },
 };
 
 export default function SellerLayout({
@@ -40,12 +42,9 @@ export default function SellerLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <Head>
-        <link rel="canonical" href="https://www.shovexa.com/privacy-policy" />
-      </Head>
+ 
 
       <main>{children}</main>
-    </>
+    
   );
 }
