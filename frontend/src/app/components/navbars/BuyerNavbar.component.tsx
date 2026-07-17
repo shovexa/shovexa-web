@@ -423,7 +423,7 @@ const BuyerNavbarComponent = () => {
                                         <Image src="/logo.jpg" alt="shovexa logo" width={36} height={36} className="h-full w-full object-cover" />
                                     </span>
                                     <span className="text-[15px] font-bold tracking-tight">
-                                        shovexa<span className="text-[10px] font-medium text-white/70 align-super">.shop</span>
+                                        shovexa<span className="text-[10px] font-medium text-white/70 align-super">.com</span>
                                     </span>
                                 </div>
                                 <button
