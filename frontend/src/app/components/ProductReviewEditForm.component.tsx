@@ -55,9 +55,9 @@ const handleEditSubmit = async () => {
 };
   return (
  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
-  <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-xl border border-orange-100">
+  <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-xl border border-gray-100">
     <h2 className="text-xl font-semibold text-gray-900 mb-5 flex items-center gap-2">
-      <span className="w-1.5 h-5 bg-orange-500 rounded-full" />
+      <span className="w-1.5 h-5 bg-gray-500 rounded-full" />
       Edit Your Review
     </h2>
 
@@ -90,7 +90,7 @@ const handleEditSubmit = async () => {
             onChange={(e) =>
               setEditData({ ...editData, reviewMessage: e.target.value })
             }
-            className="w-full border text-gray-800 border-gray-300 rounded-lg px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm"
+            className="w-full border text-gray-800 border-gray-300 rounded-lg px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm"
             rows={4}
             placeholder="Write your review here..."
           ></textarea>
@@ -107,7 +107,7 @@ const handleEditSubmit = async () => {
         </button>
         <button
           onClick={handleEditSubmit}
-          className="px-4 py-2 bg-gradient-to-r from-orange-600 to-amber-500 text-white rounded-lg hover:from-orange-500 hover:to-amber-400 transition-all font-medium shadow-sm hover:shadow-md"
+          className="px-4 py-2 bg-gradient-to-r from-gray-600 to-amber-500 text-white rounded-lg hover:from-gray-500 hover:to-amber-400 transition-all font-medium shadow-sm hover:shadow-md"
         >
           Save Changes
         </button>

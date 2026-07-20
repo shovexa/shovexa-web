@@ -86,12 +86,12 @@ const Footer = () => {
       {
         !isAuthRoute && 
         <footer className="relative overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-black text-white border-t border-slate-800">
-  {/* Orange Top Border */}
-  <div className="h-1 w-full bg-gradient-to-r from-orange-500 via-amber-400 to-orange-500" />
+  {/* gray Top Border */}
+  <div className="h-1 w-full bg-gradient-to-r from-gray-500 via-amber-400 to-gray-500" />
 
   {/* Background Glow */}
-  <div className="absolute -top-40 -left-32 w-96 h-96 bg-orange-500/10 blur-[140px] rounded-full" />
-  <div className="absolute bottom-0 -right-40 w-96 h-96 bg-orange-400/10 blur-[140px] rounded-full" />
+  <div className="absolute -top-40 -left-32 w-96 h-96 bg-gray-500/10 blur-[140px] rounded-full" />
+  <div className="absolute bottom-0 -right-40 w-96 h-96 bg-gray-400/10 blur-[140px] rounded-full" />
 
   <div className="relative max-w-7xl mx-auto px-6 py-16">
 
@@ -158,23 +158,23 @@ const Footer = () => {
           Quick Links
         </h3>
 
-        <div className="w-12 h-1 rounded-full bg-orange-500 mt-2 mb-6" />
+        <div className="w-12 h-1 rounded-full bg-gray-500 mt-2 mb-6" />
 
         <div className="flex flex-col gap-4 text-slate-300">
 
-          <Link href="/" className="hover:text-orange-400 transition">
+          <Link href="/" className="hover:text-gray-400 transition">
             Home
           </Link>
 
-          <Link href="/" className="hover:text-orange-400 transition">
+          <Link href="/" className="hover:text-gray-400 transition">
             Shop
           </Link>        
 
-          <Link href="/about" className="hover:text-orange-400 transition">
+          <Link href="/about" className="hover:text-gray-400 transition">
             About Us
           </Link>
 
-          <Link href="/contact" className="hover:text-orange-400 transition">
+          <Link href="/contact" className="hover:text-gray-400 transition">
             Contact
           </Link>
 
@@ -184,19 +184,19 @@ const Footer = () => {
 
       {/* ================= Store Location ================= */}
 
-      {/* <div className="rounded-3xl border border-slate-800 bg-slate-900/70 backdrop-blur-md p-6">
+      <div className="rounded-3xl border border-slate-800 bg-slate-900/70 backdrop-blur-md p-6">
 
         <h3 className="text-lg font-semibold">
           Visit Our Store
         </h3>
 
-        <div className="w-12 h-1 rounded-full bg-orange-500 mt-2 mb-6" />
+        <div className="w-12 h-1 rounded-full bg-gray-500 mt-2 mb-6" />
 
         <div className="overflow-hidden rounded-2xl">
 
           <iframe
             title="chakwal"
-            src="https://www.google.com/maps?q=chakwal,+Pakistan&output=embed"
+            src="https://www.google.com/maps?q=Dhok+Kala+Khan,+Shamsabad,+Rawalpindi,+Pakistan&output=embed"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             className="w-full h-56 border-0"
@@ -211,7 +211,7 @@ const Footer = () => {
           </p>
 
           <p>
-            Chakwal, Punjab
+            Dhok Kala Khan, Shamsabad, Rawalpindi
           </p>
 
           <p>
@@ -220,7 +220,7 @@ const Footer = () => {
 
         </div>
 
-      </div> */}
+      </div>
 
       {/* ================= Newsletter ================= */}
 
@@ -230,7 +230,7 @@ const Footer = () => {
           Stay Updated
         </h3>
 
-        <div className="w-12 h-1 rounded-full bg-orange-500 mt-2 mb-6" />
+        <div className="w-12 h-1 rounded-full bg-gray-500 mt-2 mb-6" />
 
         <p className="text-slate-400 text-sm leading-6">
           Subscribe and receive exclusive offers, new arrivals and product updates.
@@ -246,12 +246,12 @@ const Footer = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-white placeholder:text-slate-500 outline-none focus:border-orange-500"
+            className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-white placeholder:text-slate-500 outline-none focus:border-gray-500"
           />
 
           <button
             type="submit"
-            className="w-full rounded-xl bg-orange-500 py-3 font-semibold transition hover:bg-orange-600"
+            className="w-full rounded-xl bg-gray-500 py-3 font-semibold transition hover:bg-gray-600"
           >
             Subscribe
           </button>
@@ -265,7 +265,7 @@ const Footer = () => {
               key={href}
               href={href}
               target="_blank"
-              className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-800 text-lg transition duration-300 hover:scale-110 hover:bg-orange-500"
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-800 text-lg transition duration-300 hover:scale-110 hover:bg-gray-500"
             >
               {icon}
             </Link>
@@ -289,23 +289,23 @@ const Footer = () => {
 
         <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-400">
 
-          <Link href="/privacy-policy" className="hover:text-orange-400">
+          <Link href="/privacy-policy" className="hover:text-gray-400">
             Privacy Policy
           </Link>
 
-          <Link href="/refund-policy" className="hover:text-orange-400">
+          <Link href="/refund-policy" className="hover:text-gray-400">
             Refund Policy
           </Link>
 
-          <Link href="/shipping-policy" className="hover:text-orange-400">
+          <Link href="/shipping-policy" className="hover:text-gray-400">
             Shipping Policy
           </Link>
 
-          <Link href="/terms-and-conditions" className="hover:text-orange-400">
+          <Link href="/terms-and-conditions" className="hover:text-gray-400">
             Terms
           </Link>
 
-          <Link href="/contact" className="hover:text-orange-400">
+          <Link href="/contact" className="hover:text-gray-400">
             Contact
           </Link>
 
@@ -321,7 +321,7 @@ const Footer = () => {
 
   <button
     onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-    className="fixed bottom-6 right-6 flex h-12 w-12 items-center justify-center rounded-full bg-orange-500 text-xl shadow-xl transition hover:scale-110 hover:bg-orange-600"
+    className="fixed bottom-6 right-6 flex h-12 w-12 items-center justify-center rounded-full bg-gray-500 text-xl shadow-xl transition hover:scale-110 hover:bg-gray-600"
   >
     ↑
   </button>

@@ -101,10 +101,10 @@ const VerifyEmail = ({ email }: { email: string | null }) => {
 
 
   return (
- <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-orange-50 via-white to-orange-100 px-4 py-10">
+ <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-50 via-white to-gray-100 px-4 py-10">
   {!code && (
-    <div className="w-full max-w-md overflow-hidden rounded-3xl border border-orange-100 bg-white shadow-xl">
-      <div className="bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-10 text-center">
+    <div className="w-full max-w-md overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-xl">
+      <div className="bg-gradient-to-r from-gray-500 to-gray-600 px-8 py-10 text-center">
         <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-white/20 backdrop-blur">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -126,7 +126,7 @@ const VerifyEmail = ({ email }: { email: string | null }) => {
           Verify Your Email
         </h2>
 
-        <p className="mt-2 text-sm text-orange-100">
+        <p className="mt-2 text-sm text-gray-100">
           Enter the verification code sent to
         </p>
 
@@ -171,10 +171,10 @@ const VerifyEmail = ({ email }: { email: string | null }) => {
                   type={passwordVisible ? "text" : "password"}
                   {...register("emailVerificationCode")}
                   placeholder="Enter 6 digit code"
-                  className={`w-full rounded-xl border bg-orange-50 px-4 py-3 pr-12 text-gray-900 outline-none transition focus:border-orange-500 focus:bg-white focus:ring-4 focus:ring-orange-100 ${
+                  className={`w-full rounded-xl border bg-gray-50 px-4 py-3 pr-12 text-gray-900 outline-none transition focus:border-gray-500 focus:bg-white focus:ring-4 focus:ring-gray-100 ${
                     errors.emailVerificationCode
                       ? "border-red-500"
-                      : "border-orange-200"
+                      : "border-gray-200"
                   }`}
                 />
 
@@ -208,7 +208,7 @@ const VerifyEmail = ({ email }: { email: string | null }) => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-xl bg-orange-500 py-3 font-semibold text-white transition hover:bg-orange-600 disabled:cursor-not-allowed disabled:opacity-70"
+              className="w-full rounded-xl bg-gray-500 py-3 font-semibold text-white transition hover:bg-gray-600 disabled:cursor-not-allowed disabled:opacity-70"
             >
               {loading ? "Verifying..." : "Verify Email"}
             </button>
@@ -228,7 +228,7 @@ const VerifyEmail = ({ email }: { email: string | null }) => {
         <div className="mt-8 border-t border-gray-100 pt-6 text-center">
           <Link
             href="/"
-            className="text-sm font-medium text-orange-600 transition hover:text-orange-700"
+            className="text-sm font-medium text-gray-600 transition hover:text-gray-700"
           >
             ← Back to Home
           </Link>

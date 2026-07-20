@@ -22,7 +22,6 @@ const AdminOrderComponent= () =>{
         })
         setOrders(res.data.data)
       } catch (err) {
-        console.error("Error fetching orders", err)
       } finally {
         setLoading(false)
       }

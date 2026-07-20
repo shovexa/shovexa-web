@@ -95,16 +95,16 @@ const PaymentComponent = () => {
   return (
    <div className="flex md:flex-row flex-col gap-6 max-w-5xl mx-auto px-4 py-8">
   {/* Payment method column */}
-  <div className="text-gray-800 w-full md:max-w-lg bg-white p-6 sm:p-8 rounded-2xl shadow-md border border-orange-100">
+  <div className="text-gray-800 w-full md:max-w-lg bg-white p-6 sm:p-8 rounded-2xl shadow-md border border-gray-100">
     <h1 className="text-2xl font-bold mb-6 text-center text-gray-900">
       Select Payment Method
     </h1>
 
     {decoded.price && (
-      <div className="mb-6 p-4 bg-orange-50 rounded-xl border border-orange-100">
+      <div className="mb-6 p-4 bg-gray-50 rounded-xl border border-gray-100">
         <p className="text-center font-medium text-gray-700">
           Total Amount:{" "}
-          <span className="font-bold text-orange-600 text-lg">
+          <span className="font-bold text-gray-600 text-lg">
             PKR {decoded.price}
           </span>
         </p>
@@ -119,8 +119,8 @@ const PaymentComponent = () => {
               flex items-center p-4 rounded-xl border-2 transition-all duration-200 cursor-pointer
               ${
                 selectedPayment === method.label
-                  ? "border-orange-500 bg-orange-50 shadow-sm"
-                  : "border-gray-200 hover:border-orange-300 bg-white"
+                  ? "border-gray-500 bg-gray-50 shadow-sm"
+                  : "border-gray-200 hover:border-gray-300 bg-white"
               }
             `}
             onClick={() => document.getElementById(method.id)?.click()}
@@ -130,13 +130,13 @@ const PaymentComponent = () => {
                 flex items-center justify-center w-5 h-5 rounded-full border-2 mr-3 flex-shrink-0 transition-colors
                 ${
                   selectedPayment === method.label
-                    ? "border-orange-500"
+                    ? "border-gray-500"
                     : "border-gray-300"
                 }
               `}
             >
               {selectedPayment === method.label && (
-                <span className="w-2.5 h-2.5 rounded-full bg-orange-500" />
+                <span className="w-2.5 h-2.5 rounded-full bg-gray-500" />
               )}
             </span>
 
@@ -165,7 +165,7 @@ const PaymentComponent = () => {
             {selectedPayment === "JazzCash" && selectedPayment === method.label && (
               <div
                 onClick={() => (window.location.href = "jazzcash://pay?number=03281250745")}
-                className="flex flex-col gap-2 p-3 mt-1 border-2 border-t-0 border-orange-200 cursor-pointer rounded-b-xl bg-orange-50/50"
+                className="flex flex-col gap-2 p-3 mt-1 border-2 border-t-0 border-gray-200 cursor-pointer rounded-b-xl bg-gray-50/50"
               >
                 <div className="flex gap-2 flex-wrap">
                   <p className="text-sm font-medium text-gray-700">JazzCash:</p>
@@ -184,7 +184,7 @@ const PaymentComponent = () => {
             {selectedPayment === "easyPaisa" && selectedPayment === method.label && (
               <div
                 onClick={() => (window.location.href = "easypaisa://pay?number=03281250745")}
-                className="flex flex-col gap-2 p-3 mt-1 border-2 border-t-0 border-orange-200 cursor-pointer rounded-b-xl bg-orange-50/50"
+                className="flex flex-col gap-2 p-3 mt-1 border-2 border-t-0 border-gray-200 cursor-pointer rounded-b-xl bg-gray-50/50"
               >
                 <div className="flex gap-2 flex-wrap">
                   <p className="text-sm font-medium text-gray-700">EasyPaisa:</p>
@@ -211,7 +211,7 @@ const PaymentComponent = () => {
             onChange={handleTransactionIdChange}
             type="text"
             placeholder={`Enter ${selectedPayment} transaction ID`}
-            className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm"
+            className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm"
           />
         </div>
       )}
@@ -230,8 +230,8 @@ const PaymentComponent = () => {
           shadow-md hover:shadow-lg transform hover:-translate-y-0.5
           ${
             loading
-              ? "bg-orange-300 cursor-not-allowed"
-              : "bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-500 hover:to-amber-400"
+              ? "bg-gray-300 cursor-not-allowed"
+              : "bg-gradient-to-r from-gray-600 to-amber-500 hover:from-gray-500 hover:to-amber-400"
           }
         `}
         onClick={handleProceed}
@@ -275,7 +275,7 @@ const PaymentComponent = () => {
     {productIds.length === 0 ? (
       <p className="text-red-500 text-center mt-4">No products selected for checkout.</p>
     ) : (
-      <div className="flex items-center justify-between bg-gradient-to-r from-orange-600 to-amber-500 rounded-2xl px-4 py-4 sm:px-5 shadow-md">
+      <div className="flex items-center justify-between bg-gradient-to-r from-gray-600 to-amber-500 rounded-2xl px-4 py-4 sm:px-5 shadow-md">
         <div className="flex items-center gap-3">
           <div className="flex items-center justify-center w-9 h-9 bg-white/20 rounded-full flex-shrink-0">
             <svg
@@ -296,14 +296,14 @@ const PaymentComponent = () => {
             <h2 className="text-white font-semibold text-sm uppercase tracking-wide">
               Selected for Checkout
             </h2>
-            <p className="text-orange-50/80 text-xs">Ready to complete your purchase</p>
+            <p className="text-gray-50/80 text-xs">Ready to complete your purchase</p>
           </div>
         </div>
 
         <div className="text-right">
           <div className="flex items-baseline gap-1 justify-end">
             <span className="text-2xl font-bold text-white">{productIds.length}</span>
-            <span className="text-orange-50/80 text-sm font-medium">items</span>
+            <span className="text-gray-50/80 text-sm font-medium">items</span>
           </div>
           <div className="w-24 h-1.5 bg-white/25 rounded-full mt-1.5 ml-auto">
             <div

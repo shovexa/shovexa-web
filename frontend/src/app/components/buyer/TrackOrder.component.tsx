@@ -26,7 +26,7 @@ const TrackOrderComponent = ({ product, order, setOpenTrackOrder }: { product: O
 
       <div className="mx-auto">
         <article className="rounded-2xl overflow-hidden">
-          <header className="bg-gradient-to-r from-orange-600 to-amber-500 text-white px-6 py-5 text-xl font-semibold">
+          <header className="bg-gradient-to-r from-gray-600 to-amber-500 text-white px-6 py-5 text-xl font-semibold">
             My Orders / Tracking
           </header>
 
@@ -35,7 +35,7 @@ const TrackOrderComponent = ({ product, order, setOpenTrackOrder }: { product: O
               Order ID: <span className="text-gray-800 font-semibold">{order._id}</span>
             </h6>
 
-            <article className="bg-orange-50 border border-orange-100 text-gray-700 p-4 rounded-xl">
+            <article className="bg-gray-50 border border-gray-100 text-gray-700 p-4 rounded-xl">
               <div className="grid md:grid-cols-4 gap-4 text-sm">
                 <div>
                   <strong className="text-gray-900">Estimated Delivery time:</strong>
@@ -46,7 +46,7 @@ const TrackOrderComponent = ({ product, order, setOpenTrackOrder }: { product: O
                 <div>
                   <strong className="text-gray-900">Status:</strong>
                   <br />
-                  <span className="inline-block mt-1 px-2.5 py-0.5 bg-orange-100 text-orange-700 rounded-full text-xs font-semibold">
+                  <span className="inline-block mt-1 px-2.5 py-0.5 bg-gray-100 text-gray-700 rounded-full text-xs font-semibold">
                     {order.isDelivered
                       ? "Order Delivered"
                       : order.confirmed
@@ -68,7 +68,7 @@ const TrackOrderComponent = ({ product, order, setOpenTrackOrder }: { product: O
                   <br />
                   <a
                     href="tel:+923409751709"
-                    className="text-orange-600 hover:underline hover:text-orange-700 flex items-center gap-1.5 mt-1"
+                    className="text-gray-600 hover:underline hover:text-gray-700 flex items-center gap-1.5 mt-1"
                   >
                     <FaPhone className="inline text-xs" /> 0333 4186523
                   </a>
@@ -83,7 +83,7 @@ const TrackOrderComponent = ({ product, order, setOpenTrackOrder }: { product: O
               <div className="relative z-10 flex flex-col items-center flex-1 min-w-[80px]">
                 <span
                   className={`flex items-center justify-center w-11 h-11 rounded-full mb-2 ${
-                    order.confirmed ? "bg-orange-500 text-white" : "bg-gray-100 text-gray-400"
+                    order.confirmed ? "bg-gray-500 text-white" : "bg-gray-100 text-gray-400"
                   }`}
                 >
                   <FaCheck className="text-lg" />
@@ -91,7 +91,7 @@ const TrackOrderComponent = ({ product, order, setOpenTrackOrder }: { product: O
                 <span
                   className={
                     order.confirmed
-                      ? "text-orange-600 font-medium text-center"
+                      ? "text-gray-600 font-medium text-center"
                       : "text-gray-400 text-center"
                   }
                 >
@@ -102,7 +102,7 @@ const TrackOrderComponent = ({ product, order, setOpenTrackOrder }: { product: O
               <div className="relative z-10 flex flex-col items-center flex-1 min-w-[80px]">
                 <span
                   className={`flex items-center justify-center w-11 h-11 rounded-full mb-2 ${
-                    order.pickedByCounter ? "bg-orange-500 text-white" : "bg-gray-100 text-gray-400"
+                    order.pickedByCounter ? "bg-gray-500 text-white" : "bg-gray-100 text-gray-400"
                   }`}
                 >
                   <FaUser className="text-lg" />
@@ -110,7 +110,7 @@ const TrackOrderComponent = ({ product, order, setOpenTrackOrder }: { product: O
                 <span
                   className={
                     order.pickedByCounter
-                      ? "text-orange-600 font-medium text-center"
+                      ? "text-gray-600 font-medium text-center"
                       : "text-gray-400 text-center"
                   }
                 >
@@ -121,7 +121,7 @@ const TrackOrderComponent = ({ product, order, setOpenTrackOrder }: { product: O
               <div className="relative z-10 flex flex-col items-center flex-1 min-w-[80px]">
                 <span
                   className={`flex items-center justify-center w-11 h-11 rounded-full mb-2 ${
-                    order.orderShipped ? "bg-orange-500 text-white" : "bg-gray-100 text-gray-400"
+                    order.orderShipped ? "bg-gray-500 text-white" : "bg-gray-100 text-gray-400"
                   }`}
                 >
                   <FaTruck className="text-lg" />
@@ -129,7 +129,7 @@ const TrackOrderComponent = ({ product, order, setOpenTrackOrder }: { product: O
                 <span
                   className={
                     order.orderShipped
-                      ? "text-orange-600 font-medium text-center"
+                      ? "text-gray-600 font-medium text-center"
                       : "text-gray-400 text-center"
                   }
                 >
@@ -140,7 +140,7 @@ const TrackOrderComponent = ({ product, order, setOpenTrackOrder }: { product: O
               <div className="relative z-10 flex flex-col items-center flex-1 min-w-[80px]">
                 <span
                   className={`flex items-center justify-center w-11 h-11 rounded-full mb-2 ${
-                    order.readyForPickup ? "bg-orange-500 text-white" : "bg-gray-100 text-gray-400"
+                    order.readyForPickup ? "bg-gray-500 text-white" : "bg-gray-100 text-gray-400"
                   }`}
                 >
                   <FaBox className="text-lg" />
@@ -148,7 +148,7 @@ const TrackOrderComponent = ({ product, order, setOpenTrackOrder }: { product: O
                 <span
                   className={
                     order.readyForPickup
-                      ? "text-orange-600 font-medium text-center"
+                      ? "text-gray-600 font-medium text-center"
                       : "text-gray-400 text-center"
                   }
                 >
@@ -157,7 +157,7 @@ const TrackOrderComponent = ({ product, order, setOpenTrackOrder }: { product: O
               </div>
             </div>
 
-            <hr className="border-orange-100" />
+            <hr className="border-gray-100" />
 
             {/* Product List */}
             <ul className="grid md:grid-cols-3 gap-4">
@@ -165,7 +165,7 @@ const TrackOrderComponent = ({ product, order, setOpenTrackOrder }: { product: O
                 product.map((product: OrderProduct) => (
                   <li
                     key={product.productId._id}
-                    className="flex text-gray-600 items-start gap-4 bg-white border border-orange-100 rounded-xl p-3"
+                    className="flex text-gray-600 items-start gap-4 bg-white border border-gray-100 rounded-xl p-3"
                   >
                     <Image
                       src={product.productId.image}
@@ -187,7 +187,7 @@ const TrackOrderComponent = ({ product, order, setOpenTrackOrder }: { product: O
                 ))}
             </ul>
 
-            <hr className="border-orange-100" />
+            <hr className="border-gray-100" />
           </div>
         </article>
       </div>

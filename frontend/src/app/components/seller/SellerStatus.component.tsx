@@ -36,8 +36,8 @@ await logOut()
         return {
           message: "Your seller account is temporarily suspended. Please contact our support team for assistance.",
           icon: "⚠️",
-          color: "text-orange-600",
-          bgColor: "bg-orange-50",
+          color: "text-gray-600",
+          bgColor: "bg-gray-50",
         };
       case "blocked":
         return {

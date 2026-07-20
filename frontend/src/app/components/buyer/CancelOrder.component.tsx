@@ -42,18 +42,18 @@ const CancelOrderComponent = ({
 
         return (
           <div key={order._id} className="border p-4 rounded-md bg-white shadow">
-          <div className="rounded-3xl border border-orange-100 bg-gradient-to-r from-orange-50 to-white p-5">
+          <div className="rounded-3xl border border-gray-100 bg-gradient-to-r from-gray-50 to-white p-5">
   <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
 
     <div className="space-y-3">
 
       <div className="flex items-center gap-3">
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-100">
-          <Receipt className="h-6 w-6 text-orange-600" />
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-100">
+          <Receipt className="h-6 w-6 text-gray-600" />
         </div>
 
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-orange-600">
+          <p className="text-xs font-semibold uppercase tracking-wider text-gray-600">
             Order ID
           </p>
 
@@ -71,7 +71,7 @@ const CancelOrderComponent = ({
         </div>
 
         <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm text-gray-600 shadow-sm">
-          <CalendarDays size={16} className="text-orange-500" />
+          <CalendarDays size={16} className="text-gray-500" />
           {new Date(order.updatedAt).toLocaleDateString("en-US", {
             year: "numeric",
             month: "short",
@@ -89,7 +89,7 @@ const CancelOrderComponent = ({
           prev === order._id ? null : order._id
         )
       }
-      className="inline-flex items-center justify-center gap-2 rounded-2xl bg-orange-500 px-6 py-3 font-semibold text-white transition hover:bg-orange-600"
+      className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gray-500 px-6 py-3 font-semibold text-white transition hover:bg-gray-600"
     >
       {showDetails ? (
         <>
@@ -147,12 +147,12 @@ const CancelOrderComponent = ({
             
 <div
   key={orderProduct.productId._id}
-  className="group overflow-hidden rounded-3xl border border-orange-100 bg-white transition-all duration-300 hover:border-orange-300 hover:shadow-xl"
+  className="group overflow-hidden rounded-3xl border border-gray-100 bg-white transition-all duration-300 hover:border-gray-300 hover:shadow-xl"
 >
   <div className="flex flex-col gap-5 p-5 md:flex-row">
 
     {/* Product Image */}
-    <div className="relative mx-auto h-36 w-36 overflow-hidden rounded-2xl bg-orange-50 md:mx-0">
+    <div className="relative mx-auto h-36 w-36 overflow-hidden rounded-2xl bg-gray-50 md:mx-0">
       <Image
         src={product.image}
         alt={product.title}
@@ -167,7 +167,7 @@ const CancelOrderComponent = ({
 
       <div className="flex items-start justify-between gap-4">
         <div>
-          <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
+          <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-700">
             Ordered Product
           </span>
 
@@ -178,7 +178,7 @@ const CancelOrderComponent = ({
 
         <button
           onClick={() => window.open(product.image, "_blank")}
-          className="rounded-xl border border-orange-200 p-2 text-orange-600 transition hover:bg-orange-500 hover:text-white"
+          className="rounded-xl border border-gray-200 p-2 text-gray-600 transition hover:bg-gray-500 hover:text-white"
         >
           <Eye size={18} />
         </button>
@@ -186,8 +186,8 @@ const CancelOrderComponent = ({
 
       <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
 
-        <div className="rounded-2xl bg-orange-50 p-4">
-          <div className="mb-2 flex items-center gap-2 text-orange-600">
+        <div className="rounded-2xl bg-gray-50 p-4">
+          <div className="mb-2 flex items-center gap-2 text-gray-600">
             <Wallet size={18} />
             <span className="text-xs font-semibold uppercase">
               Price
@@ -212,7 +212,7 @@ const CancelOrderComponent = ({
           </p>
         </div>
 
-        <div className="rounded-2xl bg-orange-500 p-4 text-white">
+        <div className="rounded-2xl bg-gray-500 p-4 text-white">
           <div className="mb-2 flex items-center gap-2">
             <ShoppingBag size={18} />
             <span className="text-xs font-semibold uppercase">
@@ -235,11 +235,11 @@ const CancelOrderComponent = ({
 
 <div
   key={order._id}
-  className="flex items-center justify-between rounded-2xl border border-orange-200 bg-gradient-to-r from-orange-50 to-white p-5 shadow-sm"
+  className="flex items-center justify-between rounded-2xl border border-gray-200 bg-gradient-to-r from-gray-50 to-white p-5 shadow-sm"
 >
   <div className="flex items-center gap-4">
-    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-100">
-      <PackageX className="h-7 w-7 text-orange-600" />
+    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gray-100">
+      <PackageX className="h-7 w-7 text-gray-600" />
     </div>
 
     <div>
@@ -253,7 +253,7 @@ const CancelOrderComponent = ({
     </div>
   </div>
 
-  <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
+  <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-700">
     Removed
   </span>
 </div>

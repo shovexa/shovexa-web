@@ -28,7 +28,6 @@ if (!senderId) {
         
         const sender = await User.findById(senderId).session(session);
         const recipient = await User.findById(recipientId).session(session);
-        console.log("senderId",session.credentials)
 
         if (!sender) throw new ApiError(404, "Sender not found");
         if (!recipient) throw new ApiError(404, "Recipient not found");

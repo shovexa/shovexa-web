@@ -5,7 +5,6 @@ import { sendEmailToSupportTeam } from "../utils/emailSenders/sendEmailToSupport
 import {sendcustomerConfirmations} from "../utils/emailSenders/customerContactConfirmation.utils.js"
 export const contactUs = asyncHandler(async (req, res) => {
     const { name, email, message } = req.body
-    console.log('name,email,message',name,email,message)
     if (!name || !email || !message) {
         throw new ApiError('All field are required!')
     }

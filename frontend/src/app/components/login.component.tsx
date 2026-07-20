@@ -76,21 +76,21 @@ const LoginComponent = () => {
     <>
       {networkError && <NoInternetComponent />}
 
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-orange-900 via-orange-800 to-amber-700 p-4">
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-amber-700 p-4">
       {/* Main Card */}
       <div className="w-full max-w-5xl bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
         
         {/* Left Panel – Branding (hidden on mobile) */}
-        <div className="hidden md:flex md:w-1/2 bg-orange-600/30 backdrop-blur-sm p-10 flex-col justify-center items-center text-white">
+        <div className="hidden md:flex md:w-1/2 bg-gray-600/30 backdrop-blur-sm p-10 flex-col justify-center items-center text-white">
           <div className="mb-6">
             <Image src="/logo.jpg" alt="Shovexa Logo" width={120} height={120} className="rounded-full shadow-lg" />
           </div>
-          <h1 className="text-5xl font-extrabold tracking-tight text-orange-100">Shovexa</h1>
-          <p className="text-lg text-orange-200/80 mt-3 text-center max-w-xs">
+          <h1 className="text-5xl font-extrabold tracking-tight text-gray-100">Shovexa</h1>
+          <p className="text-lg text-gray-200/80 mt-3 text-center max-w-xs">
             Manage your world, securely.
           </p>
-          <div className="mt-8 w-16 h-1 bg-orange-400 rounded-full" />
-          <p className="mt-6 text-sm text-orange-200/60 text-center">
+          <div className="mt-8 w-16 h-1 bg-gray-400 rounded-full" />
+          <p className="mt-6 text-sm text-gray-200/60 text-center">
             Your trusted platform for seamless account management.
           </p>
         </div>
@@ -99,7 +99,7 @@ const LoginComponent = () => {
         <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
           <div className="text-center md:text-left mb-8">
             <h2 className="text-3xl font-bold text-white">Welcome back</h2>
-            <p className="text-orange-200/70 mt-1">Log in to your Shovexa account</p>
+            <p className="text-gray-200/70 mt-1">Log in to your Shovexa account</p>
           </div>
 
           {/* Error toast */}
@@ -120,13 +120,13 @@ const LoginComponent = () => {
                 className={`w-full p-3 pt-5 pb-2 bg-white/5 border rounded-xl text-white placeholder-transparent focus:outline-none focus:ring-2 ${
                   errors.email
                     ? "border-red-400 focus:ring-red-400"
-                    : "border-orange-300/50 focus:ring-orange-400"
+                    : "border-gray-300/50 focus:ring-gray-400"
                 } transition`}
               />
               <label
                 htmlFor="email"
                 className={`absolute left-3 transition-all duration-200 pointer-events-none ${
-                  errors.email ? "text-red-400" : "text-orange-200/70"
+                  errors.email ? "text-red-400" : "text-gray-200/70"
                 } 
                 `}
               >
@@ -147,13 +147,13 @@ const LoginComponent = () => {
                 className={`w-full p-3 pt-5 pb-2 bg-white/5 border rounded-xl text-white placeholder-transparent focus:outline-none focus:ring-2 pr-12 ${
                   errors.password
                     ? "border-red-400 focus:ring-red-400"
-                    : "border-orange-300/50 focus:ring-orange-400"
+                    : "border-gray-300/50 focus:ring-gray-400"
                 } transition`}
               />
               <label
                 htmlFor="password"
                 className={`absolute left-3 transition-all duration-200 pointer-events-none ${
-                  errors.password ? "text-red-400" : "text-orange-200/70"
+                  errors.password ? "text-red-400" : "text-gray-200/70"
                 }`}
               >
                 Password
@@ -161,7 +161,7 @@ const LoginComponent = () => {
               <button
                 type="button"
                 onClick={() => setPasswordVisible((prev) => !prev)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-orange-200/70 hover:text-white transition"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-200/70 hover:text-white transition"
               >
                 <Image
                   src={passwordVisible ? "/eye-solid.svg" : "/eye-slash-solid.svg"}
@@ -182,7 +182,7 @@ const LoginComponent = () => {
               className={`w-full py-3 rounded-full font-semibold transition-all duration-300 shadow-lg ${
                 loading
                   ? "bg-gray-500 cursor-not-allowed"
-                  : "bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white hover:shadow-orange-500/30"
+                  : "bg-gradient-to-r from-gray-500 to-amber-500 hover:from-gray-600 hover:to-amber-600 text-white hover:shadow-gray-500/30"
               }`}
             >
               {loading ? "Logging in..." : "Log in"}
@@ -191,9 +191,9 @@ const LoginComponent = () => {
 
           {/* Divider + Social Login */}
           <div className="flex items-center my-6">
-            <div className="flex-1 border-t border-orange-200/30" />
-            <span className="px-3 text-sm text-orange-200/60">or continue with</span>
-            <div className="flex-1 border-t border-orange-200/30" />
+            <div className="flex-1 border-t border-gray-200/30" />
+            <span className="px-3 text-sm text-gray-200/60">or continue with</span>
+            <div className="flex-1 border-t border-gray-200/30" />
           </div>
 
           <SignInWithGoogleComponent />
@@ -202,15 +202,15 @@ const LoginComponent = () => {
           <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-sm">
             <Link
               href="/sign-up"
-              className="w-full sm:w-auto text-center px-6 py-2 rounded-full border border-orange-400/60 text-orange-200 hover:bg-orange-500/20 transition"
+              className="w-full sm:w-auto text-center px-6 py-2 rounded-full border border-gray-400/60 text-gray-200 hover:bg-gray-500/20 transition"
             >
               Create account
             </Link>
             <div className="flex gap-4">
-              <Link href="/reset-password" className="text-orange-200/70 hover:text-orange-100 transition">
+              <Link href="/reset-password" className="text-gray-200/70 hover:text-gray-100 transition">
                 Forgot password?
               </Link>
-              <Link href="/" className="text-orange-200/70 hover:text-orange-100 transition">
+              <Link href="/" className="text-gray-200/70 hover:text-gray-100 transition">
                 Home
               </Link>
             </div>

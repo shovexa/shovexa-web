@@ -2,8 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import { useForm} from "react-hook-form";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import GetProductsByIdsComponent from "./GetProductsByIds.component";
+import axios, { AxiosError } from "axios";
+import { ProductInterface } from "@/app/utils/productsInterface";
 
 
 interface FormData {
@@ -16,18 +18,48 @@ const OrderPage = () => {
   const [loading, setLoading] = useState(false);
   const [selectedQuantity, setSelectedQuantity] = useState<number | null>(1);
   const searchParams = useSearchParams();
+  const params = useParams();
+  const idParam = params.id;
+  const productIds = Array.isArray(idParam) ? idParam : idParam ? [idParam] : [];
   const decoded = searchParams.get("query") && JSON.parse(atob(searchParams.get("query") || ""));
-
+const [product, setProduct] = useState<ProductInterface[]>([]);
+  const [countReviews, setCountReviews] = useState<{ [key: string]: number }>({});
+  const [openId, setOpenId] = useState<string | null>(null);
   const router = useRouter();
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-  useEffect(() => {
-    if (!searchParams.get("query")) {
-      return;
+    const getProductsByIds = async () => {
+    try {
+      const res = await axios.patch(`${API_URL}/getProductsByIds`, {
+        productIdsArr:  productIds,
+      });
+      setProduct(res.data.data);
+      
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 404) {
+          alert("Product not found, it may have been removed.");
+          router.back();
+          return;
+        }
+      }
     }
-  }, [ decoded]);
+  };
+
+useEffect(() => {
+    if (productIds.length > 0) {
+      getProductsByIds();
+    }
+}, [idParam]);
+  // useEffect(() => {
+  //   if (!searchParams.get("query")) {
+  //     return;
+  //   }
+  // }, [ decoded]);
 
   const onSubmit = async () => {
-if (!decoded) {
+    if(idParam === null || idParam === undefined || idParam === "") {
+
   setError("quantity", { type: "manual", message: "Invalid order data. Please try again." });
   alert("Invalid order data. Please try again.");
        if (window.history.length>1) {
@@ -70,10 +102,10 @@ return;
   return (
   <>
   {loading ? (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-orange-50">
-      <div className="h-14 w-14 animate-spin rounded-full border-4 border-orange-200 border-t-orange-500 border-b-orange-600"></div>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50">
+      <div className="h-14 w-14 animate-spin rounded-full border-4 border-gray-200 border-t-gray-500 border-b-gray-600"></div>
 
-      <p className="mt-5 text-lg font-semibold text-orange-600">
+      <p className="mt-5 text-lg font-semibold text-gray-600">
         Processing your order...
       </p>
 
@@ -82,28 +114,30 @@ return;
       </p>
     </div>
   ) : (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white py-6">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-6">
       <div className="mx-auto max-w-7xl md:px-4">
 
         <div className="gap-6 lg:grid-cols-[380px_1fr]">
 
           {/* Checkout Card */}
-          <div className="rounded-2xl border border-orange-200 bg-orange-50 p-5">
+          <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5">
 
   <label className="mb-4 block text-lg font-semibold text-gray-900">
     Quantity
   </label>
 
-  <div className="flex items-center justify-between rounded-2xl border border-orange-200 bg-white p-2 shadow-sm">
+  <div className="flex items-center justify-between rounded-2xl border border-gray-200 bg-white p-2 shadow-sm">
 
     <button
       type="button"
-      onClick={() =>
+      onClick={() =>{
+
         selectedQuantity !== null && selectedQuantity > 1 &&
         handleQuantityChange(selectedQuantity - 1)
       }
+      }
       disabled={selectedQuantity === null || selectedQuantity === 1}
-      className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-100 text-3xl font-medium text-orange-600 transition hover:bg-orange-500 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+      className="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 text-3xl font-medium text-gray-600 transition hover:bg-gray-500 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
     >
       −
     </button>
@@ -124,7 +158,7 @@ return;
         handleQuantityChange(selectedQuantity + 1)
       }
       disabled={selectedQuantity === 3 || selectedQuantity === null}
-      className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-500 text-3xl font-medium text-white transition hover:bg-orange-600 disabled:cursor-not-allowed disabled:opacity-40"
+      className="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-500 text-3xl font-medium text-white transition hover:bg-gray-600 disabled:cursor-not-allowed disabled:opacity-40"
     >
       +
     </button>
@@ -136,7 +170,7 @@ return;
       Maximum quantity
     </span>
 
-    <span className="rounded-full bg-orange-100 px-3 py-1 font-semibold text-orange-600">
+    <span className="rounded-full bg-gray-100 px-3 py-1 font-semibold text-gray-600">
       3 Items
     </span>
   </div>
@@ -149,7 +183,7 @@ return;
 
   <button
     onClick={onSubmit}
-    className="mt-6 w-full rounded-2xl bg-orange-500 py-4 text-lg font-semibold text-white transition hover:bg-orange-600 active:scale-95"
+    className="mt-6 w-full rounded-2xl bg-gray-900 py-4 text-lg font-semibold text-white transition hover:bg-gray-600 active:scale-95"
   >
     Place Order
   </button>
@@ -157,21 +191,21 @@ return;
 </div>
 
           {/* Product Card */}
-          <div className="rounded-2xl border border-orange-200 bg-white p-5 shadow-lg">
+          <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-lg">
 
             <div className="mb-5 flex items-center justify-between">
               <h2 className="text-xl font-bold text-gray-900">
                 Product Details
               </h2>
 
-              <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-medium text-orange-600">
+              <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
                 Review
               </span>
             </div>
 
-            {decoded ? (
+            {productIds.length > 0 ? (
               <GetProductsByIdsComponent
-                productIds={[decoded.productId]}
+                productIds={productIds}
               />
             ) : (
               <div className="flex h-52 items-center justify-center rounded-xl border border-red-200 bg-red-50">

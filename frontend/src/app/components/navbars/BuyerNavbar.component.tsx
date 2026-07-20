@@ -177,16 +177,21 @@ const BuyerNavbarComponent = () => {
         <>
 
             {(publicRoutes || (!isAuthRoute && roleAuth)) && (
-                <nav
-                    className={`${isSticky ? "fixed top-0 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.45)]" : "relative"
-                        } select-none text-white bg-orange-500 border-b border-black/10 transition-shadow duration-300 w-full z-50`}
-                >
-                    <div className="mx-auto w-full max-w-screen-2xl px-3 sm:px-4 md:px-6 lg:px-8">
-                        <div className="flex items-center justify-between gap-3 py-2">
+                <>
+                    {/* Top announcement bar */}
+                    <div className="bg-gray-900 py-2.5 text-center text-[12px] font-semibold uppercase tracking-wide text-white">
+                        <p>⚡ Get Free Shipping Across Pakistan on Orders Above Rs. 5000 | shop now</p>
+                    </div>
+
+                    <nav
+                        className={`${isSticky ? "fixed top-0 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.15)]" : "relative"
+                            } select-none border-b border-gray-200 bg-white/95 py-[18px] backdrop-blur-md transition-shadow duration-300 w-full z-50`}
+                    >
+                        <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between gap-[30px] px-3 sm:px-4 md:px-6 lg:px-10">
                             {/* Logo */}
                             <button
                                 type="button"
-                                className="group flex items-center gap-2.5 shrink-0 focus:outline-none"
+                                className="flex shrink-0 items-center gap-2.5 focus:outline-none"
                                 onClick={() => {
                                     router.push("/")
                                     setSearchResult(null)
@@ -194,35 +199,33 @@ const BuyerNavbarComponent = () => {
                                     setIsProductSearched(false)
                                 }}
                             >
-                                <span className="relative h-11 w-11 rounded-full p-[2px] bg-[conic-gradient(from_0deg,theme(colors.white),theme(colors.orange.200),theme(colors.white))] motion-safe:group-hover:animate-[spin_3s_linear_infinite]">
-                                    <span className="flex h-full w-full items-center justify-center rounded-full bg-orange-500 overflow-hidden">
-                                        <Image
-                                            src="/logo.jpg"
-                                            alt="shovexa logo"
-                                            width={44}
-                                            height={44}
-                                            className="h-full w-full object-cover rounded-full"
-                                        />
-                                    </span>
+                                <span className="relative h-11 w-11 overflow-hidden rounded-full border border-gray-200">
+                                    <Image
+                                        src="/logo.jpg"
+                                        alt="shovexa logo"
+                                        width={44}
+                                        height={44}
+                                        className="h-full w-full object-cover rounded-full"
+                                    />
                                 </span>
                                 <span className="hidden sm:flex flex-col items-start leading-none">
-                                    <span className="text-[17px] font-bold tracking-tight text-white">
+                                    <span className="text-[22px] font-extrabold tracking-tight text-gray-900">
                                         shovexa
-                                        <span className="ml-0.5 text-[10px] font-medium text-white/70 align-super">.com</span>
+                                        <span className="ml-0.5 text-sm font-normal text-gray-400">.com</span>
                                     </span>
-                                    <span className="flex items-center gap-1 text-[10px] text-white/70 mt-0.5">
-                                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-300 motion-safe:animate-pulse" />
+                                    <span className="mt-1 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-700">
+                                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 motion-safe:animate-pulse" />
                                         marketplace live
                                     </span>
                                 </span>
                             </button>
 
                             {/* Desktop Navigation */}
-                            <div className="hidden md:flex items-center gap-2 flex-1 justify-end">
+                            <div className="hidden md:flex items-center gap-7 flex-1 justify-end">
                                 {!sellerRoleAuth && user?.role === userRoles?.[2] &&
                                     <Link
                                         href="/seller"
-                                        className="relative px-3 py-2 text-sm font-medium text-white/85 hover:text-white transition-colors after:absolute after:left-3 after:right-3 after:-bottom-0.5 after:h-px after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform"
+                                        className="text-sm font-semibold text-gray-900 transition-colors hover:text-[#FF6B00]"
                                     >
                                         Dashboard
                                     </Link>
@@ -230,27 +233,27 @@ const BuyerNavbarComponent = () => {
                                 {!adminRoleAuth && user?.role === userRoles?.[0] &&
                                     <Link
                                         href="/admin"
-                                        className="relative px-3 py-2 text-sm font-medium text-white/85 hover:text-white transition-colors after:absolute after:left-3 after:right-3 after:-bottom-0.5 after:h-px after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform"
+                                        className="text-sm font-semibold text-gray-900 transition-colors hover:text-[#FF6B00]"
                                     >
                                         Dashboard
                                     </Link>
                                 }
 
                                 {/* Search Bar */}
-                                <div className="relative flex-1 max-w-xs lg:max-w-md xl:max-w-lg">
-                                    <div className="flex items-center gap-2 rounded-full border border-white/25 bg-white/15 hover:bg-white/20 focus-within:border-white focus-within:bg-white/20 transition-colors duration-200 pl-3.5 pr-2 py-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white/70 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                <div className="relative flex-1 max-w-xs lg:max-w-md xl:max-w-[550px]">
+                                    <div className="relative">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="pointer-events-none absolute left-5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
                                             <path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" />
                                         </svg>
                                         <input
                                             type="text"
                                             onChange={handleSearch}
                                             value={searchInput}
-                                            placeholder="Search products..."
-                                            className="w-full bg-transparent text-sm text-white placeholder-white/60 focus:outline-none"
+                                            placeholder="Search for luxury bags, clothing, accessories..."
+                                            className="w-full rounded-full border border-transparent bg-gray-100 py-3 pl-12 pr-5 text-sm text-gray-900 placeholder-gray-400 transition-all duration-300 focus:border-gray-900 focus:bg-white focus:outline-none focus:ring-4 focus:ring-gray-900/5"
                                         />
                                         {searchInput !== "" && (
-                                            <button type="button" onClick={clearSearch} aria-label="Clear search" className="text-white/70 hover:text-white transition-colors">
+                                            <button type="button" onClick={clearSearch} aria-label="Clear search" className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 transition-colors">
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                                                     <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                                                 </svg>
@@ -270,18 +273,13 @@ const BuyerNavbarComponent = () => {
                                 <div ref={categoryRef} className="relative">
                                     <button
                                         onClick={() => setCategorisOpen((prev) => !prev)}
-                                        className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-md transition-all duration-300 hover:bg-white/20 hover:border-white/40 active:scale-95"
+                                        className="flex items-center gap-1.5 text-sm font-semibold text-gray-900 transition-colors hover:text-[#FF6B00]"
                                     >
                                         <span>Categories</span>
-                                        <span
-                                            className={`transition-transform duration-300 ${categorisOpen ? "rotate-180" : ""
-                                                }`}
-                                        >
-                                            {chevron(categorisOpen)}
-                                        </span>
+                                        {chevron(categorisOpen)}
                                     </button>
                                     {categorisOpen && (
-                                        <div className="absolute right-0 mt-2 w-56 rounded-xl shadow-xl bg-white border border-black/5 z-50  text-slate-700">
+                                        <div ref={categoryRef} className="absolute right-0 mt-3 w-56 rounded-xl border border-gray-100 bg-white shadow-xl z-50 text-gray-700">
                                             <CategoryComponent setIsMenuOpen={setIsMenuOpen} />
                                         </div>
                                     )}
@@ -296,21 +294,15 @@ const BuyerNavbarComponent = () => {
                                             setIsMenuOpen(false)
                                         }
                                         }
-                                        className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-md transition-all duration-300 hover:border-white/40 hover:bg-white/20 active:scale-95"
+                                        className="flex items-center gap-1.5 text-sm font-semibold text-gray-900 transition-colors hover:text-[#FF6B00]"
                                     >
                                         <span>
-                                            {SORT_OPTIONS.find((o) => o.value === sortOption)?.label ?? "Sort by"}
+                                            {SORT_OPTIONS.find((o) => o.value === sortOption)?.label ?? "Sort By"}
                                         </span>
-
-                                        <span
-                                            className={`transition-transform duration-300 ${openSortAction ? "rotate-180" : ""
-                                                }`}
-                                        >
-                                            {chevron(openSortAction)}
-                                        </span>
+                                        {chevron(openSortAction)}
                                     </button>
                                     {openSortAction && (
-                                        <div className="absolute right-0 mt-2 w-52 rounded-xl shadow-xl bg-white border border-black/5 z-50 py-1.5 overflow-hidden">
+                                        <div className="absolute right-0 mt-3 w-52 rounded-xl border border-gray-100 bg-white shadow-xl z-50 py-1.5 overflow-hidden">
                                             {SORT_OPTIONS.map((opt) => (
                                                 <button
                                                     key={opt.value}
@@ -321,7 +313,7 @@ const BuyerNavbarComponent = () => {
 
                                                     }
                                                     }
-                                                    className={`w-full text-left px-4 py-2 text-sm transition-colors ${sortOption === opt.value ? "text-orange-600 bg-orange-50 font-medium" : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}`}
+                                                    className={`w-full text-left px-4 py-2 text-sm transition-colors ${sortOption === opt.value ? "font-semibold text-[#FF6B00] bg-gray-50" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"}`}
                                                 >
                                                     {opt.label}
                                                 </button>
@@ -340,35 +332,36 @@ const BuyerNavbarComponent = () => {
 
                                         }
                                         }
-                                        className="flex items-center gap-2 py-1.5 pl-1.5 pr-3 rounded-full border border-white/25 bg-white/15 hover:bg-white/20 transition-colors"
+                                        className="flex items-center gap-2 text-sm font-semibold text-gray-900 transition-colors hover:text-[#FF6B00]"
                                     >
-                                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-xs font-bold text-orange-600">
-                                            {user ? accountInitial : (
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-orange-600" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fillRule="evenodd" d="M10 9a3.75 3.75 0 100-7.5A3.75 3.75 0 0010 9zm-7 8a7 7 0 1114 0H3z" clipRule="evenodd" />
-                                                </svg>
-                                            )}
-                                        </span>
-                                        <span className="text-sm font-medium text-white max-w-[100px] truncate">{accountLabel}</span>
-                                        {chevron(userActionOpen)}
+                                        {user ? (
+                                            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gray-900 text-xs font-bold text-white">
+                                                {accountInitial}
+                                            </span>
+                                        ) : (
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-[18px] w-[18px]" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fillRule="evenodd" d="M10 9a3.75 3.75 0 100-7.5A3.75 3.75 0 0010 9zm-7 8a7 7 0 1114 0H3z" clipRule="evenodd" />
+                                            </svg>
+                                        )}
+                                        <span className="max-w-[100px] truncate">{accountLabel}</span>
                                     </button>
                                     {userActionOpen && (
-                                        <div className="absolute right-0 mt-2 w-52 rounded-xl shadow-xl bg-white border border-black/5 z-50 py-1.5 overflow-hidden">
-                                                
+                                        <div className="absolute right-0 mt-3 w-52 rounded-xl border border-gray-100 bg-white shadow-xl z-50 py-1.5 overflow-hidden">
+
                                             {user && (
-                                                <button onClick={() => handleSitting('profile')} className="w-full text-left px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+                                                <button onClick={() => handleSitting('profile')} className="w-full text-left px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
                                                     Profile
                                                 </button>
                                             )}
-                                            <button onClick={() => handleSitting('contact')} className="w-full text-left px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">
+                                            <button onClick={() => handleSitting('contact')} className="w-full text-left px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">
                                                 Contact us
                                             </button>
-                                                    <button onClick={() => handleSitting('login')} className="w-full text-left px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">Login</button>
-                                                    <button onClick={() => handleSitting('sign-up')} className="w-full text-left px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors">Sign up</button>
-                                                
+                                            <button onClick={() => handleSitting('login')} className="w-full text-left px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">Login</button>
+                                            <button onClick={() => handleSitting('sign-up')} className="w-full text-left px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors">Sign up</button>
+
                                             {user && (
                                                 <>
-                                                    <div className="my-1 border-t border-slate-100" />
+                                                    <div className="my-1 border-t border-gray-100" />
                                                     <button onClick={() => handleSitting('log-out')} className="w-full text-left px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 hover:text-rose-700 transition-colors">Log out</button>
                                                 </>
                                             )}
@@ -376,14 +369,14 @@ const BuyerNavbarComponent = () => {
                                     )}
                                 </div>
 
-                                <div className="pl-1">
+                                <div className="relative pl-1 text-gray-900">
                                     <OrdersIconComponent />
                                 </div>
                             </div>
 
                             {/* Mobile Menu Button */}
                             <button
-                                className="md:hidden text-white focus:outline-none p-2 rounded-lg hover:bg-black/10 transition-colors"
+                                className="md:hidden text-gray-900 focus:outline-none p-2 rounded-lg hover:bg-gray-100 transition-colors"
                                 onClick={handleMenuToggle}
                                 aria-label="Open menu"
                             >
@@ -392,8 +385,8 @@ const BuyerNavbarComponent = () => {
                                 </svg>
                             </button>
                         </div>
-                    </div>
-                </nav>
+                    </nav>
+                </>
             )}
 
             {/* Mobile Navigation Drawer */}
@@ -403,7 +396,7 @@ const BuyerNavbarComponent = () => {
                     <div
                         onClick={handleMenuToggle}
                         aria-hidden="true"
-                        className={`fixed inset-0 z-[60] bg-slate-900/50 backdrop-blur-[1px] transition-opacity duration-300 ${isMenuOpen ? "opacity-100" : "pointer-events-none opacity-0"
+                        className={`fixed inset-0 z-[60] bg-gray-900/50 backdrop-blur-[1px] transition-opacity duration-300 ${isMenuOpen ? "opacity-100" : "pointer-events-none opacity-0"
                             }`}
                     />
 
@@ -412,24 +405,24 @@ const BuyerNavbarComponent = () => {
                         role="dialog"
                         aria-modal="true"
                         aria-label="Site menu"
-                        className={`fixed inset-y-0 right-0 z-[70] flex h-full w-[85%] max-w-sm flex-col bg-slate-50 shadow-2xl transition-transform duration-300 ease-out ${isMenuOpen ? "translate-x-0" : "translate-x-full"
+                        className={`fixed inset-y-0 right-0 z-[70] flex h-full w-[85%] max-w-sm flex-col bg-gray-50 shadow-2xl transition-transform duration-300 ease-out ${isMenuOpen ? "translate-x-0" : "translate-x-full"
                             }`}
                     >
                         {/* Header: account snapshot */}
-                        <div className="shrink-0 bg-orange-500 px-4 pb-5 pt-4 text-white">
+                        <div className="shrink-0 bg-gray-900 px-4 pb-5 pt-4 text-white">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-2.5">
-                                    <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full bg-orange-400 ring-2 ring-white/40">
+                                    <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full ring-2 ring-white/20">
                                         <Image src="/logo.jpg" alt="shovexa logo" width={36} height={36} className="h-full w-full object-cover" />
                                     </span>
-                                    <span className="text-[15px] font-bold tracking-tight">
-                                        shovexa<span className="text-[10px] font-medium text-white/70 align-super">.com</span>
+                                    <span className="text-[15px] font-extrabold tracking-tight">
+                                        shovexa<span className="text-[10px] font-normal text-white/60"> .com</span>
                                     </span>
                                 </div>
                                 <button
                                     onClick={handleMenuToggle}
                                     aria-label="Close menu"
-                                    className="rounded-full p-1.5 text-white/90 hover:bg-white/15 hover:text-white transition-colors"
+                                    className="rounded-full p-1.5 text-white/90 hover:bg-white/10 hover:text-white transition-colors"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -443,20 +436,20 @@ const BuyerNavbarComponent = () => {
                                     handleSitting(user ? 'profile' : 'login')
                                 }
                                 }
-                                className="mt-4 flex w-full items-center gap-3 rounded-xl bg-white/15 px-3 py-2.5 text-left hover:bg-white/20 transition-colors"
+                                className="mt-4 flex w-full items-center gap-3 rounded-xl bg-white/10 px-3 py-2.5 text-left hover:bg-white/15 transition-colors"
                             >
-                                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-sm font-bold text-orange-600 shrink-0">
+                                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FF6B00] text-sm font-bold text-white shrink-0">
                                     {user ? accountInitial : (
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-orange-600" viewBox="0 0 20 20" fill="currentColor">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
                                             <path fillRule="evenodd" d="M10 9a3.75 3.75 0 100-7.5A3.75 3.75 0 0010 9zm-7 8a7 7 0 1114 0H3z" clipRule="evenodd" />
                                         </svg>
                                     )}
                                 </span>
                                 <span className="min-w-0 flex-1">
                                     <span className="block truncate text-sm font-semibold">{accountLabel}</span>
-                                    <span className="block text-xs text-white/75">{user ? "View profile" : "Sign in or create an account"}</span>
+                                    <span className="block text-xs text-white/60">{user ? "View profile" : "Sign in or create an account"}</span>
                                 </span>
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white/70 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white/60 shrink-0" viewBox="0 0 20 20" fill="currentColor">
                                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                                 </svg>
                             </button>
@@ -467,8 +460,8 @@ const BuyerNavbarComponent = () => {
 
                             {/* Search */}
                             <div className="relative">
-                                <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-2.5 shadow-sm focus-within:border-orange-400 transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-400 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                <div className="relative">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                                         <path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" />
                                     </svg>
                                     <input
@@ -476,10 +469,10 @@ const BuyerNavbarComponent = () => {
                                         onChange={handleSearch}
                                         value={searchInput}
                                         placeholder="Search products..."
-                                        className="w-full bg-transparent text-sm text-slate-800 placeholder-slate-400 focus:outline-none"
+                                        className="w-full rounded-full border border-gray-200 bg-white py-2.5 pl-11 pr-4 text-sm text-gray-800 placeholder-gray-400 shadow-sm transition-colors focus:border-[#FF6B00] focus:outline-none"
                                     />
                                     {searchInput !== "" && (
-                                        <button type="button" onClick={clearSearch} aria-label="Clear search" className="text-slate-400 hover:text-slate-600 transition-colors">
+                                        <button type="button" onClick={clearSearch} aria-label="Clear search" className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                                                 <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                                             </svg>
@@ -496,68 +489,68 @@ const BuyerNavbarComponent = () => {
 
                             {/* Quick actions */}
                             <div className="mt-4 grid grid-cols-3 gap-2">
-                                <div className="flex flex-col items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white py-3 shadow-sm">
+                                <div className="flex flex-col items-center justify-center gap-1.5 rounded-xl border border-gray-200 bg-white py-3 shadow-sm">
                                     <OrdersIconComponent />
-                                    <span className="text-[11px] font-medium text-slate-600">Orders</span>
+                                    <span className="text-[11px] font-medium text-gray-600">Orders</span>
                                 </div>
                                 {!sellerRoleAuth && user?.role === userRoles?.[2] && (
                                     <Link
                                         href="/seller"
                                         onClick={handleMenuToggle}
-                                        className="flex flex-col items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white py-3 shadow-sm hover:border-orange-300"
+                                        className="flex flex-col items-center justify-center gap-1.5 rounded-xl border border-gray-200 bg-white py-3 shadow-sm hover:border-[#FF6B00]/40"
                                     >
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-orange-500" viewBox="0 0 20 20" fill="currentColor">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#FF6B00]" viewBox="0 0 20 20" fill="currentColor">
                                             <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1H3a1 1 0 01-1-1v-6zM8 7a1 1 0 011-1h2a1 1 0 011 1v10a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 3a1 1 0 011-1h2a1 1 0 011 1v14a1 1 0 01-1 1h-2a1 1 0 01-1-1V3z" />
                                         </svg>
-                                        <span className="text-[11px] font-medium text-slate-600">Dashboard</span>
+                                        <span className="text-[11px] font-medium text-gray-600">Dashboard</span>
                                     </Link>
                                 )}
                                 {!adminRoleAuth && user?.role === userRoles?.[0] && (
                                     <Link
                                         href="/admin"
                                         onClick={handleMenuToggle}
-                                        className="flex flex-col items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white py-3 shadow-sm hover:border-orange-300"
+                                        className="flex flex-col items-center justify-center gap-1.5 rounded-xl border border-gray-200 bg-white py-3 shadow-sm hover:border-[#FF6B00]/40"
                                     >
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-orange-500" viewBox="0 0 20 20" fill="currentColor">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#FF6B00]" viewBox="0 0 20 20" fill="currentColor">
                                             <path fillRule="evenodd" d="M10 1a5 5 0 00-5 5v2a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2H7V6a3 3 0 016 0v1a1 1 0 102 0V6a5 5 0 00-5-5z" clipRule="evenodd" />
                                         </svg>
-                                        <span className="text-[11px] font-medium text-slate-600">Admin</span>
+                                        <span className="text-[11px] font-medium text-gray-600">Admin</span>
                                     </Link>
                                 )}
                                 <button
                                     onClick={() => handleSitting('contact')}
-                                    className="flex flex-col items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white py-3 shadow-sm hover:border-orange-300"
+                                    className="flex flex-col items-center justify-center gap-1.5 rounded-xl border border-gray-200 bg-white py-3 shadow-sm hover:border-[#FF6B00]/40"
                                 >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-orange-500" viewBox="0 0 20 20" fill="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#FF6B00]" viewBox="0 0 20 20" fill="currentColor">
                                         <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                                         <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                                     </svg>
-                                    <span className="text-[11px] font-medium text-slate-600">Contact</span>
+                                    <span className="text-[11px] font-medium text-gray-600">Contact</span>
                                 </button>
                             </div>
 
                             {/* Browse */}
-                            <p className="mt-5 mb-2 px-0.5 text-xs font-semibold uppercase tracking-wide text-slate-400">Browse</p>
-                            <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                            <p className="mt-5 mb-2 px-0.5 text-xs font-bold uppercase tracking-wide text-gray-400">Browse</p>
+                            <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
                                 <button
                                     onClick={() => {
-                                        console.log('clicked')
+                                        
                                         setCategorisOpen((prev) => !prev)
                                     }
 
                                     }
-                                    className="flex w-full items-center justify-between px-3.5 py-3 text-sm font-medium text-slate-700"
+                                    className="flex w-full items-center justify-between px-3.5 py-3 text-sm font-semibold text-gray-900"
                                 >
                                     <span>Categories</span>
-                                    <span className="text-slate-400">{chevron(categorisOpen)}</span>
+                                    <span className="text-gray-400">{chevron(categorisOpen)}</span>
                                 </button>
                                 {categorisOpen && (
-                                    <div ref={categoryRef} className=" mt-2 w-56 rounded-xl shadow-xl bg-white border border-black/5 z-50  text-slate-700">
+                                    <div ref={categoryRef} className="mt-2 w-56 rounded-xl border border-gray-100 bg-white shadow-xl z-50 text-gray-700">
                                         <CategoryComponent setIsMenuOpen={setIsMenuOpen} />
                                     </div>
                                 )}
-                                <div className="border-t border-slate-100 px-3.5 py-3">
-                                    <span className="text-sm font-medium text-slate-700">Sort by</span>
+                                <div className="border-t border-gray-100 px-3.5 py-3">
+                                    <span className="text-sm font-semibold text-gray-900">Sort by</span>
                                     <div className="mt-2 flex flex-wrap gap-2">
                                         {SORT_OPTIONS.map((opt) => (
                                             <button
@@ -568,7 +561,7 @@ const BuyerNavbarComponent = () => {
                                                     handleSort(opt.value)
                                                 }
                                                 }
-                                                className={`text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${sortOption === opt.value ? "border-orange-500 bg-orange-50 text-orange-600" : "border-slate-200 text-slate-600 hover:border-slate-300"}`}
+                                                className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-colors ${sortOption === opt.value ? "border-[#FF6B00] bg-gray-50 text-[#FF6B00]" : "border-gray-200 text-gray-600 hover:border-gray-300"}`}
                                             >
                                                 {opt.label}
                                             </button>
@@ -578,10 +571,10 @@ const BuyerNavbarComponent = () => {
                             </div>
 
                             {/* Account actions */}
-                            <p className="mt-5 mb-2 px-0.5 text-xs font-semibold uppercase tracking-wide text-slate-400">Account</p>
-                            <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-                                        <button onClick={() => handleSitting('login')} className="w-full text-left px-3.5 py-3 text-sm text-slate-700 hover:bg-slate-50 border-b border-slate-100">Login</button>
-                                        <button onClick={() => handleSitting('sign-up')} className="w-full text-left px-3.5 py-3 text-sm text-slate-700 hover:bg-slate-50">Sign up</button>
+                            <p className="mt-5 mb-2 px-0.5 text-xs font-bold uppercase tracking-wide text-gray-400">Account</p>
+                            <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+                                <button onClick={() => handleSitting('login')} className="w-full text-left px-3.5 py-3 text-sm text-gray-700 hover:bg-gray-50 border-b border-gray-100">Login</button>
+                                <button onClick={() => handleSitting('sign-up')} className="w-full text-left px-3.5 py-3 text-sm text-gray-700 hover:bg-gray-50">Sign up</button>
                                 {user && (
                                     <button onClick={() => handleSitting('log-out')} className="w-full text-left px-3.5 py-3 text-sm text-rose-600 hover:bg-rose-50">Log out</button>
                                 )}

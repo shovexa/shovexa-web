@@ -49,7 +49,6 @@ const AdminDashboardComponent = function () {
         setRevenue(monthlyrevenueRes.data.data)
       } catch (error: unknown) {
         if (error instanceof AxiosError) {
-          console.log(error);
           if (error.status === 401) router.push("/login");
         }
       } finally {

@@ -204,7 +204,7 @@ const SellerHomePageComponent = () => {
           </div>
           <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
             <p className="text-gray-500 text-sm">Low Stock Items</p>
-            <p className="text-2xl font-bold text-orange-500 mt-1">
+            <p className="text-2xl font-bold text-gray-500 mt-1">
               {products.filter(p => p.countInStock <= 10).length}
             </p>
           </div>
@@ -405,7 +405,7 @@ const SellerHomePageComponent = () => {
                           </div>
                           :
 
-                          <p className={`font-semibold ${product.countInStock <= 10 ? 'text-orange-500' : 'text-green-600'}`}>
+                          <p className={`font-semibold ${product.countInStock <= 10 ? 'text-gray-500' : 'text-green-600'}`}>
                             {product.countInStock} {product.countInStock <= 10 && '(Low Stock)'}
                           </p>
                           }

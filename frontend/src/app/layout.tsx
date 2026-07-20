@@ -71,7 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Suspense fallback={<Loading/>}>
+        <Suspense fallback={<Loading />}>
           <div className="flex flex-col justify-between  h-auto min-h-screen">
             <div className="relative">
               <BuyerNavbarComponent />
@@ -79,13 +79,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <SideWhatsappIconComponent />
               </div>
             </div>
-
             <main className="flex-grow">
               {children}
             </main>
             <div >
 
-            <FooterComponent />
+              <FooterComponent />
             </div>
           </div>
         </Suspense>

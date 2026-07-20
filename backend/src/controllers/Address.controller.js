@@ -49,7 +49,6 @@ const editAddress=asyncHandler(async(req,res)=>{
         await address.save()
         res.status(200).json(new ApiResponse(200,address,"address updated successfully",true))
     } catch (error) {
-        console.log('edit address error',error);
         throw new ApiError(500,"internal server error") 
     }
 })

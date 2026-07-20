@@ -196,6 +196,13 @@ const GetUserCartComponent = () => {
                   /* Active Cart Items */
                   <div className="p-6 ">
                     {cart.cartItems.map((cartItem: CartItemInterface) => {
+                      if (!cartItem.product) {
+                        return (
+                          <div key={cartItem._id} className="text-sm text-gray-500">
+                            Product not found.
+                          </div>
+                        );
+                      }
                       const hasDiscount = cartItem.product.discount > 0;
                       const discountPercent = hasDiscount ? Math.round((cartItem.product.discount / cartItem.product.price) * 100) : 0
                       const isOutOfStock = cartItem.product.countInStock <= 0;
@@ -388,7 +395,7 @@ const GetUserCartComponent = () => {
           px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform
           ${selectedItemsIds.length === 0 || loading
                     ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-orange-600 to-orange-400 text-white hover:from-orange-400 hover:to-orange-600 hover:shadow-lg '
+                    : 'bg-gradient-to-r from-gray-600 to-gray-400 text-white hover:from-gray-400 hover:to-gray-600 hover:shadow-lg '
                   }
         `}
               >

@@ -28,54 +28,57 @@ function HomeCategorySectionComponent() {
 
   const visibleCategories = showAll ? category : category.slice(0, 4);
 
+
   return (
-    <div className="col-span-full rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20 shadow-xl p-6 transition-all hover:shadow-orange-500/10">
-      {/* Optional header – you can add a title like "Shop by Category" if needed */}
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-white/90">Browse Categories</h2>
-        <span className="text-xs text-orange-300/70">{category.length} categories</span>
+    <div className="col-span-full mb-4 rounded-2xl border border-gray-200 bg-white p-4 shadow-[0_2px_8px_rgba(0,0,0,0.02)] transition-shadow hover:shadow-[0_12px_30px_rgba(0,0,0,0.04)] sm:p-6 lg:p-8">
+      <div className="mb-5 flex flex-col gap-1 sm:mb-6 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
+        <div>
+          <h2 className="text-lg font-extrabold tracking-tight text-gray-900 sm:text-xl lg:text-2xl">Shop By Category</h2>
+          <p className="mt-1 text-xs text-gray-500 sm:text-sm">Explore curated categories tailored for every style requirement</p>
+        </div>
+        <span className="shrink-0 text-xs font-semibold text-gray-400">{category.length} categories</span>
       </div>
 
-      <div className="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-9">
+      <div className="grid grid-cols-3 gap-3 sm:grid-cols-5 sm:gap-5 md:grid-cols-6 lg:grid-cols-7 lg:gap-6 xl:grid-cols-9">
         {visibleCategories.map((category) => (
           <button
             key={category.categoryName}
             onClick={() => {
               router.push(`/?category=${category.categoryName}`);
             }}
-            className="group flex flex-col items-center justify-center gap-2 rounded-xl p-3 transition-all duration-300 hover:bg-orange-500/10 hover:shadow-lg hover:shadow-orange-500/20 backdrop-blur-sm"
+            className="group flex flex-col items-center justify-center gap-2 rounded-xl p-1.5 transition-all duration-300 sm:gap-3 sm:p-2"
           >
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm transition-all duration-300 group-hover:scale-110 group-hover:bg-orange-500/20 group-hover:shadow-md">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-transparent bg-gray-50 shadow-[0_2px_8px_rgba(0,0,0,0.02)] transition-all duration-300 ease-out group-hover:scale-105 group-hover:border-[#FF6B00] group-hover:shadow-[0_10px_20px_rgba(255,107,0,0.15)] sm:h-20 sm:w-20 lg:h-[100px] lg:w-[100px]">
               {category.image && (
                 <Image
                   width={80}
                   height={80}
                   src={category.image}
                   alt={category.categoryName}
-                  className="h-9 w-9 object-contain drop-shadow-md"
+                  className="h-full w-full object-cover"
                 />
               )}
             </div>
-            <span className="text-center text-xs font-medium text-white/80 transition-colors group-hover:text-orange-300 sm:text-sm">
+            <span className="line-clamp-2 text-center text-[11px] font-bold leading-tight text-gray-900 transition-colors group-hover:text-[#FF6B00] sm:text-xs lg:text-sm">
               {category.categoryName}
             </span>
           </button>
         ))}
 
         {/* Show "View All" button only if there are more than 4 categories */}
-        {visibleCategories.length > 4 && (
+        {category.length > 4 && (
           <button
             onClick={() => setShowAll((prev) => !prev)}
-            className="group flex flex-col items-center justify-center gap-2 rounded-xl p-3 transition-all duration-300 hover:bg-orange-500/20 hover:shadow-lg hover:shadow-orange-500/30"
+            className="group flex flex-col items-center justify-center gap-2 rounded-xl p-1.5 transition-all duration-300 sm:gap-3 sm:p-2"
           >
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-amber-500 text-white shadow-md transition-all duration-300 group-hover:scale-110 group-hover:shadow-orange-500/40">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#FF6B00] text-white shadow-[0_10px_20px_rgba(255,107,0,0.25)] transition-all duration-300 group-hover:scale-105 group-hover:bg-[#E55A00] sm:h-20 sm:w-20 lg:h-[100px] lg:w-[100px]">
               {showAll ? (
-                <ChevronRight className="h-8 w-8 rotate-90" />
+                <ChevronRight className="h-6 w-6 rotate-90 sm:h-7 sm:w-7 lg:h-8 lg:w-8" />
               ) : (
-                <Grid2x2 className="h-8 w-8" />
+                <Grid2x2 className="h-6 w-6 sm:h-7 sm:w-7 lg:h-8 lg:w-8" />
               )}
             </div>
-            <span className="text-center text-xs font-medium text-orange-300 transition-colors group-hover:text-orange-100 sm:text-sm">
+            <span className="text-center text-[11px] font-bold text-gray-900 transition-colors group-hover:text-[#FF6B00] sm:text-xs lg:text-sm">
               {showAll ? "Show Less" : "View All"}
             </span>
           </button>

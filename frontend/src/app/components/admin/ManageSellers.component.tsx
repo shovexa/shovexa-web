@@ -99,7 +99,7 @@ const ManageSellers=() =>{
                         className={`px-3 py-1 rounded text-sm ${
                         seller?.status === "suspended"
                           ? "bg-gray-600 cursor-not-allowed"
-                          : "bg-orange-500 hover:bg-orange-600"
+                          : "bg-gray-500 hover:bg-gray-600"
                       }`}
                       disabled={seller?.status === "suspended"}
                     >

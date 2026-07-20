@@ -3,7 +3,6 @@ export const orderConfirmationTemp = (order, orderedProducts, userName) => {
 
   const productList = orderedProducts
     .map((item) => {
-        console.log('item',item)
       const matchedProduct = order.products.find(
         (p) => p.productId.toString() === item._id.toString()
       );

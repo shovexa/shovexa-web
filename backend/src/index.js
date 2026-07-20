@@ -9,7 +9,6 @@ dotenv.config({
 
 
 const PORT=process.env.PORT
-console.log("DB_URL:", process.env.DB_URL?.substring(0, 30));
 connectDb().then(() => {
 
      app.listen(PORT, () => {

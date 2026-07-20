@@ -4,7 +4,6 @@ export const webhookController = async (req, res) => {
   try {
     const { amount, orderId, email } = req.body;
 
-    console.log("Starting payment init:", { amount, orderId, email });
 
     const response = await axios.post(
       "https://sandbox.api.getsafepay.com/order/v1/init",
@@ -26,7 +25,6 @@ export const webhookController = async (req, res) => {
       }
     );
 
-    console.log("Safepay response:", response.data);
     res.json(response.data);
   } catch (error) {
     console.error("Safepay error:", error.response?.data || error.message);

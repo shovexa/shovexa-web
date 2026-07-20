@@ -173,7 +173,7 @@ const SellerOrdersComponent = () => {
       await fetchAdminOderspoducts()
 
     } catch (error) {
-      console.log("refund error", error)
+      console.error("refund error", error)
     }
   }
   return (

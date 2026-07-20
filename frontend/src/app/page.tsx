@@ -8,7 +8,7 @@ import Products from './components/buyer/HomeProducts.component';
 const Page = () => {
 
   return (
-    <div className='bg-orange-300'>
+    <div className='bg-gray-300'>
       <Products />
 
     </div>

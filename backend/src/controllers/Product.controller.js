@@ -29,11 +29,13 @@ let getAllProducts = asyncHandler(async (req, res) => {
 let getProductsByIds = asyncHandler(async (req, res) => {
 
     const { productIdsArr } = req.body
+
     if (productIdsArr.length > 0) {
         const objectIds = productIdsArr.map((p) => new mongoose.Types.ObjectId(p));
         const productArr = await Product.find({
             _id: { $in: objectIds }
-        });
+        })
+        // .populate("reviews")
     if (productArr.length === 0) {
             throw new ApiError(404, "No products found for the provided IDs")
         }

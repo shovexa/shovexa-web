@@ -353,6 +353,8 @@ const CreateProductComponent = () => {
                                     <div className="relative mb-4 border border-gray-300 rounded-lg overflow-hidden shadow-sm">
                                         <Image
                                             src={productImgPreview}
+                                            width={500}
+                                            height={500}
                                             alt="Preview"
                                             className="max-h-60 w-auto object-contain"
                                         />

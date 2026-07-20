@@ -17,6 +17,7 @@ const ReviewComponent = ({ setCountReviews, productId }: { setCountReviews: Disp
 
 
   useEffect(() => {
+    
     if (!productId) {
       return;
     }
@@ -65,7 +66,7 @@ const ReviewComponent = ({ setCountReviews, productId }: { setCountReviews: Disp
 
   return (
   <>
-  <div className="flex items-center bg-gradient-to-r from-orange-600 to-amber-500 rounded-t-xl p-4 justify-between mb-6 shadow-sm">
+  <div className="flex items-center bg-gradient-to-r from-gray-600 to-amber-500 rounded-t-xl p-4 justify-between mb-6 shadow-sm">
     <h2 className="text-xl font-semibold text-white">Customer Reviews</h2>
     <span className="text-sm text-white bg-white/20 backdrop-blur-sm md:px-3 px-2 py-1 rounded-full font-medium">
       {reviews.length} {reviews.length === 1 ? "review" : "reviews"}
@@ -78,10 +79,10 @@ const ReviewComponent = ({ setCountReviews, productId }: { setCountReviews: Disp
     }`}
   >
     {reviews.length === 0 ? (
-      <div className="w-full flex flex-col items-center justify-center py-16 px-6 text-center bg-orange-50/50 rounded-xl border border-orange-100">
-        <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4">
+      <div className="w-full flex flex-col items-center justify-center py-16 px-6 text-center bg-gray-50/50 rounded-xl border border-gray-100">
+        <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
           <svg
-            className="w-8 h-8 text-orange-400"
+            className="w-8 h-8 text-gray-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -104,12 +105,12 @@ const ReviewComponent = ({ setCountReviews, productId }: { setCountReviews: Disp
         {reviews.map((review, index) => (
           <div
             key={review._id || index}
-            className="bg-white rounded-xl border border-orange-100 shadow-sm hover:shadow-md hover:border-orange-200 transition-all duration-200 p-6"
+            className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-gray-200 transition-all duration-200 p-6"
           >
             {/* Header with user info and rating */}
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-amber-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 bg-gradient-to-br from-gray-500 to-amber-500 rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-medium text-sm">
                     {review.user?.username?.charAt(0)?.toUpperCase() || "A"}
                   </span>
@@ -129,9 +130,9 @@ const ReviewComponent = ({ setCountReviews, productId }: { setCountReviews: Disp
               </div>
 
               {/* Rating badge */}
-              <div className="flex items-center space-x-1 bg-orange-50 px-3 py-1 rounded-full flex-shrink-0">
+              <div className="flex items-center space-x-1 bg-gray-50 px-3 py-1 rounded-full flex-shrink-0">
                 <span className="text-amber-500 text-lg">★</span>
-                <span className="text-orange-700 font-medium text-sm">
+                <span className="text-gray-700 font-medium text-sm">
                   {review.rating.toFixed(1)}
                 </span>
               </div>
@@ -163,7 +164,7 @@ const ReviewComponent = ({ setCountReviews, productId }: { setCountReviews: Disp
                   onClick={() => {
                     handleEditToggle(review);
                   }}
-                  className="px-4 py-2 bg-orange-600 text-white text-sm font-medium rounded-lg hover:bg-orange-700 transition-colors"
+                  className="px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors"
                 >
                   Edit
                 </button>

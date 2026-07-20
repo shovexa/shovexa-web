@@ -34,7 +34,7 @@ const CategoryComponent = ({ setIsMenuOpen }: { setIsMenuOpen: (isOpen: boolean)
     return (
         <div 
 
-        className="absolute w-full  right-0 rounded-lg shadow-xl overflow-hidden bg-gradient-to-br p-2 from-orange-500 to-orange-600 border border-gray-700">
+        className="absolute w-full  right-0 rounded-lg shadow-xl overflow-hidden bg-gradient-to-br p-2 from-gray-500 to-gray-600 border border-gray-700">
           <div className="max-h-60 overflow-y-auto  custom-scrollbar">
                 {loading ? (
                     <div className="flex flex-col items-center justify-center py-8">

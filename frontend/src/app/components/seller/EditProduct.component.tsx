@@ -101,8 +101,6 @@ useEffect(() => {
       data.append('description', formData.description);
       data.append('countInStock', formData.countInStock.toString());
       data.append('brand', formData.brand);
-      console.log('productImage', productImage)
-      console.log('categoryImage', categoryImage)
       if (productImage) data.append('productImg', productImage);
       if (categoryImage) data.append('categoryImg', categoryImage);
       if (formData.discount && formData.discount > 0) data.append('discount', formData.discount.toString());

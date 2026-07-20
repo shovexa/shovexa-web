@@ -123,14 +123,14 @@ const ShippingComponent = () => {
   <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6 lg:gap-8">
     {/* Left column: Address + Selected Item */}
     <div className="space-y-6 order-2 lg:order-1">
-      <div className="bg-white rounded-2xl border border-orange-100 shadow-sm p-5 sm:p-6">
+      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-6">
         <AddressComponent />
       </div>
 
       {decoded ? (
-        <div className="bg-white rounded-2xl border border-orange-100 shadow-sm p-5 sm:p-6">
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-6">
           <h1 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-            <span className="w-1.5 h-5 bg-orange-500 rounded-full" />
+            <span className="w-1.5 h-5 bg-gray-500 rounded-full" />
             Selected Item for Checkout
           </h1>
           <SingleProductComponent productIds={[decoded.productId]} />
@@ -144,11 +144,11 @@ const ShippingComponent = () => {
 
     {/* Right column: Order Summary (sticky receipt card) */}
     <div className="order-1 lg:order-2">
-      <div className="lg:sticky lg:top-6 bg-white rounded-2xl border border-orange-100 shadow-md overflow-hidden">
-        {/* Orange header strip */}
-        <div className="bg-gradient-to-r from-orange-600 to-orange-500 px-5 py-4 sm:px-6">
+      <div className="lg:sticky lg:top-6 bg-white rounded-2xl border border-gray-100 shadow-md overflow-hidden">
+        {/* gray header strip */}
+        <div className="bg-gradient-to-r from-gray-600 to-gray-500 px-5 py-4 sm:px-6">
           <h1 className="text-lg font-semibold text-white">Order Summary</h1>
-          <p className="text-xs text-orange-50/90 mt-1">
+          <p className="text-xs text-gray-50/90 mt-1">
             Order cancelling is not allowed after 15 minutes of placing order
           </p>
         </div>
@@ -156,7 +156,7 @@ const ShippingComponent = () => {
         <div className="p-5 sm:p-6">
           {decoded ? (
             <>
-              <div className="space-y-4 divide-y divide-dashed divide-orange-100">
+              <div className="space-y-4 divide-y divide-dashed divide-gray-100">
                 <div className="pb-4">
                   <div className="flex justify-between items-start text-sm font-medium text-gray-800">
                     <span>Items Total ({orderSummary.products[0].quantity})</span>
@@ -168,7 +168,7 @@ const ShippingComponent = () => {
                     <span className="text-xs text-gray-400 line-through">
                       PKR {orderSummary.products[0].price}
                     </span>
-                    <span className="bg-orange-100 text-orange-700 text-xs font-semibold px-2 py-0.5 rounded-full">
+                    <span className="bg-gray-100 text-gray-700 text-xs font-semibold px-2 py-0.5 rounded-full">
                       Save{" "}
                       {Math.round(
                         (Number(orderSummary.products[0].discount) /
@@ -192,7 +192,7 @@ const ShippingComponent = () => {
 
                 <div className="flex justify-between items-center pt-4">
                   <span className="text-base font-semibold text-gray-900">Total</span>
-                  <span className="text-xl font-bold text-orange-600">
+                  <span className="text-xl font-bold text-gray-600">
                     PKR {orderSummary.totalPrice.toFixed(2)}
                   </span>
                 </div>
@@ -201,7 +201,7 @@ const ShippingComponent = () => {
               <button
                 onClick={handleProceedPay}
                 disabled={loading}
-                className="mt-6 w-full bg-orange-600 text-white font-semibold py-3 rounded-xl hover:bg-orange-700 active:bg-orange-800 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                className="mt-6 w-full bg-gray-600 text-white font-semibold py-3 rounded-xl hover:bg-gray-700 active:bg-gray-800 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {loading ? "Processing…" : "Proceed to Pay"}
               </button>

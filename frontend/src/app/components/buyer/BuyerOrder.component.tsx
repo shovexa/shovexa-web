@@ -117,7 +117,7 @@ const BuyerOrderComponent = () => {
     <div className="p-3 flex flex-wrap justify-between   min-h-screen">
       {/* mobile menu  */}
     <div className="fixed bottom-5 left-1/2 z-50 -translate-x-1/2 md:hidden">
-  <div className="flex items-center gap-2 rounded-full border border-orange-100 bg-white/95 p-2 shadow-2xl backdrop-blur-xl">
+  <div className="flex items-center gap-2 rounded-full border border-gray-100 bg-white/95 p-2 shadow-2xl backdrop-blur-xl">
     {tabs.map((tab) => {
       const active = activeTab === tab.id;
 
@@ -127,8 +127,8 @@ const BuyerOrderComponent = () => {
           onClick={() => setActiveTab(tab.id)}
           className={`group relative flex h-14 w-14 items-center justify-center rounded-full transition-all duration-300 ${
             active
-              ? "bg-orange-500 text-white scale-110"
-              : "text-gray-500 hover:bg-orange-50 hover:text-orange-600"
+              ? "bg-gray-500 text-white scale-110"
+              : "text-gray-500 hover:bg-gray-50 hover:text-gray-600"
           }`}
         >
       <span>
@@ -149,9 +149,9 @@ const BuyerOrderComponent = () => {
 </div>
       {/* Order Management*/}
       <div className="mx-auto mt-20 w-full max-w-7xl px-4 pb-10 md:mt-8 md:px-6">
-  <div className="mb-8 flex flex-col gap-6 rounded-3xl bg-gradient-to-r from-orange-500 to-orange-400 p-6 text-white lg:flex-row lg:items-center lg:justify-between">
+  <div className="mb-8 flex flex-col gap-6 rounded-3xl bg-gradient-to-r from-gray-500 to-gray-400 p-6 text-white lg:flex-row lg:items-center lg:justify-between">
     <div>
-      <p className="text-sm uppercase tracking-widest text-orange-100">
+      <p className="text-sm uppercase tracking-widest text-gray-100">
         Dashboard
       </p>
 
@@ -159,7 +159,7 @@ const BuyerOrderComponent = () => {
         Order Management
       </h1>
 
-      <p className="mt-2 max-w-xl text-orange-100">
+      <p className="mt-2 max-w-xl text-gray-100">
         Manage your orders, track deliveries, review cancelled purchases and
         access your wishlist from one place.
       </p>
@@ -167,7 +167,7 @@ const BuyerOrderComponent = () => {
 
     <div className="flex gap-4">
       <div className="rounded-2xl bg-white/15 px-5 py-4 backdrop-blur">
-        <p className="text-xs uppercase text-orange-100">
+        <p className="text-xs uppercase text-gray-100">
           Orders
         </p>
 
@@ -190,8 +190,8 @@ const BuyerOrderComponent = () => {
         onClick={() => setActiveTab(tab.id)}
         className={`flex items-center justify-center rounded-2xl px-4 py-3 text-sm font-semibold transition-all duration-300 ${
           activeTab === tab.id
-            ? "bg-orange-500 text-white shadow-lg"
-            : "border border-gray-200 bg-white text-gray-600 hover:border-orange-300 hover:text-orange-600"
+            ? "bg-gray-500 text-white shadow-lg"
+            : "border border-gray-200 bg-white text-gray-600 hover:border-gray-300 hover:text-gray-600"
         }`}
       >
         {tab.label}

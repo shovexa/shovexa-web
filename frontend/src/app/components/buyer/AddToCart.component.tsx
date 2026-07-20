@@ -82,14 +82,14 @@ const CartPanel = ({
         {/* Header */}
         <div className="flex justify-between items-center px-5 py-4 border-b border-slate-100">
           <div className="flex items-center gap-2">
-            <span className="h-8 w-8 rounded-full bg-orange-500 flex items-center justify-center text-white">
+            <span className="h-8 w-8 rounded-full bg-gray-500 flex items-center justify-center text-white">
               <FiShoppingCart size={16} />
             </span>
             <h2 className="text-lg font-extrabold text-slate-900">Add to Cart</h2>
           </div>
           <button
             onClick={closePanel}
-            className="p-2 rounded-full hover:bg-orange-50 text-slate-400 hover:text-orange-600 transition-colors"
+            className="p-2 rounded-full hover:bg-gray-50 text-slate-400 hover:text-gray-600 transition-colors"
             aria-label="Close cart"
           >
             <FiX size={20} />
@@ -124,7 +124,7 @@ const CartPanel = ({
                 <span className="text-slate-400 line-through text-base mb-0.5">
                   PKR {Number(product.price).toFixed(2)}
                 </span>
-                <span className="ml-auto mb-0.5 text-[11px] font-bold text-orange-600 border border-dashed border-orange-300 rounded-md px-1.5 py-0.5">
+                <span className="ml-auto mb-0.5 text-[11px] font-bold text-gray-600 border border-dashed border-gray-300 rounded-md px-1.5 py-0.5">
                   −{discountPercent}%
                 </span>
               </>
@@ -142,7 +142,7 @@ const CartPanel = ({
                 disabled={quantity <= 1}
                 className={`h-9 w-9 flex items-center justify-center rounded-full transition-colors ${quantity <= 1
                   ? 'text-slate-300 cursor-not-allowed'
-                  : 'text-slate-600 hover:bg-white hover:text-orange-600 hover:shadow-sm'
+                  : 'text-slate-600 hover:bg-white hover:text-gray-600 hover:shadow-sm'
                   }`}
               >
                 <FiMinus size={16} />
@@ -160,7 +160,7 @@ const CartPanel = ({
                 disabled={quantity >= product.countInStock}
                 className={`h-9 w-9 flex items-center justify-center rounded-full transition-colors ${quantity >= product.countInStock
                   ? 'text-slate-300 cursor-not-allowed'
-                  : 'text-slate-600 hover:bg-white hover:text-orange-600 hover:shadow-sm'
+                  : 'text-slate-600 hover:bg-white hover:text-gray-600 hover:shadow-sm'
                   }`}
               >
                 <FiPlus size={16} />
@@ -178,8 +178,8 @@ const CartPanel = ({
               : isSuccess
                 ? 'bg-emerald-500 text-white'
                 : isAdding
-                  ? 'bg-orange-400 text-white'
-                  : 'bg-orange-500 hover:bg-orange-600 text-white shadow-lg shadow-orange-500/25'
+                  ? 'bg-gray-400 text-white'
+                  : 'bg-gray-500 hover:bg-gray-600 text-white shadow-lg shadow-gray-500/25'
               }`}
           >
             {isAdding ? (
@@ -216,9 +216,9 @@ const CartPanel = ({
           </button>
 
           {/* Perforated seam */}
-          <div className="relative h-0 mt-7 mb-6 border-t-2 border-dashed border-orange-100">
-            <span className="absolute -left-5 -top-[7px] h-3.5 w-3.5 rounded-full bg-orange-400" />
-            <span className="absolute -right-5 -top-[7px] h-3.5 w-3.5 rounded-full bg-orange-400" />
+          <div className="relative h-0 mt-7 mb-6 border-t-2 border-dashed border-gray-100">
+            <span className="absolute -left-5 -top-[7px] h-3.5 w-3.5 rounded-full bg-gray-400" />
+            <span className="absolute -right-5 -top-[7px] h-3.5 w-3.5 rounded-full bg-gray-400" />
           </div>
 
           {/* Product Details */}
@@ -237,7 +237,7 @@ const CartPanel = ({
               </p>
               <button
                 onClick={() => setOpen((prev => !prev))}
-                className="text-orange-600 hover:text-orange-700 font-semibold text-xs transition-colors duration-200 flex items-center gap-1"
+                className="text-gray-600 hover:text-gray-700 font-semibold text-xs transition-colors duration-200 flex items-center gap-1"
               >
                 {open ? (
                   <>
@@ -270,7 +270,7 @@ const CartPanel = ({
             </h3>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
-                <div className="shrink-0 h-8 w-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center">
+                <div className="shrink-0 h-8 w-8 rounded-full bg-gray-50 text-gray-500 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
@@ -282,7 +282,7 @@ const CartPanel = ({
               </div>
 
               <div className="flex items-start gap-3">
-                <div className="shrink-0 h-8 w-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center">
+                <div className="shrink-0 h-8 w-8 rounded-full bg-gray-50 text-gray-500 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
@@ -294,7 +294,7 @@ const CartPanel = ({
               </div>
 
               <div className="flex items-start gap-3">
-                <div className="shrink-0 h-8 w-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center">
+                <div className="shrink-0 h-8 w-8 rounded-full bg-gray-50 text-gray-500 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>

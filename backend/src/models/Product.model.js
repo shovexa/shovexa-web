@@ -23,7 +23,10 @@ default:0
         required: [true, "description is required"],
         trim: true,
     },
-
+reviews: [{
+        type: Schema.Types.ObjectId,
+        ref: "Review",
+    }],
     category: {
         type: Schema.Types.ObjectId,
         ref: "Category",

@@ -50,7 +50,7 @@ const PrivacyPolicyCards = () => {
             "Comply with legal obligations and prevent fraudulent activities",
           ].map((item, i) => (
             <li key={i} className="flex gap-3">
-              <span className="mt-1 flex-shrink-0 text-orange-400">→</span>
+              <span className="mt-1 flex-shrink-0 text-gray-400">→</span>
               {item}
             </li>
           ))}
@@ -135,7 +135,7 @@ const PrivacyPolicyCards = () => {
   return (
     <main className="min-h-screen bg-[#1C1410]">
       {/* Hero banner */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-orange-600 via-orange-500 to-amber-500 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+      <div className="relative overflow-hidden bg-gradient-to-br from-gray-600 via-gray-500 to-amber-500 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/10 blur-3xl sm:h-96 sm:w-96" />
         <div className="absolute -bottom-20 -left-10 h-52 w-52 rounded-full bg-black/10 blur-3xl" />
         <div className="relative mx-auto max-w-3xl text-center">
@@ -163,7 +163,7 @@ const PrivacyPolicyCards = () => {
                 key={section.id}
                 className={`overflow-hidden rounded-2xl border transition-colors ${
                   isOpen
-                    ? "border-orange-500/60 bg-white/[0.06]"
+                    ? "border-gray-500/60 bg-white/[0.06]"
                     : "border-white/10 bg-white/[0.03]"
                 }`}
               >
@@ -172,7 +172,7 @@ const PrivacyPolicyCards = () => {
                   className="flex w-full items-center gap-4 px-5 py-4 text-left sm:px-6 sm:py-5"
                   aria-expanded={isOpen}
                 >
-                  <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-orange-500/20 text-lg">
+                  <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-gray-500/20 text-lg">
                     {section.icon}
                   </span>
                   <span className="min-w-0 flex-1">
@@ -184,7 +184,7 @@ const PrivacyPolicyCards = () => {
                     </span>
                   </span>
                   <span
-                    className={`flex-shrink-0 text-orange-400 transition-transform duration-200 ${
+                    className={`flex-shrink-0 text-gray-400 transition-transform duration-200 ${
                       isOpen ? "rotate-45" : ""
                     }`}
                   >

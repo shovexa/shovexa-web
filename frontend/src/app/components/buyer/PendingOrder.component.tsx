@@ -137,11 +137,11 @@ const formatOrderDate = (createdAt: string | Date) => {
                 <div        
            
                   ref={detailRef} className="mt-6 p-6  rounded-xl  ">
-                  <div className="bg-gradient-to-r from-orange-500 to-orange-400 p-5">
+                  <div className="bg-gradient-to-r from-gray-500 to-gray-400 p-5">
                     <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
 
                       <div>
-                        <p className="text-xs uppercase tracking-widest text-orange-100">
+                        <p className="text-xs uppercase tracking-widest text-gray-100">
                           Order ID
                         </p>
 
@@ -149,7 +149,7 @@ const formatOrderDate = (createdAt: string | Date) => {
                           #{order._id.slice(-6).toUpperCase()}
                         </h2>
 
-                        <p className="mt-2 text-sm text-orange-100">
+                        <p className="mt-2 text-sm text-gray-100">
                           {new Date(order.createdAt).toLocaleDateString("en-US", {
                             day: "numeric",
                             month: "long",
@@ -161,7 +161,7 @@ const formatOrderDate = (createdAt: string | Date) => {
                       <div className="flex flex-wrap gap-3">
 
                         <div className="rounded-2xl bg-white/15 px-4 py-3 backdrop-blur">
-                          <p className="text-xs text-orange-100">
+                          <p className="text-xs text-gray-100">
                             Status
                           </p>
 
@@ -171,7 +171,7 @@ const formatOrderDate = (createdAt: string | Date) => {
                         </div>
 
                         <div className="rounded-2xl bg-white/15 px-4 py-3 backdrop-blur">
-                          <p className="text-xs text-orange-100">
+                          <p className="text-xs text-gray-100">
                             Total
                           </p>
 
@@ -186,7 +186,7 @@ const formatOrderDate = (createdAt: string | Date) => {
                   </div>
 <div className="mb-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
 
-  <div className="rounded-2xl border border-orange-100 bg-orange-50 p-4">
+  <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
     <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
       Delivery Status
     </p>
@@ -194,13 +194,13 @@ const formatOrderDate = (createdAt: string | Date) => {
     <div className="mt-3 flex items-center gap-2">
       <span
         className={`h-3 w-3 rounded-full ${
-          delivered ? "bg-green-500" : "bg-orange-500"
+          delivered ? "bg-green-500" : "bg-gray-500"
         }`}
       />
 
       <span
         className={`font-semibold ${
-          delivered ? "text-green-600" : "text-orange-600"
+          delivered ? "text-green-600" : "text-gray-600"
         }`}
       >
         {delivered ? "Delivered" : "Pending"}
@@ -208,7 +208,7 @@ const formatOrderDate = (createdAt: string | Date) => {
     </div>
   </div>
 
-  <div className="rounded-2xl border border-orange-100 bg-orange-50 p-4">
+  <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
     <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
       Payment Status
     </p>
@@ -216,13 +216,13 @@ const formatOrderDate = (createdAt: string | Date) => {
     <div className="mt-3 flex items-center gap-2">
       <span
         className={`h-3 w-3 rounded-full ${
-          order.isPaid ? "bg-green-500" : "bg-orange-500"
+          order.isPaid ? "bg-green-500" : "bg-gray-500"
         }`}
       />
 
       <span
         className={`font-semibold ${
-          order.isPaid ? "text-green-600" : "text-orange-600"
+          order.isPaid ? "text-green-600" : "text-gray-600"
         }`}
       >
         {order.isPaid ? "Paid" : "Pending"}
@@ -230,7 +230,7 @@ const formatOrderDate = (createdAt: string | Date) => {
     </div>
   </div>
 
-  <div className="rounded-2xl border border-orange-100 bg-orange-50 p-4">
+  <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
     <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
       Transaction ID
     </p>
@@ -240,8 +240,8 @@ const formatOrderDate = (createdAt: string | Date) => {
     </p>
   </div>
 
-  <div className="rounded-2xl border border-orange-100 bg-gradient-to-r from-orange-500 to-orange-400 p-4 text-white">
-    <p className="text-xs font-medium uppercase tracking-wider text-orange-100">
+  <div className="rounded-2xl border border-gray-100 bg-gradient-to-r from-gray-500 to-gray-400 p-4 text-white">
+    <p className="text-xs font-medium uppercase tracking-wider text-gray-100">
       Total Amount
     </p>
 
@@ -249,12 +249,12 @@ const formatOrderDate = (createdAt: string | Date) => {
       PKR {order.totalPrice.toFixed(2)}
     </p>
 
-    <div className="mt-3 flex justify-between text-xs text-orange-100">
+    <div className="mt-3 flex justify-between text-xs text-gray-100">
       <span>Tax</span>
       <span>PKR {order.taxPrice.toFixed(2)}</span>
     </div>
 
-    <div className="mt-1 flex justify-between text-xs text-orange-100">
+    <div className="mt-1 flex justify-between text-xs text-gray-100">
       <span>Shipping</span>
       <span>PKR {order.shippingPrice.toFixed(2)}</span>
     </div>
@@ -274,12 +274,12 @@ const formatOrderDate = (createdAt: string | Date) => {
     return (
       <div
         key={orderProduct.productId._id}
-        className="overflow-hidden rounded-3xl border border-orange-100 bg-white transition hover:border-orange-300 hover:shadow-lg"
+        className="overflow-hidden rounded-3xl border border-gray-100 bg-white transition hover:border-gray-300 hover:shadow-lg"
       >
         <div className="flex flex-col lg:flex-row">
 
           {/* Product Image */}
-          <div className="flex items-center justify-center bg-orange-50 p-6 lg:w-44">
+          <div className="flex items-center justify-center bg-gray-50 p-6 lg:w-44">
             <div className="relative h-28 w-28 overflow-hidden rounded-2xl bg-white shadow">
               <Image
               width={80}
@@ -296,7 +296,7 @@ const formatOrderDate = (createdAt: string | Date) => {
 
             <div className="flex flex-wrap items-center gap-2">
 
-              <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
+              <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-700">
                 Ordered Item
               </span>
 
@@ -317,7 +317,7 @@ const formatOrderDate = (createdAt: string | Date) => {
           </div>
 
           {/* Price Section */}
-          <div className="border-t border-orange-100 bg-gray-50 p-6 lg:w-64 lg:border-l lg:border-t-0">
+          <div className="border-t border-gray-100 bg-gray-50 p-6 lg:w-64 lg:border-l lg:border-t-0">
 
             <div className="space-y-4">
 
@@ -349,7 +349,7 @@ const formatOrderDate = (createdAt: string | Date) => {
                   Total
                 </span>
 
-                <span className="rounded-xl bg-orange-500 px-4 py-2 font-bold text-white">
+                <span className="rounded-xl bg-gray-500 px-4 py-2 font-bold text-white">
                   PKR {(orderProduct.price * orderProduct.quantity).toFixed(0)}
                 </span>
 
@@ -390,7 +390,7 @@ scrollTo({ top: 0, behavior: 'smooth' });
     setSelectedOrderId(null)
   }
     }
-  className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-500 transition hover:border-orange-300 hover:bg-orange-50 hover:text-orange-600"
+  className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-500 transition hover:border-gray-300 hover:bg-gray-50 hover:text-gray-600"
 >
   <X size={18} />
 </button>
@@ -440,7 +440,7 @@ scrollTo({ top: 0, behavior: 'smooth' });
       </button>
 
       {/* Header */}
-      <div className="flex flex-col items-center border-b border-orange-100 bg-orange-50 px-6 py-8">
+      <div className="flex flex-col items-center border-b border-gray-100 bg-gray-50 px-6 py-8">
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-100">
           <AlertTriangle className="h-8 w-8 text-red-500" />
         </div>

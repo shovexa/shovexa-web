@@ -72,10 +72,10 @@ const ProductReviewFormComponent = ({
 
     return (
         <div
-  className={`${!productId && "hidden"} bg-white rounded-xl border border-orange-100 shadow-sm p-6`}
+  className={`${!productId && "hidden"} bg-white rounded-xl border border-gray-100 shadow-sm p-6`}
 >
   <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-    <span className="w-1.5 h-5 bg-orange-500 rounded-full" />
+    <span className="w-1.5 h-5 bg-gray-500 rounded-full" />
     Write a Review
   </h2>
 
@@ -106,7 +106,7 @@ const ProductReviewFormComponent = ({
         Review
       </label>
       <textarea
-        className="w-full p-3 border border-gray-300 text-gray-700 rounded-lg mt-1.5 overflow-y-auto resize-none focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-sm"
+        className="w-full p-3 border border-gray-300 text-gray-700 rounded-lg mt-1.5 overflow-y-auto resize-none focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm"
         rows={3}
         value={reviewMessage}
         onChange={(e) => setReviewMessage(e.target.value)}
@@ -120,7 +120,7 @@ const ProductReviewFormComponent = ({
 
         <button
           onClick={handleSubmit}
-          className="w-full bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-500 hover:to-amber-400 text-white font-semibold py-2.5 px-4 rounded-lg mt-4 shadow-sm hover:shadow-md transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+          className="w-full bg-gradient-to-r from-gray-600 to-amber-500 hover:from-gray-500 hover:to-amber-400 text-white font-semibold py-2.5 px-4 rounded-lg mt-4 shadow-sm hover:shadow-md transition-all disabled:opacity-60 disabled:cursor-not-allowed"
           disabled={loading}
         >
           {loading ? "Submitting..." : "Submit Review"}
@@ -129,7 +129,7 @@ const ProductReviewFormComponent = ({
     </div>
   ) : (
     <Link
-      className="w-full inline-block text-center hover:text-orange-600 text-gray-600 font-semibold underline decoration-orange-300 underline-offset-4 py-2 px-4 rounded mt-3 transition-colors"
+      className="w-full inline-block text-center hover:text-gray-600 text-gray-600 font-semibold underline decoration-gray-300 underline-offset-4 py-2 px-4 rounded mt-3 transition-colors"
       href="/"
     >
       Return to Home Page ↗

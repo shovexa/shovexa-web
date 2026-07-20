@@ -17,7 +17,6 @@ const sellerRequest = asyncHandler(async (req, res) => {
 
   // Check if store name already exists
   const existingStore = await SellerRequest.findOne({ storeName });
-  console.log('existingstore',existingStore)
   if (existingStore && existingStore.status==="approved") {
     throw new ApiError(400, `The store name "${storeName}" is already in use.`);
   }

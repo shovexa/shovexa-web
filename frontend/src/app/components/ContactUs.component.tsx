@@ -39,10 +39,10 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 py-10 px-4 sm:py-16 sm:px-6">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-amber-50 py-10 px-4 sm:py-16 sm:px-6">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8 sm:mb-12">
-          <span className="inline-block px-4 py-1 rounded-full bg-orange-100 text-orange-700 text-xs font-semibold uppercase tracking-widest mb-4">
+          <span className="inline-block px-4 py-1 rounded-full bg-gray-100 text-gray-700 text-xs font-semibold uppercase tracking-widest mb-4">
             Shovexa
           </span>
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">
@@ -53,7 +53,7 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 rounded-3xl overflow-hidden shadow-xl border border-orange-100">
+        <div className="grid grid-cols-1 lg:grid-cols-5 rounded-3xl overflow-hidden shadow-xl border border-gray-100">
           {/* Contact Form */}
           <div className="lg:col-span-3 bg-white p-6 sm:p-10">
             <form onSubmit={handleSubmit} className="space-y-5">
@@ -68,7 +68,7 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                   placeholder="Your full name"
-                  className="w-full border border-gray-200 text-gray-900 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                  className="w-full border border-gray-200 text-gray-900 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition-colors"
                 />
               </div>
 
@@ -83,7 +83,7 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                   placeholder="you@example.com"
-                  className="w-full border border-gray-200 text-gray-900 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                  className="w-full border border-gray-200 text-gray-900 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition-colors"
                 />
               </div>
 
@@ -98,7 +98,7 @@ export default function ContactPage() {
                   rows={4}
                   required
                   placeholder="How can we help?"
-                  className="w-full border border-gray-200 text-gray-900 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors resize-none"
+                  className="w-full border border-gray-200 text-gray-900 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition-colors resize-none"
                 ></textarea>
               </div>
 
@@ -107,8 +107,8 @@ export default function ContactPage() {
                 disabled={loading}
                 className={`w-full py-3 text-white font-semibold rounded-xl transition-all shadow-sm ${
                   loading
-                    ? "bg-orange-300 cursor-not-allowed"
-                    : "bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-500 hover:to-amber-400 hover:shadow-md"
+                    ? "bg-gray-300 cursor-not-allowed"
+                    : "bg-gradient-to-r from-gray-600 to-amber-500 hover:from-gray-500 hover:to-amber-400 hover:shadow-md"
                 }`}
               >
                 {loading ? "Sending..." : "Send Message"}
@@ -129,7 +129,7 @@ export default function ContactPage() {
           </div>
 
           {/* Contact Info */}
-          <div className="lg:col-span-2 bg-gradient-to-br from-orange-600 to-amber-500 p-6 sm:p-10 flex flex-col justify-center text-white">
+          <div className="lg:col-span-2 bg-gradient-to-br from-gray-600 to-amber-500 p-6 sm:p-10 flex flex-col justify-center text-white">
             <h3 className="text-xl sm:text-2xl font-semibold mb-6">
               Contact Information
             </h3>
@@ -140,7 +140,7 @@ export default function ContactPage() {
                   📍
                 </span>
                 <div>
-                  <p className="text-xs uppercase tracking-wide text-orange-50/80">
+                  <p className="text-xs uppercase tracking-wide text-gray-50/80">
                     Address
                   </p>
                   <p className="font-medium">Sialkot, Pakistan</p>
@@ -152,7 +152,7 @@ export default function ContactPage() {
                   📞
                 </span>
                 <div>
-                  <p className="text-xs uppercase tracking-wide text-orange-50/80">
+                  <p className="text-xs uppercase tracking-wide text-gray-50/80">
                     Phone
                   </p>
                   <p className="font-medium">0333 4186523</p>
@@ -164,7 +164,7 @@ export default function ContactPage() {
                   📧
                 </span>
                 <div>
-                  <p className="text-xs uppercase tracking-wide text-orange-50/80">
+                  <p className="text-xs uppercase tracking-wide text-gray-50/80">
                     Email
                   </p>
                   <p className="font-medium">shovexa@gmail.com</p>

@@ -39,7 +39,7 @@ const AboutComponent = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-orange-600 via-orange-500 to-amber-500 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+      <section className="relative overflow-hidden bg-gradient-to-br from-gray-600 via-gray-500 to-amber-500 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/10 blur-3xl sm:h-96 sm:w-96" />
         <div className="absolute -bottom-20 -left-10 h-52 w-52 rounded-full bg-black/10 blur-3xl" />
         <div className="relative mx-auto max-w-3xl text-center">
@@ -60,7 +60,7 @@ const AboutComponent = () => {
       <section className="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
           <div>
-            <span className="text-sm font-semibold uppercase tracking-widest text-orange-600">
+            <span className="text-sm font-semibold uppercase tracking-widest text-gray-600">
               Our Story
             </span>
             <h2 className="mt-3 text-2xl font-bold text-gray-900 sm:text-3xl">
@@ -80,17 +80,17 @@ const AboutComponent = () => {
             </p>
             <Link
               href="/contact"
-              className="mt-6 inline-block rounded-xl bg-gradient-to-r from-orange-600 to-amber-500 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:from-orange-500 hover:to-amber-400 hover:shadow-md"
+              className="mt-6 inline-block rounded-xl bg-gradient-to-r from-gray-600 to-amber-500 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:from-gray-500 hover:to-amber-400 hover:shadow-md"
             >
               Get in Touch
             </Link>
           </div>
 
-          <div className="rounded-2xl border border-orange-100 bg-orange-50/50 p-6 sm:p-8">
+          <div className="rounded-2xl border border-gray-100 bg-gray-50/50 p-6 sm:p-8">
             <div className="grid grid-cols-2 gap-6">
               {stats.map((stat) => (
                 <div key={stat.label} className="text-center">
-                  <p className="text-3xl font-bold text-orange-600 sm:text-4xl">
+                  <p className="text-3xl font-bold text-gray-600 sm:text-4xl">
                     {stat.value}
                   </p>
                   <p className="mt-1 text-xs font-medium uppercase tracking-wide text-gray-500 sm:text-sm">
@@ -104,10 +104,10 @@ const AboutComponent = () => {
       </section>
 
       {/* Values */}
-      <section className="bg-orange-50/40 px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
+      <section className="bg-gray-50/40 px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
         <div className="mx-auto max-w-5xl">
           <div className="text-center">
-            <span className="text-sm font-semibold uppercase tracking-widest text-orange-600">
+            <span className="text-sm font-semibold uppercase tracking-widest text-gray-600">
               What We Stand For
             </span>
             <h2 className="mt-3 text-2xl font-bold text-gray-900 sm:text-3xl">
@@ -119,9 +119,9 @@ const AboutComponent = () => {
             {values.map((value) => (
               <div
                 key={value.title}
-                className="rounded-2xl border border-orange-100 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+                className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
               >
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-100 text-2xl">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-100 text-2xl">
                   {value.icon}
                 </span>
                 <h3 className="mt-4 text-base font-semibold text-gray-900">
@@ -148,13 +148,13 @@ const AboutComponent = () => {
         <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link
             href="/contact"
-            className="w-full rounded-xl bg-gradient-to-r from-orange-600 to-amber-500 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:from-orange-500 hover:to-amber-400 hover:shadow-md sm:w-auto"
+            className="w-full rounded-xl bg-gradient-to-r from-gray-600 to-amber-500 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:from-gray-500 hover:to-amber-400 hover:shadow-md sm:w-auto"
           >
             Contact Support
           </Link>
           <Link
             href="/"
-            className="w-full rounded-xl border border-orange-200 px-6 py-3 text-sm font-semibold text-orange-700 transition-colors hover:bg-orange-50 sm:w-auto"
+            className="w-full rounded-xl border border-gray-200 px-6 py-3 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-50 sm:w-auto"
           >
             Continue Shopping
           </Link>
