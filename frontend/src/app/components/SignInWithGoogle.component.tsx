@@ -1,18 +1,24 @@
+import {  useSearchParams } from 'next/dist/client/components/navigation';
 import Image from 'next/image';
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const SignInWithGoogleComponent = () => {
   const API = process.env.NEXT_PUBLIC_API_URL
-  
-  const signup = () => {
-    if(!API) return;
-     window.location.href =`${API}/auth/google`
-  }
+  const searchParams = useSearchParams();
+  const trackPath=searchParams.get('track') || '/'
+       
+
+
+const signIp = () => {
+  if (!API) return;
+  const full = `${trackPath}${searchParams.toString() ? '?' + searchParams.toString() : ''}`;
+  window.location.href = `${API}/auth/google?track=${encodeURIComponent(full)}`;
+};
   return (
     <div className="flex justify-center items-center mt-4">
       <button
         type='reset'
-        onClick={signup}
+        onClick={signIp}
         className="flex items-center cursor-pointer gap-3 bg-white text-gray-700 border border-gray-300 rounded-full px-6 py-3 shadow-sm hover:shadow-md hover:bg-gray-50 transition-all duration-200"
       >
         <Image

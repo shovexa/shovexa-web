@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useRouter, usePathname, useSearchParams, useParams } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import { UserInterface } from "../utils/user.interface";
 interface WithAuthProps {
@@ -20,12 +20,13 @@ const buyerAuth = <P extends WithAuthProps>(
         const trackPath = usePathname();
         const isAuthRoutes = authRoutes.includes(trackPath);
         const secureRoute = ["/buyer"];
+        const  idParams=useParams()?.id
         const roleAuth = secureRoute.some(route => trackPath.startsWith(route));
 
 
         const searchParams = useSearchParams();
         const updatedSearchParams = new URLSearchParams(searchParams.toString())
-        const publicRoutes = ["/privacy-policy","/request-store", "/reset-password", "/verify-email", "/terms-and-conditions", "/ownership-statement", "/refund-return-policy", "/shipping-policy", "/", "/contact"].includes(pathName);
+        const publicRoutes = ["/privacy-policy",`/buyer/product/${idParams}`,"/request-store", "/reset-password", "/verify-email", "/terms-and-conditions", "/ownership-statement", "/refund-return-policy", "/shipping-policy", "/", "/contact"].includes(pathName);
 
         const checkAuth = async () => {
             try {
@@ -63,10 +64,10 @@ const buyerAuth = <P extends WithAuthProps>(
                         return null;
                     }
                     if (!publicRoutes && error?.response?.status === 401 && !isAuthRoutes) {
-                        router.push(`/login?track=${trackPath}&${updatedSearchParams}`)
+                      return  router.push(`/login?track=${trackPath}&${updatedSearchParams}`)
                     }
                     if (error?.response?.status === 403) {
-                        router.push(`/verify-email?track=${trackPath}&${updatedSearchParams}`)
+                      return  router.push(`/verify-email?track=${trackPath}&${updatedSearchParams}`)
                     }
                 }
 

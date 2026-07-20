@@ -23,8 +23,6 @@ const OrderPage = () => {
   const productIds = Array.isArray(idParam) ? idParam : idParam ? [idParam] : [];
   const decoded = searchParams.get("query") && JSON.parse(atob(searchParams.get("query") || ""));
 const [product, setProduct] = useState<ProductInterface[]>([]);
-  const [countReviews, setCountReviews] = useState<{ [key: string]: number }>({});
-  const [openId, setOpenId] = useState<string | null>(null);
   const router = useRouter();
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -74,18 +72,26 @@ useEffect(() => {
       setError("quantity", { type: "manual", message: "Quantity is required" });
       return;
     }
+if(idParam === null || idParam === undefined || idParam === "") {
 
-    if (decoded.stock < selectedQuantity) {
-      setError("quantity", { type: "manual", message: "Quantity exceeds available stock" });
-      return;
-    }
+  if (decoded.stock < selectedQuantity) {
+    setError("quantity", { type: "manual", message: "Quantity exceeds available stock" });
+    return;
+  }
+}
 
     try {
       setLoading(true);
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      router.push(`/buyer/shipping?query=${btoa(JSON.stringify({ productId: decoded.productId, quantity: selectedQuantity, price: decoded.price }))}`);
+      if(idParam === null || idParam === undefined || idParam === "") {
+
+        router.push(`/buyer/shipping?query=${btoa(JSON.stringify({ productId: decoded.productId, quantity: selectedQuantity, price: decoded.price }))}`);
+      }else{
+        router.push(`/buyer/shipping?query=${btoa(JSON.stringify({productId:idParam,quantity:selectedQuantity, price: product[0]?.price})) }`);
+      }
     } catch (error: unknown) {
       if (error instanceof Error) {
+        console.error(error)
 return;
       }
     } finally {

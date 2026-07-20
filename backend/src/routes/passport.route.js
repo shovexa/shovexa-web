@@ -6,8 +6,13 @@ import { generateAccessAndRefereshTokens } from "../controllers/User.controller.
 
 const passportRouter = Router();
 
-passportRouter.get("/google", passport.authenticate("google", { scope: ["profile", "email"] })
-);
+passportRouter.get("/google", (req, res, next) => {
+    const track = typeof req.query.track === "string" ? req.query.track : "/";
+    passport.authenticate("google", {
+        scope: ["profile", "email"],
+        state: encodeURIComponent(track),
+    })(req, res, next);
+});
 passportRouter.get(
     "/google/callback",
     (req, res, next) => {
@@ -15,24 +20,37 @@ passportRouter.get(
             if (err) return res.send(signupWithGoogleUnknownError(err));
 
             if (!user) {
-                // handle error message from strategy
-                return res.status(401).send( signupWithGoogleError(info));
+                return res.status(401).send(signupWithGoogleError(info));
             }
-            req.logIn(user,async (err) => {
+
+            req.logIn(user, async (err) => {
                 if (err) return res.status(500).send("Login failed");
-                  const { accessToken, refreshToken } =await generateAccessAndRefereshTokens(req.user._id);
-                               const options = {
+
+                const { accessToken, refreshToken } = await generateAccessAndRefereshTokens(req.user._id);
+                const options = {
                     httpOnly: true,
                     secure: process.env.NODE_ENV === 'production',
                     sameSite: process.env.NODE_ENV === 'production' ? "None" : 'Lax',
-                    // domain: process.env.WEBSITE_URL,
-                
+                };
+
+                // decode + validate the returned state before using it
+                let track = "/";
+                if (typeof req.query.state === "string") {
+                    try {
+                        const decoded = decodeURIComponent(req.query.state);
+                        console.log('decoded',decoded)
+                        if (decoded.startsWith("/") && !decoded.startsWith("//")) {
+                            track = decoded;
+                        }
+                    } catch {
+                        track = "/";
+                    }
                 }
-                
-                    res
-                      .cookie("refreshToken", refreshToken, options)
-                      .cookie("accessToken", accessToken, options)      
-                      .redirect(process.env.CORS_ORIGIN);
+
+                res
+                    .cookie("refreshToken", refreshToken, options)
+                    .cookie("accessToken", accessToken, options)
+                    .redirect(`${process.env.CORS_ORIGIN}${track}`);
             });
         })(req, res, next);
     }

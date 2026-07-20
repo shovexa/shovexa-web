@@ -25,7 +25,7 @@ const LoginComponent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const updatedSearchParams = new URLSearchParams(searchParams.toString());
-  const trackedPath = searchParams.get("track");
+  const trackedPath = searchParams.get("track") || '/';
 
   const onSubmit = async (data: LoginFormData) => {
     setLoading(true);
@@ -48,9 +48,10 @@ const LoginComponent = () => {
       setLoading(false);
 
       if (resData.isVerified) {
-        if (userRole === "buyer") router.push(`${trackedPath || "/"}?${updatedSearchParams}`);
-        if (userRole === "super-admin") router.push("/admin");
-        if (userRole === "seller") router.push("/seller");
+        console.log('updatedSearchParams',updatedSearchParams)
+        if (userRole === "buyer") return router.push(`${trackedPath }?${updatedSearchParams}`);
+        if (userRole === "super-admin") return router.push("/admin");
+        if (userRole === "seller") return router.push("/seller");
       }
 
     } catch (err: unknown) {
@@ -201,7 +202,7 @@ const LoginComponent = () => {
           {/* Footer Links */}
           <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-sm">
             <Link
-              href="/sign-up"
+              href={`/sign-up?track=${trackedPath}&${updatedSearchParams}`}
               className="w-full sm:w-auto text-center px-6 py-2 rounded-full border border-gray-400/60 text-gray-200 hover:bg-gray-500/20 transition"
             >
               Create account

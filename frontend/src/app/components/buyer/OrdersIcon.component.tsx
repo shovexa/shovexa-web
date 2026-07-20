@@ -2,7 +2,6 @@
 import { usePathname, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import axios, { AxiosError } from 'axios';
-import buyerAuth from '@/app/auths/buyerAuth';
 
 const OrderIconComponent = () => {
     const router = useRouter()
@@ -66,4 +65,4 @@ const fetchOrderAccepedCancel = orders.filter((order: { cancelled: boolean }) =>
     )
 }
 
-export default buyerAuth( OrderIconComponent)
+export default  OrderIconComponent

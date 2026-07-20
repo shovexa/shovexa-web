@@ -48,7 +48,7 @@ export default passport.use(
 
                     });
                 }
-                
+                return done(null, user);
                 
             } catch (err) {
                 console.log('sign up with google error', err)

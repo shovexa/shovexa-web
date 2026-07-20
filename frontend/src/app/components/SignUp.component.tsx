@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { SignupSchema, SignupFormData } from '../utils/formSchemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosError } from 'axios';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import SignUpWithGoogleComponent from './SignUpWithGoogle.component';
@@ -25,6 +25,8 @@ const SignupComponent = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
   const router = useRouter();
+  const updatedSearchParams = new URLSearchParams(useSearchParams.toString());
+  const trackedPath = useSearchParams().get("track") || '/';
 
   const onSubmit = async (data: SignupFormData) => {
     setLoading(true);
@@ -251,7 +253,7 @@ const SignupComponent = () => {
           {/* Footer Links */}
           <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-sm">
             <Link
-              href="/login"
+              href={`/login?track=${trackedPath}&${updatedSearchParams}`}
               className="w-full sm:w-auto text-center px-6 py-2 rounded-full border border-gray-400/60 text-gray-200 hover:bg-gray-500/20 transition"
             >
               Sign in instead

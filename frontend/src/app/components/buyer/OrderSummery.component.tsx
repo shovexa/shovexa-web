@@ -69,7 +69,6 @@ const ShippingComponent = () => {
       
       setOrderSummary(res.data.data)
 
-
     }
     previewOrder()
 
@@ -187,13 +186,13 @@ const ShippingComponent = () => {
 
                 <div className="flex justify-between text-sm font-medium text-gray-700 py-3">
                   <span>Tax Price</span>
-                  <span>PKR {orderSummary.taxPrice.toFixed(2)}</span>
+                  <span>PKR {orderSummary.taxPrice?.toFixed(2)}</span>
                 </div>
 
                 <div className="flex justify-between items-center pt-4">
                   <span className="text-base font-semibold text-gray-900">Total</span>
                   <span className="text-xl font-bold text-gray-600">
-                    PKR {orderSummary.totalPrice.toFixed(2)}
+                    PKR {orderSummary.totalPrice?.toFixed(2)}
                   </span>
                 </div>
               </div>

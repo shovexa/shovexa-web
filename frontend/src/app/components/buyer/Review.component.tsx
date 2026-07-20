@@ -17,7 +17,9 @@ const ReviewComponent = ({ setCountReviews, productId }: { setCountReviews: Disp
 
 
   useEffect(() => {
-    
+    if(!user) {
+      return;
+    }
     if (!productId) {
       return;
     }
