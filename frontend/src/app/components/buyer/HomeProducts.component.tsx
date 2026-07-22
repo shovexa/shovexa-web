@@ -12,6 +12,7 @@ import { useFetchData } from '@/app/utils/useFetchData';
 
 import Link from 'next/link';
 import HomeCategorySectionComponent from './HomeCategorySection.component';
+import Slider from '../Slider.component';
 
 const Products = () => {
   const [sort, setSort] = useState<string | null>(null);
@@ -215,7 +216,7 @@ const Products = () => {
                   </p>
                 </div>
               )}
-
+<Slider />
           <HomeCategorySectionComponent />
 
           {searchedProducts && (

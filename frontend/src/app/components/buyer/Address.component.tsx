@@ -1,12 +1,12 @@
 import { AddressFormData, AddressSchema } from '@/app/utils/formSchemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosError } from 'axios';
-import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { provinces, citiesByProvince } from "../../constants/locationData"
 import buyerAuth from '@/app/auths/buyerAuth';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { X } from 'lucide-react';
 
 
 type AddressInterface = {
@@ -147,7 +147,7 @@ const AddressComponent = () => {
 
               <button
                 onClick={handleFormToggle}
-                className={`${"bg-blue-700 w-full max-w-lg   text-white z-1 px-6 py-3  rounded-lg flex justify-center items-center hover:bg-blue-800 "} `}
+                className={`${"bg-gray-700 w-full max-w-lg   text-white z-1 px-6 py-3  rounded-lg flex justify-center items-center hover:bg-gray-800 "} `}
               >
                 Add Shipping Address
               </button>
@@ -159,14 +159,11 @@ const AddressComponent = () => {
               >
                 <div className="bg-white w-full max-w-lg rounded-lg shadow-lg p-6 relative">
                   <div className="absolute top-3 right-3">
-                    <Image
+                    <button
                       onClick={handleFormToggle}
-                      className="cursor-pointer rounded-full"
-                      src="/cross.jpg"
-                      alt="close"
-                      width={28}
-                      height={28}
-                    />
+                      className="p-2 rounded-full hover:bg-gray-200 transition">
+                      <X className="w-6 h-6 text-gray-700" />
+                    </button>
                   </div>
                   <h1 className="text-xl font-semibold text-gray-900 border-b pb-2 mb-4">
                     Add Shipping Address
@@ -319,7 +316,7 @@ const AddressComponent = () => {
 
                   <button
                     type="submit"
-                    className="w-full bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-md py-2"
+                    className="w-full bg-gray-600 hover:bg-gray-500 text-white text-sm font-medium rounded-md py-2"
                   >
                     {loading ? "Loading..." : "Submit"}
                   </button>

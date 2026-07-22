@@ -36,7 +36,7 @@ const BuyerNavbarComponent = () => {
     const [categorisOpen, setCategorisOpen] = useState(false)
     const router = useRouter();
     const pathName = usePathname();
-    const publicRoutes = ["/privacy-policy", "/request-store", "/ownership-statement", "/terms-and-conditions", "/refund-return-policy", "/shipping-policy", "/","/about", "/contact"].includes(pathName);
+    const publicRoutes = ["/privacy-policy", "/request-store", "/ownership-statement", "/terms-and-conditions", "/refund-return-policy", "/shipping-policy", "/", "/about", "/contact"].includes(pathName);
     const userRoles = process.env.NEXT_PUBLIC_ROLES?.split(',')
     const authRoutes = ["/sign-up", "/verify-email", "/reset-password", "/login"];
     const isAuthRoute = authRoutes.includes(pathName);
@@ -178,10 +178,6 @@ const BuyerNavbarComponent = () => {
 
             {(publicRoutes || (!isAuthRoute && roleAuth)) && (
                 <>
-                    {/* Top announcement bar */}
-                    <div className="bg-gray-900 py-2.5 text-center text-[12px] font-semibold uppercase tracking-wide text-white">
-                        <p>⚡ Get Free Shipping Across Pakistan on Orders Above Rs. 5000 | shop now</p>
-                    </div>
 
                     <nav
                         className={`${isSticky ? "fixed top-0 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.15)]" : "relative"
@@ -189,7 +185,33 @@ const BuyerNavbarComponent = () => {
                     >
                         <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between gap-[30px] px-3 sm:px-4 md:px-6 lg:px-10">
                             {/* Logo */}
-                            <button
+                            <div onClick={() => router.push('/')} className="text-xl flex select-none flex-col justify-center items-center hover:text-cyan-400 cursor-pointer font-bold tracking-tight">
+                                <div>
+                                    <Image
+                                        src="/logo.jpg"
+                                        alt="Logo"
+                                        width={70}
+                                        height={70}
+                                        className="w-[70px] h-[70px] object-center rounded-full border border-cyan-500 hover:border-cyan-300 "
+                                    />
+
+                                </div>
+                                <div className="overflow-hidden whitespace-nowrap">
+                                    <div className="inline-block animate-marquee  text-[15px] text-gray-900 font-semibold tracking-wide">
+                                        shovexa
+                                        <span className="text-[10px] ml-0.5 text-gray-400">.com</span>
+
+                                    </div>
+                                </div>
+                                <span className="hidden sm:flex flex-col items-start leading-none">
+
+                                    <span className="mt-1 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-emerald-700">
+                                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 motion-safe:animate-pulse" />
+                                        marketplace live
+                                    </span>
+                                </span>
+                            </div>
+                            {/* <button
                                 type="button"
                                 className="flex shrink-0 items-center gap-2.5 focus:outline-none"
                                 onClick={() => {
@@ -218,7 +240,7 @@ const BuyerNavbarComponent = () => {
                                         marketplace live
                                     </span>
                                 </span>
-                            </button>
+                            </button> */}
 
                             {/* Desktop Navigation */}
                             <div className="hidden md:flex items-center gap-7 flex-1 justify-end">
@@ -534,7 +556,7 @@ const BuyerNavbarComponent = () => {
                             <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
                                 <button
                                     onClick={() => {
-                                        
+
                                         setCategorisOpen((prev) => !prev)
                                     }
 
