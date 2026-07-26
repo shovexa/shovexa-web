@@ -103,11 +103,11 @@ const ShippingPolicyCards = () => {
         <div className="space-y-3 leading-relaxed text-white/80">
           <p>For any shipping-related questions, please contact our support team.</p>
           <p className="flex flex-wrap gap-2">
-            <span className="font-semibold text-white">Email</span>
-            <span>support@shovexa.com</span>
+            <span className="font-semibold text-white">Email:</span>
+            <span>shovexa@gmail.com</span>
           </p>
           <p className="flex flex-wrap gap-2">
-            <span className="font-semibold text-white">Phone</span>
+            <span className="font-semibold text-white">Phone:</span>
             <span>0333 4186523</span>
           </p>
         </div>

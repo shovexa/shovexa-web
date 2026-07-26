@@ -58,11 +58,11 @@ const OwnershipStatementCards = () => {
       content: (
         <div className="space-y-2 leading-relaxed text-white/80">
           <p className="flex flex-wrap gap-2">
-            <span className="font-semibold text-white">Email</span>
+            <span className="font-semibold text-white">Email:</span>
             <span>shovexa@gmail.com</span>
           </p>
           <p className="flex flex-wrap gap-2">
-            <span className="font-semibold text-white">Phone</span>
+            <span className="font-semibold text-white">Phone:</span>
             <span>0333 4186523</span>
           </p>
         </div>

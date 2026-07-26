@@ -119,11 +119,11 @@ const PrivacyPolicyCards = () => {
       content: (
         <div className="space-y-3 leading-relaxed text-white/80">
           <p className="flex flex-wrap gap-2">
-            <span className="font-semibold text-white">Email</span>
+            <span className="font-semibold text-white">Email:</span>
             <span>shovexa@gmail.com</span>
           </p>
           <p className="flex flex-wrap gap-2">
-            <span className="font-semibold text-white">Phone</span>
+            <span className="font-semibold text-white">Phone:</span>
             <span>03334186523  (Mon–Fri, 9AM–5PM PST)</span>
           </p>
          
