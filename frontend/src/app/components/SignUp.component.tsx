@@ -49,6 +49,7 @@ const SignupComponent = () => {
       setLoading(false);
       if (err instanceof AxiosError) {
         if (err.response) {
+          console.log('error',err)
           setError(err.response.data.error);
         } else {
           setError('An unknown error occurred.');
