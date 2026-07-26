@@ -27,7 +27,7 @@ export async function generateMetadata({
 
   if (!product) {
     return {
-      title: "Product | Shovexa",
+      title: "Product ",
       description: "Product not found.",
     };
   }

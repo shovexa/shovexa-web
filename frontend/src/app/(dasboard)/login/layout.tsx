@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Login | Shovexa",
+  title: "Login ",
   description:
     "Securely log in to your Shovexa account to shop online, manage orders, save addresses, access your wishlist, or manage your seller store.",
   keywords: [

@@ -21,9 +21,12 @@ const Slider: React.FC = () => {
     try {
       const endpoint = `${API_URL}/get-products`
       const response = await axios.get(endpoint)
-      setDiscountedProducts(
-        response.data.data.filter((product: ProductInterface) => product.discount > 0)
-      )
+   setDiscountedProducts(
+  response.data.data.filter(
+    (product: ProductInterface) =>
+      product.discount > 0 && product.countInStock > 0
+  )
+);
       setError(null)
     } catch (err: unknown) {
       if (err instanceof AxiosError) {
@@ -34,8 +37,7 @@ const Slider: React.FC = () => {
     }
   }
 
-  // fetch once on mount — the original depended on `discountedProducts`,
-  // which re-triggered the effect every time the fetch resolved (infinite loop)
+  
   useEffect(() => {
     fetchDiscountedProducts()
   }, [])

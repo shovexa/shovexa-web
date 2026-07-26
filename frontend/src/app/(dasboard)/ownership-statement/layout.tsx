@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 
 export const metadata: Metadata = {
-  title: "Ownership Statement | Shovexa",
+  title: "Ownership Statement ",
   description:
     "Read the Shovexa Ownership Statement to understand our intellectual property rights, trademarks, website content ownership, brand assets, and legal information for shovexa.com.",
   keywords: [

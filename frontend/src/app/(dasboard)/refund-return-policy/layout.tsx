@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Refund and Return Policy | Shovexa",
+  title: "Refund and Return Policy ",
   description:
     "Read the Shovexa Refund and Return Policy to learn about returns, refunds, exchanges, eligibility, processing times, damaged items, cancellations, and customer support for orders placed on shovexa.com.",
   keywords: [

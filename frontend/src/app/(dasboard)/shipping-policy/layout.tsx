@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 
 export const metadata: Metadata = {
-  title: "Shipping Policy | Shovexa",
+  title: "Shipping Policy ",
   description:
     "Read the Shovexa Shipping Policy to learn about delivery times, shipping methods, shipping charges, order processing, tracking, and nationwide delivery for orders placed on shovexa.com.",
   keywords: [

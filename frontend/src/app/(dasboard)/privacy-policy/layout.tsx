@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Shovexa",
+  title: "Privacy Policy ",
   description:
     "Read the Shovexa Privacy Policy to learn how we collect, use, store, and protect your personal information, account data, payment information, and browsing activity on shovexa.com.",
   keywords: [

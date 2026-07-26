@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 
 export const metadata: Metadata = {
-  title: "Terms and Conditions | Shovexa",
+  title: "Terms and Conditions ",
   description:
     "Read the Shovexa Terms and Conditions to understand the rules, responsibilities, user obligations, seller policies, and conditions for using shovexa.com.",
   keywords: [
