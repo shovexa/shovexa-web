@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import React, {   useState } from "react";
 
 const ResetPasswordComponent = () => {
   const router = useRouter();
@@ -14,6 +14,7 @@ const ResetPasswordComponent = () => {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const [loading, setLoading] = useState<boolean>(false);
 
+
   const handleEmailSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
@@ -23,6 +24,11 @@ const ResetPasswordComponent = () => {
       setLoading(true);
       await axios.post(`${API_URL}/forgotPassword`, { email: form.email.value });
       router.push(`?email=${form.email.value}`);
+      setTimeout(() => {
+  window.location.reload();
+}, 100);
+      
+      
     } catch (error: unknown) {
       if (error instanceof AxiosError) {
         setLoading(false);

@@ -12,16 +12,25 @@ const SellerOrdersComponent = () => {
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const [adminOrders, setAdminOrders] = React.useState<adminOrdersInterface[]>([])
   const [activeTab, setActiveTab] = useState("Active");
-  const tabs = ["Active", "Delevered", "Cancelled", "Refund Pending", "Refunded"]
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const tabs = ["All", "Active", "Delevered", "Cancelled", "Refund Pending", "Refunded"]
   const [openTabMenu, setOpenTabMenu] = useState(false)
   const filteredOrders = adminOrders.filter(order => {
-    if (activeTab === "Cancelled") return order.cancelled && !order.transactionId;
-    if (activeTab === "Delevered") return order.isDelivered && !order.cancelled;
-    if (activeTab === "Refund Pending") return order.cancelled && order.transactionId && !order.refund;
-    if (activeTab === "Refunded") return order.cancelled && order.transactionId && order.refund;
-    return !order.cancelled && !order.refund && !order.isDelivered; // Active
-  });
+    let matchesTab = false;
 
+    if (activeTab === "All") matchesTab = true;
+    else if (activeTab === "Cancelled") matchesTab = order.cancelled && !order.transactionId;
+    else if (activeTab === "Delevered") matchesTab = order.isDelivered && !order.cancelled;
+    else if (activeTab === "Refund Pending") matchesTab = order.cancelled && Boolean(order.transactionId) && !order.refund;
+    else if (activeTab === "Refunded") matchesTab = order.cancelled && Boolean(order.transactionId) && order.refund;
+    else matchesTab = !order.cancelled && !order.refund && !order.isDelivered; // Active
+
+    const matchesSearch = searchQuery.trim() === "" ||
+      order._id.toLowerCase().includes(searchQuery.trim().toLowerCase());
+
+    return matchesTab && matchesSearch;
+  });
   const searchParams = useSearchParams()
   const [loading, setLoading] = useState(true)
   const updatedSearchParams = new URLSearchParams(searchParams.toString())
@@ -198,48 +207,133 @@ const SellerOrdersComponent = () => {
 
         <div>
           {/* Mobile menu */}
-          <div className="flex flex-col w-full z-40 mb-8  justify-center items-center p-3  md:hidden  left-0 gap-3 bg-white ">
-            <button
-              onClick={() => setOpenTabMenu((prev) => !prev)}
-              className="w-full flex flex-wrap justify-between items-center bg-blue-500 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-600 transition">
-              {activeTab}
-              <span
-                className={`ml-2 text-xs font-semibold px-2 py-0.5 rounded-full  bg-white text-blue-600`}
-              >
-                {filteredOrders.length}
-              </span>
-
-              <span>
-                {`${openTabMenu ? '▲' : '▼'}`}
-              </span>
-
-            </button>
-
-            {openTabMenu && <div className="flex  flex-wrap gap-2 w-full ">
-              {tabs.map((tab) => {
-                return (
+          <div className="mb-6">
+            <div className="max-w-md">
+              <div className="relative">
+                <svg
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
+                  />
+                </svg>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search by Order ID..."
+                  className="w-full pl-10 pr-10 py-2.5 border border-gray-200 rounded-lg text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                {searchQuery && (
                   <button
-                    key={tab}
-                    onClick={() => {
-                      setOpenTabMenu(false)
-
-                      setActiveTab(tab)
-
-                    }}
-                    className={`flex justify-between items-center w-full sm:w-auto px-4 py-2 text-sm font-medium rounded-md transition ${activeTab === tab
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                      }`}
+                    onClick={() => setSearchQuery("")}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
                   >
-                    <span>{tab}</span>
-
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
                   </button>
-                );
-              })}
-            </div>}
+                )}
+              </div>
+              <p className="mt-1.5 text-xs text-gray-400">
+                Searches only within the <span className="font-medium text-gray-500">{activeTab}</span> tab.
+              </p>
+            </div>
           </div>
+          <>
+  {/* Compact trigger — mobile only */}
+  <div className="w-full md:hidden mb-8">
+    <button
+      onClick={() => setOpenTabMenu(true)}
+      className="w-full flex items-center justify-between gap-3 bg-white border border-[#F0E4D8] rounded-2xl px-4 py-3 shadow-sm active:scale-[0.99] transition"
+    >
+      <div className="flex items-center gap-3 min-w-0">
+        <span className="flex items-center justify-center w-9 h-9 rounded-full bg-[#FDECE3] text-[#EA5B22] shrink-0">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 01.8 1.6L12 10.4V16a1 1 0 01-1.45.9l-3-1.5A1 1 0 017 14.5v-4.1L3.2 3.6A1 1 0 013 3z" clipRule="evenodd" />
+          </svg>
+        </span>
+        <div className="flex flex-col items-start min-w-0 text-left">
+          <span className="text-[11px] text-[#B0A296] font-medium leading-none mb-1">Filtering by</span>
+          <span className="text-sm font-semibold text-[#241B15] truncate">{activeTab}</span>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-2.5 shrink-0">
+        <span className="text-xs font-bold px-2.5 py-1 mt-0 rounded-full bg-[#EA5B22] text-white">
+          {filteredOrders.length}
+        </span>
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#B0A296]" viewBox="0 0 20 20" fill="currentColor">
+          <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+        </svg>
+      </div>
+    </button>
+  </div>
+
+  {/* Bottom sheet */}
+  <div className={`fixed inset-0 z-50 md:hidden ${openTabMenu ? '' : 'pointer-events-none'}`}>
+    <div
+      onClick={() => setOpenTabMenu(false)}
+      className={`absolute inset-0 bg-[#241B15]/50 transition-opacity duration-300 ${
+        openTabMenu ? 'opacity-100' : 'opacity-0'
+      }`}
+    />
+
+    <div
+      className={`absolute bottom-0 inset-x-0 bg-white rounded-t-3xl shadow-2xl transition-transform duration-300 ease-out ${
+        openTabMenu ? 'translate-y-0' : 'translate-y-full'
+      }`}
+    >
+      <div className="flex justify-center pt-3">
+        <span className="w-10 h-1.5 rounded-full bg-[#F0E4D8]" />
+      </div>
+
+      <div className="flex items-center justify-between px-5 pt-3 pb-2">
+        <h2 className="text-base font-semibold text-[#241B15]">Filter orders</h2>
+        <button
+          onClick={() => setOpenTabMenu(false)}
+          className="w-8 h-8 flex items-center justify-center rounded-full text-[#8A7A6D] hover:bg-[#FFF8F3] transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+          </svg>
+        </button>
+      </div>
+
+      <div className="max-h-[60vh] overflow-y-auto px-3 pb-6">
+        {tabs.map((tab) => (
+          <button
+            key={tab}
+            onClick={() => {
+              setActiveTab(tab)
+              setOpenTabMenu(false)
+            }}
+            className={`w-full flex items-center justify-between px-4 py-3.5 rounded-xl mb-1 transition-colors ${
+              activeTab === tab ? 'bg-[#FDECE3]' : 'hover:bg-[#FFF8F3]'
+            }`}
+          >
+            <span className={`text-sm font-medium ${activeTab === tab ? 'text-[#B8390E]' : 'text-[#241B15]'}`}>
+              {tab}
+            </span>
+            {activeTab === tab && (
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-[#EA5B22]" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+            )}
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+</>
           {/* desktop Tabs */}
-          <div className="md:flex flex-wrap gap-3 hidden mb-6 border-b pb-3">
+          <div className="md:flex flex-wrap justify-between items-center gap-3 hidden mb-6 border-b pb-3">
 
             {tabs.map((tab) => (
               <button
@@ -264,6 +358,43 @@ const SellerOrdersComponent = () => {
                 }
               </button>
             ))}
+            <div className="max-w-md">
+              <div className="relative">
+                <svg
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
+                  />
+                </svg>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search by Order ID..."
+                  className="w-full pl-10 pr-10 py-2.5 border border-gray-200 rounded-lg text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery("")}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                )}
+              </div>
+              <p className="mt-1.5 text-xs text-gray-400">
+                Searches only within the <span className="font-medium text-gray-500">{activeTab}</span> tab.
+              </p>
+            </div>
           </div>
 
 

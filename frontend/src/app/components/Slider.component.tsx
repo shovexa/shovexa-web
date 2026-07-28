@@ -16,7 +16,11 @@ const Slider: React.FC = () => {
   const router = useRouter()
   const startRef = useRef<number>(Date.now())
   const API_URL = process.env.NEXT_PUBLIC_API_URL
-
+  useEffect(() => {
+    if (discountedProducts.length <= 0) {
+      return;
+    }
+  }, [discountedProducts])
   const fetchDiscountedProducts = async () => {
     try {
       const endpoint = `${API_URL}/get-products`
@@ -67,35 +71,19 @@ const Slider: React.FC = () => {
     )
   }
 
-  if (error || discountedProducts.length === 0) {
+  if (error) {
     return (
-      <div className="relative w-full h-[62vh] max-h-[620px] min-h-[420px] rounded-2xl bg-gradient-to-br from-ink-900 via-ink-900 to-amber-950/40 flex flex-col items-center justify-center text-center px-6 overflow-hidden">
-        <motion.div
-          className="absolute -top-20 -left-20 w-72 h-72 rounded-full bg-amber-500/20 blur-3xl"
-          animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
-        />
-        <motion.span
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="uppercase tracking-[0.4em] bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-400 bg-clip-text text-transparent text-xs font-semibold mb-3"
-        >
-          Shovexa
-        </motion.span>
-        <h2 className="font-display italic text-2xl md:text-4xl font-bold text-white mb-2">
-          New styles are on their way
-        </h2>
-        <p className="text-white/60 text-sm max-w-md font-light">
-          {error ?? "Check back shortly for today's deals."}
-        </p>
+      <div className="relative w-full h-[62vh] max-h-[620px] min-h-[420px] rounded-2xl bg-gradient-to-br from-ink-900/10 via-amber-500/5 to-ink-900/10 overflow-hidden flex items-center justify-center">
+        <p className="text-white text-lg">{error}</p>
       </div>
     )
   }
 
   const product = discountedProducts[index]
-  const discountPercent = Math.round((Number(product.discount) / Number(product.price)) * 100)
+  const discountPercent = Math.round((Number(product?.discount) / Number(product?.price)) * 100)
 
   return (
+    discountedProducts.length > 0 &&
     <div
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
@@ -136,7 +124,7 @@ const Slider: React.FC = () => {
 
       <AnimatePresence mode="sync">
         <motion.div
-          key={product._id}
+          key={product?._id}
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.15}
@@ -151,8 +139,8 @@ const Slider: React.FC = () => {
           className="absolute inset-0 cursor-grab active:cursor-grabbing"
         >
           <img
-            src={product.image}
-            alt={product.title}
+            src={product?.image}
+            alt={product?.title}
             draggable={false}
             className="w-full h-full object-cover animate-kenburns pointer-events-none"
           />
@@ -192,7 +180,7 @@ const Slider: React.FC = () => {
               transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="font-display text-3xl md:text-6xl font-bold mb-4 max-w-2xl leading-[1.05] bg-gradient-to-br from-white via-amber-100 to-orange-200 bg-clip-text text-transparent drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]"
             >
-              {product.title}
+              {product?.title}
             </motion.h2>
 
             <motion.p
@@ -202,9 +190,9 @@ const Slider: React.FC = () => {
               className="flex items-baseline gap-3 mb-7"
             >
               <span className="text-xl md:text-2xl font-bold bg-gradient-to-r from-amber-300 to-orange-300 bg-clip-text text-transparent">
-                PKR {product.price - product.discount}
+                PKR {product?.price - product?.discount}
               </span>
-              <span className="text-sm text-white/40 line-through font-light">PKR {product.price}</span>
+              <span className="text-sm text-white/40 line-through font-light">PKR {product?.price}</span>
             </motion.p>
 
             <div className="flex items-center gap-6">
@@ -214,7 +202,7 @@ const Slider: React.FC = () => {
                 transition={{ delay: 0.7, duration: 0.6 }}
                 whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(251,146,60,0.5)' }}
                 whileTap={{ scale: 0.96 }}
-                onClick={() => router.push(`/buyer/product/${product._id}`)}
+                onClick={() => router.push(`/buyer/product/${product?._id}`)}
                 className="relative overflow-hidden bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-3 rounded-full font-semibold text-sm tracking-wide shadow-lg shadow-orange-900/40 transition-shadow group"
               >
                 <span className="relative z-10">Shop Now</span>
@@ -234,7 +222,7 @@ const Slider: React.FC = () => {
                 transition={{ delay: 0.8, duration: 0.5 }}
                 className="text-amber-200/60 text-xs font-mono tracking-widest hidden sm:inline"
               >
-                {String(index + 1).padStart(2, '0')} / {String(discountedProducts.length).padStart(2, '0')}
+                {String(index + 1).padStart(2, '0')} / {String(discountedProducts?.length).padStart(2, '0')}
               </motion.span>
             </div>
           </div>

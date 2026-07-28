@@ -30,7 +30,9 @@ function HomeCategorySectionComponent() {
 
 
   return (
+    category.length > 0 && 
     <div className="col-span-full mb-4 rounded-2xl border border-gray-200 bg-white p-4 shadow-[0_2px_8px_rgba(0,0,0,0.02)] transition-shadow hover:shadow-[0_12px_30px_rgba(0,0,0,0.04)] sm:p-6 lg:p-8">
+   
       <div className="mb-5 flex flex-col gap-1 sm:mb-6 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
         <div>
           <h2 className="text-lg font-extrabold tracking-tight text-gray-900 sm:text-xl lg:text-2xl">Shop By Category</h2>
