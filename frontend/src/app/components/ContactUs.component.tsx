@@ -143,7 +143,7 @@ export default function ContactPage() {
                   <p className="text-xs uppercase tracking-wide text-gray-50/80">
                     Address
                   </p>
-                  <p className="font-medium">Sialkot, Pakistan</p>
+                  <p className="font-medium">Dhok Kala Khan, Shamsabad, Rawalpindi ,Pakistan</p>
                 </div>
               </div>
 

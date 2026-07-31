@@ -28,7 +28,7 @@ const TermsAndConditionsCards = () => {
       summary: "Where we operate and how orders are handled",
       content: (
         <p className="leading-relaxed text-white/80">
-          Shovexa is a registered business operating from Sialkot, Pakistan. All transactions,
+          Shovexa is a registered business operating from Dhok Kala Khan, Shamsabad, Rawalpindi ,Pakistan. All transactions,
           deliveries, and communications will be handled through this location.
         </p>
       ),
@@ -115,7 +115,7 @@ const TermsAndConditionsCards = () => {
       content: (
         <p className="leading-relaxed text-white/80">
           These terms are governed by the laws of Pakistan. Any disputes will be resolved under
-          the jurisdiction of courts in Sialkot.
+          the jurisdiction of courts in Shamsabad, Rawalpindi ,Pakistan.
         </p>
       ),
     },
