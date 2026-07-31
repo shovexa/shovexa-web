@@ -155,7 +155,7 @@ export default function ContactPage() {
                   <p className="text-xs uppercase tracking-wide text-gray-50/80">
                     Phone
                   </p>
-                  <p className="font-medium">0333 4186523</p>
+                  <p className="font-medium">03470832780</p>
                 </div>
               </div>
 

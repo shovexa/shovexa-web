@@ -108,7 +108,7 @@ const ShippingPolicyCards = () => {
           </p>
           <p className="flex flex-wrap gap-2">
             <span className="font-semibold text-white">Phone:</span>
-            <span>0333 4186523</span>
+            <span>03470832780</span>
           </p>
         </div>
       ),
