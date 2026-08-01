@@ -19,7 +19,7 @@ const SideWhatsappIconComponent = () => {
   return (
 
     <Link
-      href="https://wa.me/923409751709"
+      href="https://wa.me/923470832780"
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 bg-green-500 rounded-full p-3 shadow-lg hover:bg-green-600 transition-all duration-300"
